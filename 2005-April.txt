@@ -1,0 +1,2796 @@
+From dave at brondsema.net  Mon Apr 18 19:11:43 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 18 Apr 2005 13:11:43 -0400
+Subject: SVN repo
+Message-ID: <4263EA4F.5020700@brondsema.net>
+
+
+The SVN repos is set up at berlios now.  Previous location is now
+readonly.  I will change RDF files that use SVN URLs soon.
+
+http://svn.berlios.de/viewcvs/konfidi/
+
+export SVN_SSH="ssh -l developername"
+svn checkout svn+ssh://svn.berlios.de/svnroot/repos/konfidi
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/4c9b6564/attachment.pgp>
+
+From noreply at berlios.de  Mon Apr 18 20:05:25 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Mon, 18 Apr 2005 14:05:25 -0400 (EDT)
+Subject: [Task #1910] stable trust.owl URI
+Message-ID: <200504181805.j3II5POS019561@unicorn.berlios.de>
+
+Task #1910 has been updated. 
+
+Project: konfidi
+Subproject: General
+Summary: stable trust.owl URI
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: Create something permanent at konfidi.org for the trust.owl URI
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1910&group_id=3538&group_project_id=895
+
+
+From noreply at berlios.de  Mon Apr 18 20:05:47 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Mon, 18 Apr 2005 14:05:47 -0400 (EDT)
+Subject: [Task #1911] stable topics URIs
+Message-ID: <200504181805.j3II5lje019611@unicorn.berlios.de>
+
+Task #1911 has been updated. 
+
+Project: konfidi
+Subproject: General
+Summary: stable topics URIs
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: Create something permanent at konfidi.org for the topic URIs that we use
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1911&group_id=3538&group_project_id=895
+
+
+From dave at brondsema.net  Mon Apr 18 20:20:42 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 18 Apr 2005 14:20:42 -0400
+Subject: r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk
+ tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote
+ trustserver/trunk trustserver/trunk/prototype
+In-Reply-To: <200504181803.j3II3Ye9003568@sheep.berlios.de>
+References: <200504181803.j3II3Ye9003568@sheep.berlios.de>
+Message-ID: <4263FA7A.2050507@brondsema.net>
+
+You can see there were some prior inconsistencies regarding whether the
+rdf files were using a trunk schema or a release.  Hopefully moving them
+all to trunk reduced any possible problems rather than create any
+
+Dave Brondsema at BerliOS wrote:
+>
+> Modified: tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+> ===================================================================
+> --- tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf	2005-04-18 17:31:11 UTC (rev 355)
+> +++ tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf	2005-04-18 18:03:33 UTC (rev 356)
+> @@ -4,7 +4,7 @@
+>  ]>
+>  <rdf:RDF
+>      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+> -    xmlns="http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#"
+> +    xmlns="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>      xmlns:wot="http://xmlns.com/wot/0.1/"
+>      >
+>
+> Modified: tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+> ===================================================================
+> --- tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf	2005-04-18 17:31:11 UTC (rev 355)
+> +++ tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf	2005-04-18 18:03:33 UTC (rev 356)
+> @@ -6,7 +6,7 @@
+>     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>     xmlns:wot="http://xmlns.com/wot/0.1/#"
+>     xmlns:owl="http://www.w3.org/2002/07/owl#"
+> -   xmlns:trust="http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#"
+> +   xmlns:trust="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>     >
+>
+>  <trust:Truster>
+>
+
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/e6cbf192/attachment.pgp>
+
+From schamp at gmail.com  Mon Apr 18 20:38:38 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 18 Apr 2005 14:38:38 -0400
+Subject: r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype
+In-Reply-To: <4263FA7A.2050507@brondsema.net>
+References: <200504181803.j3II3Ye9003568@sheep.berlios.de>
+	 <4263FA7A.2050507@brondsema.net>
+Message-ID: <5a086d9d05041811381595c56a@mail.gmail.com>
+
+Those small-remote ones were old that I never updated...RDFlib doesn't
+handle that stuff anyway (though the new, more powerful one librdf,
+might do that remote stuff.  that's why they were pointed to that old
+release.
+
+I propose this:  that we do something like xmlns.com with the FOAF and
+WOT business, with versions built into the URI, and publish that and
+change everything to it in our test data (since the schema won't
+change for now, and we can build new versions as they are ready and
+put that into the URIs, without breaking old ones).  Plus, the
+trustserver can be smart and deal appropriately for each version, via
+some strategy stuff, probably.
+
+On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+> You can see there were some prior inconsistencies regarding whether the
+> rdf files were using a trunk schema or a release.  Hopefully moving them
+> all to trunk reduced any possible problems rather than create any
+> 
+> Dave Brondsema at BerliOS wrote:
+> >
+> > Modified: tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+> > ===================================================================
+> > --- tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf    2005-04-18 17:31:11 UTC (rev 355)
+> > +++ tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf    2005-04-18 18:03:33 UTC (rev 356)
+> > @@ -4,7 +4,7 @@
+> >  ]>
+> >  <rdf:RDF
+> >      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+> > -    xmlns="http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#"
+> > +    xmlns="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+> >      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+> >      xmlns:wot="http://xmlns.com/wot/0.1/"
+> >      >
+> >
+> > Modified: tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+> > ===================================================================
+> > --- tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf     2005-04-18 17:31:11 UTC (rev 355)
+> > +++ tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf     2005-04-18 18:03:33 UTC (rev 356)
+> > @@ -6,7 +6,7 @@
+> >     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+> >     xmlns:wot="http://xmlns.com/wot/0.1/#"
+> >     xmlns:owl="http://www.w3.org/2002/07/owl#"
+> > -   xmlns:trust="http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#"
+> > +   xmlns:trust="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+> >     >
+> >
+> >  <trust:Truster>
+> >
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://csx.calvin.edu : student org
+> http://www.brondsema.net : personal
+> 
+> 
+>
+
+
+From dave at brondsema.net  Mon Apr 18 20:59:06 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 18 Apr 2005 14:59:06 -0400
+Subject: r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk
+ tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote
+ trustserver/trunk trustserver/trunk/prototype
+In-Reply-To: <5a086d9d05041811381595c56a@mail.gmail.com>
+References: <200504181803.j3II3Ye9003568@sheep.berlios.de>	 <4263FA7A.2050507@brondsema.net> <5a086d9d05041811381595c56a@mail.gmail.com>
+Message-ID: <4264037A.50709@brondsema.net>
+
+I just remembered that forrest uses a .htaccess file to redirect their
+DTD files to actually pull straight from SVN.  So we could do good URIs
+like you suggest and have it get the files from SVN.  Example:
+
+http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl
+
+
+----
+from forrest's (old) http://forrest.apache.org/dtd/.htaccess file
+
+# The reason for this .htaccess is to deliver DTDs and associated resources
+# to some impoverished XML tools that do not use the Catalog Entity
+Resolver.
+# We do make every effort to encourage the latter. See ./index.html
+#
+#--------------------------------------------------------------------------
+# NOTE: There is a problem with getting the correct media-types ...
+# http://svn.apache.org/repos/asf/forrest/trunk/.../*.dtd
+# Currently the server just delivers text/plain
+# We can do 'svn propset svn:mime-type' for the *.dtd etc.
+# which will cause them to be delivered properly.
+# However there is an Issue for SVN (#1233) whereby the files will be seen
+# by SVN as binary, hence no diffs.
+# Please vote for http://subversion.tigris.org/issues/show_bug.cgi?id=1233
+#
+# So the workaround is to use ViewCVS to explicity set the media-type.
+#--------------------------------------------------------------------------
+
+# Get the content straight out of ViewCVS and use the appropriate media
+type:
+# See http://www.faqs.org/rfcs/rfc3023.html
+# FIXME: Verify these media types and maybe add charset
+#
+RewriteEngine On
+RewriteRule "(.*)\.dtd$"
+"http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.dtd?content-type=application/xml-dtd"
+[P]
+RewriteRule "(.*)\.mod$"
+"http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.mod?content-type=application/xml-dtd"
+[P]
+RewriteRule "(.*)\.pen$"
+"http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.pen?content-type=application/xml-external-parsed-entity"
+[P]
+RewriteRule "(.*)\.ent$"
+"http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.ent?content-type=application/xml-external-parsed-entity"
+[P]
+
+
+
+
+A. Schamp wrote:
+> Those small-remote ones were old that I never updated...RDFlib doesn't
+> handle that stuff anyway (though the new, more powerful one librdf,
+> might do that remote stuff.  that's why they were pointed to that old
+> release.
+>
+> I propose this:  that we do something like xmlns.com with the FOAF and
+> WOT business, with versions built into the URI, and publish that and
+> change everything to it in our test data (since the schema won't
+> change for now, and we can build new versions as they are ready and
+> put that into the URIs, without breaking old ones).  Plus, the
+> trustserver can be smart and deal appropriately for each version, via
+> some strategy stuff, probably.
+>
+> On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>You can see there were some prior inconsistencies regarding whether the
+>>rdf files were using a trunk schema or a release.  Hopefully moving them
+>>all to trunk reduced any possible problems rather than create any
+>>
+>>Dave Brondsema at BerliOS wrote:
+>>
+>>>Modified: tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>===================================================================
+>>>--- tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf    2005-04-18 17:31:11 UTC (rev 355)
+>>>+++ tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf    2005-04-18 18:03:33 UTC (rev 356)
+>>>@@ -4,7 +4,7 @@
+>>> ]>
+>>> <rdf:RDF
+>>>     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+>>>-    xmlns="http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#"
+>>>+    xmlns="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>>>     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>>>     xmlns:wot="http://xmlns.com/wot/0.1/"
+>>>     >
+>>>
+>>>Modified: tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>===================================================================
+>>>--- tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf     2005-04-18 17:31:11 UTC (rev 355)
+>>>+++ tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf     2005-04-18 18:03:33 UTC (rev 356)
+>>>@@ -6,7 +6,7 @@
+>>>    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>>>    xmlns:wot="http://xmlns.com/wot/0.1/#"
+>>>    xmlns:owl="http://www.w3.org/2002/07/owl#"
+>>>-   xmlns:trust="http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#"
+>>>+   xmlns:trust="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>>>    >
+>>>
+>>> <trust:Truster>
+>>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://csx.calvin.edu : student org
+>>http://www.brondsema.net : personal
+>>
+>>
+>>
+>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/154f554d/attachment.pgp>
+
+From dave at brondsema.net  Mon Apr 18 21:01:10 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 18 Apr 2005 15:01:10 -0400
+Subject: r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk
+ tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote
+ trustserver/trunk trustserver/trunk/prototype
+In-Reply-To: <4264037A.50709@brondsema.net>
+References: <200504181803.j3II3Ye9003568@sheep.berlios.de>	 <4263FA7A.2050507@brondsema.net> <5a086d9d05041811381595c56a@mail.gmail.com> <4264037A.50709@brondsema.net>
+Message-ID: <426403F6.9030707@brondsema.net>
+
+I meant:
+
+http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/tags/release-0.1/trust.owl
+
+
+Dave Brondsema wrote:
+> I just remembered that forrest uses a .htaccess file to redirect their
+> DTD files to actually pull straight from SVN.  So we could do good URIs
+> like you suggest and have it get the files from SVN.  Example:
+>
+> http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+> http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl
+>
+>
+> ----
+> from forrest's (old) http://forrest.apache.org/dtd/.htaccess file
+>
+> # The reason for this .htaccess is to deliver DTDs and associated resources
+> # to some impoverished XML tools that do not use the Catalog Entity
+> Resolver.
+> # We do make every effort to encourage the latter. See ./index.html
+> #
+> #--------------------------------------------------------------------------
+> # NOTE: There is a problem with getting the correct media-types ...
+> # http://svn.apache.org/repos/asf/forrest/trunk/.../*.dtd
+> # Currently the server just delivers text/plain
+> # We can do 'svn propset svn:mime-type' for the *.dtd etc.
+> # which will cause them to be delivered properly.
+> # However there is an Issue for SVN (#1233) whereby the files will be seen
+> # by SVN as binary, hence no diffs.
+> # Please vote for http://subversion.tigris.org/issues/show_bug.cgi?id=1233
+> #
+> # So the workaround is to use ViewCVS to explicity set the media-type.
+> #--------------------------------------------------------------------------
+>
+> # Get the content straight out of ViewCVS and use the appropriate media
+> type:
+> # See http://www.faqs.org/rfcs/rfc3023.html
+> # FIXME: Verify these media types and maybe add charset
+> #
+> RewriteEngine On
+> RewriteRule "(.*)\.dtd$"
+> "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.dtd?content-type=application/xml-dtd"
+>
+> [P]
+> RewriteRule "(.*)\.mod$"
+> "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.mod?content-type=application/xml-dtd"
+>
+> [P]
+> RewriteRule "(.*)\.pen$"
+> "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.pen?content-type=application/xml-external-parsed-entity"
+>
+> [P]
+> RewriteRule "(.*)\.ent$"
+> "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.ent?content-type=application/xml-external-parsed-entity"
+>
+> [P]
+>
+>
+>
+>
+> A. Schamp wrote:
+>
+>> Those small-remote ones were old that I never updated...RDFlib doesn't
+>> handle that stuff anyway (though the new, more powerful one librdf,
+>> might do that remote stuff.  that's why they were pointed to that old
+>> release.
+>>
+>> I propose this:  that we do something like xmlns.com with the FOAF and
+>> WOT business, with versions built into the URI, and publish that and
+>> change everything to it in our test data (since the schema won't
+>> change for now, and we can build new versions as they are ready and
+>> put that into the URIs, without breaking old ones).  Plus, the
+>> trustserver can be smart and deal appropriately for each version, via
+>> some strategy stuff, probably.
+>>
+>> On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+>>
+>>> You can see there were some prior inconsistencies regarding whether the
+>>> rdf files were using a trunk schema or a release.  Hopefully moving them
+>>> all to trunk reduced any possible problems rather than create any
+>>>
+>>> Dave Brondsema at BerliOS wrote:
+>>>
+>>>> Modified:
+>>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>> ===================================================================
+>>>> ---
+>>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>> 2005-04-18 17:31:11 UTC (rev 355)
+>>>> +++
+>>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>> 2005-04-18 18:03:33 UTC (rev 356)
+>>>> @@ -4,7 +4,7 @@
+>>>> ]>
+>>>> <rdf:RDF
+>>>>     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+>>>> -
+>>>> xmlns="http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#"
+>>>> +
+>>>> xmlns="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>>>>
+>>>>     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>>>>     xmlns:wot="http://xmlns.com/wot/0.1/"
+>>>>     >
+>>>>
+>>>> Modified:
+>>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>> ===================================================================
+>>>> ---
+>>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>> 2005-04-18 17:31:11 UTC (rev 355)
+>>>> +++
+>>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>> 2005-04-18 18:03:33 UTC (rev 356)
+>>>> @@ -6,7 +6,7 @@
+>>>>    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>>>>    xmlns:wot="http://xmlns.com/wot/0.1/#"
+>>>>    xmlns:owl="http://www.w3.org/2002/07/owl#"
+>>>> -
+>>>> xmlns:trust="http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#"
+>>>>
+>>>> +
+>>>> xmlns:trust="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>>>>
+>>>>    >
+>>>>
+>>>> <trust:Truster>
+>>>>
+>>> --
+>>> Dave Brondsema : dave at brondsema.net
+>>> http://www.splike.com : programming
+>>> http://csx.calvin.edu : student org
+>>> http://www.brondsema.net : personal
+>>>
+>>>
+>>>
+>>
+>>
+>
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://csx.calvin.edu : student org
+> http://www.brondsema.net : personal
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/5a87e916/attachment.pgp>
+
+From schamp at gmail.com  Mon Apr 18 21:14:46 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 18 Apr 2005 15:14:46 -0400
+Subject: r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype
+In-Reply-To: <426403F6.9030707@brondsema.net>
+References: <200504181803.j3II3Ye9003568@sheep.berlios.de>
+	 <4263FA7A.2050507@brondsema.net>
+	 <5a086d9d05041811381595c56a@mail.gmail.com>
+	 <4264037A.50709@brondsema.net> <426403F6.9030707@brondsema.net>
+Message-ID: <5a086d9d05041812143a63b749@mail.gmail.com>
+
+right on.
+
+can we make it really smart, so /schema/trust/n/m server .../tags/release-n/m ?
+
+
+On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+> I meant:
+> 
+> http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+> http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/tags/release-0.1/trust.owl
+> 
+> 
+> Dave Brondsema wrote:
+> > I just remembered that forrest uses a .htaccess file to redirect their
+> > DTD files to actually pull straight from SVN.  So we could do good URIs
+> > like you suggest and have it get the files from SVN.  Example:
+> >
+> > http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+> > http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl
+> >
+> >
+> > ----
+> > from forrest's (old) http://forrest.apache.org/dtd/.htaccess file
+> >
+> > # The reason for this .htaccess is to deliver DTDs and associated resources
+> > # to some impoverished XML tools that do not use the Catalog Entity
+> > Resolver.
+> > # We do make every effort to encourage the latter. See ./index.html
+> > #
+> > #--------------------------------------------------------------------------
+> > # NOTE: There is a problem with getting the correct media-types ...
+> > # http://svn.apache.org/repos/asf/forrest/trunk/.../*.dtd
+> > # Currently the server just delivers text/plain
+> > # We can do 'svn propset svn:mime-type' for the *.dtd etc.
+> > # which will cause them to be delivered properly.
+> > # However there is an Issue for SVN (#1233) whereby the files will be seen
+> > # by SVN as binary, hence no diffs.
+> > # Please vote for http://subversion.tigris.org/issues/show_bug.cgi?id=1233
+> > #
+> > # So the workaround is to use ViewCVS to explicity set the media-type.
+> > #--------------------------------------------------------------------------
+> >
+> > # Get the content straight out of ViewCVS and use the appropriate media
+> > type:
+> > # See http://www.faqs.org/rfcs/rfc3023.html
+> > # FIXME: Verify these media types and maybe add charset
+> > #
+> > RewriteEngine On
+> > RewriteRule "(.*)\.dtd$"
+> > "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.dtd?content-type=application/xml-dtd"
+> >
+> > [P]
+> > RewriteRule "(.*)\.mod$"
+> > "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.mod?content-type=application/xml-dtd"
+> >
+> > [P]
+> > RewriteRule "(.*)\.pen$"
+> > "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.pen?content-type=application/xml-external-parsed-entity"
+> >
+> > [P]
+> > RewriteRule "(.*)\.ent$"
+> > "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.ent?content-type=application/xml-external-parsed-entity"
+> >
+> > [P]
+> >
+> >
+> >
+> >
+> > A. Schamp wrote:
+> >
+> >> Those small-remote ones were old that I never updated...RDFlib doesn't
+> >> handle that stuff anyway (though the new, more powerful one librdf,
+> >> might do that remote stuff.  that's why they were pointed to that old
+> >> release.
+> >>
+> >> I propose this:  that we do something like xmlns.com with the FOAF and
+> >> WOT business, with versions built into the URI, and publish that and
+> >> change everything to it in our test data (since the schema won't
+> >> change for now, and we can build new versions as they are ready and
+> >> put that into the URIs, without breaking old ones).  Plus, the
+> >> trustserver can be smart and deal appropriately for each version, via
+> >> some strategy stuff, probably.
+> >>
+> >> On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+> >>
+> >>> You can see there were some prior inconsistencies regarding whether the
+> >>> rdf files were using a trunk schema or a release.  Hopefully moving them
+> >>> all to trunk reduced any possible problems rather than create any
+> >>>
+> >>> Dave Brondsema at BerliOS wrote:
+> >>>
+> >>>> Modified:
+> >>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+> >>>> ===================================================================
+> >>>> ---
+> >>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+> >>>> 2005-04-18 17:31:11 UTC (rev 355)
+> >>>> +++
+> >>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+> >>>> 2005-04-18 18:03:33 UTC (rev 356)
+> >>>> @@ -4,7 +4,7 @@
+> >>>> ]>
+> >>>> <rdf:RDF
+> >>>>     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+> >>>> -
+> >>>> xmlns="http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#"
+> >>>> +
+> >>>> xmlns="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+> >>>>
+> >>>>     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+> >>>>     xmlns:wot="http://xmlns.com/wot/0.1/"
+> >>>>     >
+> >>>>
+> >>>> Modified:
+> >>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+> >>>> ===================================================================
+> >>>> ---
+> >>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+> >>>> 2005-04-18 17:31:11 UTC (rev 355)
+> >>>> +++
+> >>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+> >>>> 2005-04-18 18:03:33 UTC (rev 356)
+> >>>> @@ -6,7 +6,7 @@
+> >>>>    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+> >>>>    xmlns:wot="http://xmlns.com/wot/0.1/#"
+> >>>>    xmlns:owl="http://www.w3.org/2002/07/owl#"
+> >>>> -
+> >>>> xmlns:trust="http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#"
+> >>>>
+> >>>> +
+> >>>> xmlns:trust="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+> >>>>
+> >>>>    >
+> >>>>
+> >>>> <trust:Truster>
+> >>>>
+> >>> --
+> >>> Dave Brondsema : dave at brondsema.net
+> >>> http://www.splike.com : programming
+> >>> http://csx.calvin.edu : student org
+> >>> http://www.brondsema.net : personal
+> >>>
+> >>>
+> >>>
+> >>
+> >>
+> >
+> >
+> > --
+> > Dave Brondsema : dave at brondsema.net
+> > http://www.splike.com : programming
+> > http://csx.calvin.edu : student org
+> > http://www.brondsema.net : personal
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://csx.calvin.edu : student org
+> http://www.brondsema.net : personal
+> 
+> 
+>
+
+
+From dave at brondsema.net  Mon Apr 18 23:51:29 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 18 Apr 2005 17:51:29 -0400
+Subject: r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk
+ tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote
+ trustserver/trunk trustserver/trunk/prototype
+In-Reply-To: <5a086d9d05041812143a63b749@mail.gmail.com>
+References: <200504181803.j3II3Ye9003568@sheep.berlios.de>	 <4263FA7A.2050507@brondsema.net>	 <5a086d9d05041811381595c56a@mail.gmail.com>	 <4264037A.50709@brondsema.net> <426403F6.9030707@brondsema.net> <5a086d9d05041812143a63b749@mail.gmail.com>
+Message-ID: <42642BE1.7000501@brondsema.net>
+
+See http://konfidi.berlios.de/ns/1.0/trust.owl
+
+Feel free to change the 'ns' directory to 'schema', 'xmlns', or whatever
+your heart fancies.  You should have permissions on
+shell.sf.net:/home/groups/konfidi  But make sure you set "umask 002"
+(group-writable by default) in your current shell and ~/.bashrc first.
+
+And should we have /ns/trust/1.0/trust.owl.  I mean, to have groups of
+namespace files in case we host more than the trust one?
+
+After you make a new tagged release, but before we make a big switch
+again, we should consider a PURL for konfidi.  In case we become
+incorporated into the Apache Software Fdtn or something :-).  Even
+giants like DC use purl.org/dc instead of dublincore.org.  I'm not sure
+the best way to set up our PURLs though.
+
+A. Schamp wrote:
+> right on.
+>
+> can we make it really smart, so /schema/trust/n/m server .../tags/release-n/m ?
+>
+>
+> On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>I meant:
+>>
+>>http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+>>http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/tags/release-0.1/trust.owl
+>>
+>>
+>>Dave Brondsema wrote:
+>>
+>>>I just remembered that forrest uses a .htaccess file to redirect their
+>>>DTD files to actually pull straight from SVN.  So we could do good URIs
+>>>like you suggest and have it get the files from SVN.  Example:
+>>>
+>>>http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+>>>http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl
+>>>
+>>>
+>>>----
+>>>from forrest's (old) http://forrest.apache.org/dtd/.htaccess file
+>>>
+>>># The reason for this .htaccess is to deliver DTDs and associated resources
+>>># to some impoverished XML tools that do not use the Catalog Entity
+>>>Resolver.
+>>># We do make every effort to encourage the latter. See ./index.html
+>>>#
+>>>#--------------------------------------------------------------------------
+>>># NOTE: There is a problem with getting the correct media-types ...
+>>># http://svn.apache.org/repos/asf/forrest/trunk/.../*.dtd
+>>># Currently the server just delivers text/plain
+>>># We can do 'svn propset svn:mime-type' for the *.dtd etc.
+>>># which will cause them to be delivered properly.
+>>># However there is an Issue for SVN (#1233) whereby the files will be seen
+>>># by SVN as binary, hence no diffs.
+>>># Please vote for http://subversion.tigris.org/issues/show_bug.cgi?id=1233
+>>>#
+>>># So the workaround is to use ViewCVS to explicity set the media-type.
+>>>#--------------------------------------------------------------------------
+>>>
+>>># Get the content straight out of ViewCVS and use the appropriate media
+>>>type:
+>>># See http://www.faqs.org/rfcs/rfc3023.html
+>>># FIXME: Verify these media types and maybe add charset
+>>>#
+>>>RewriteEngine On
+>>>RewriteRule "(.*)\.dtd$"
+>>>"http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.dtd?content-type=application/xml-dtd"
+>>>
+>>>[P]
+>>>RewriteRule "(.*)\.mod$"
+>>>"http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.mod?content-type=application/xml-dtd"
+>>>
+>>>[P]
+>>>RewriteRule "(.*)\.pen$"
+>>>"http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.pen?content-type=application/xml-external-parsed-entity"
+>>>
+>>>[P]
+>>>RewriteRule "(.*)\.ent$"
+>>>"http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.ent?content-type=application/xml-external-parsed-entity"
+>>>
+>>>[P]
+>>>
+>>>
+>>>
+>>>
+>>>A. Schamp wrote:
+>>>
+>>>
+>>>>Those small-remote ones were old that I never updated...RDFlib doesn't
+>>>>handle that stuff anyway (though the new, more powerful one librdf,
+>>>>might do that remote stuff.  that's why they were pointed to that old
+>>>>release.
+>>>>
+>>>>I propose this:  that we do something like xmlns.com with the FOAF and
+>>>>WOT business, with versions built into the URI, and publish that and
+>>>>change everything to it in our test data (since the schema won't
+>>>>change for now, and we can build new versions as they are ready and
+>>>>put that into the URIs, without breaking old ones).  Plus, the
+>>>>trustserver can be smart and deal appropriately for each version, via
+>>>>some strategy stuff, probably.
+>>>>
+>>>>On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+>>>>
+>>>>
+>>>>>You can see there were some prior inconsistencies regarding whether the
+>>>>>rdf files were using a trunk schema or a release.  Hopefully moving them
+>>>>>all to trunk reduced any possible problems rather than create any
+>>>>>
+>>>>>Dave Brondsema at BerliOS wrote:
+>>>>>
+>>>>>
+>>>>>>Modified:
+>>>>>>tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>>>>===================================================================
+>>>>>>---
+>>>>>>tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>>>>2005-04-18 17:31:11 UTC (rev 355)
+>>>>>>+++
+>>>>>>tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>>>>2005-04-18 18:03:33 UTC (rev 356)
+>>>>>>@@ -4,7 +4,7 @@
+>>>>>>]>
+>>>>>><rdf:RDF
+>>>>>>    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+>>>>>>-
+>>>>>>xmlns="http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#"
+>>>>>>+
+>>>>>>xmlns="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>>>>>>
+>>>>>>    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>>>>>>    xmlns:wot="http://xmlns.com/wot/0.1/"
+>>>>>>    >
+>>>>>>
+>>>>>>Modified:
+>>>>>>tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>>>>===================================================================
+>>>>>>---
+>>>>>>tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>>>>2005-04-18 17:31:11 UTC (rev 355)
+>>>>>>+++
+>>>>>>tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>>>>2005-04-18 18:03:33 UTC (rev 356)
+>>>>>>@@ -6,7 +6,7 @@
+>>>>>>   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>>>>>>   xmlns:wot="http://xmlns.com/wot/0.1/#"
+>>>>>>   xmlns:owl="http://www.w3.org/2002/07/owl#"
+>>>>>>-
+>>>>>>xmlns:trust="http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#"
+>>>>>>
+>>>>>>+
+>>>>>>xmlns:trust="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>>>>>>
+>>>>>>   >
+>>>>>>
+>>>>>><trust:Truster>
+>>>>>>
+>>>>>--
+>>>>>Dave Brondsema : dave at brondsema.net
+>>>>>http://www.splike.com : programming
+>>>>>http://csx.calvin.edu : student org
+>>>>>http://www.brondsema.net : personal
+>>>>>
+>>>>>
+>>>>>
+>>>>
+>>>>
+>>>
+>>>--
+>>>Dave Brondsema : dave at brondsema.net
+>>>http://www.splike.com : programming
+>>>http://csx.calvin.edu : student org
+>>>http://www.brondsema.net : personal
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://csx.calvin.edu : student org
+>>http://www.brondsema.net : personal
+>>
+>>
+>>
+>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/22f1f2b3/attachment.pgp>
+
+From dave at brondsema.net  Tue Apr 19 00:18:06 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 18 Apr 2005 18:18:06 -0400
+Subject: r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk
+ tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote
+ trustserver/trunk trustserver/trunk/prototype
+In-Reply-To: <42642BE1.7000501@brondsema.net>
+References: <200504181803.j3II3Ye9003568@sheep.berlios.de>	 <4263FA7A.2050507@brondsema.net>	 <5a086d9d05041811381595c56a@mail.gmail.com>	 <4264037A.50709@brondsema.net> <426403F6.9030707@brondsema.net> <5a086d9d05041812143a63b749@mail.gmail.com> <42642BE1.7000501@brondsema.net>
+Message-ID: <4264321E.4000209@brondsema.net>
+
+Topics will be another namespace-thingy we host, so I changed it.
+http://konfidi.berlios.de/ns/trust/1.0/trust.owl  If we modify SVN to
+have schema/trust and schema/topics dirs, we'll have to tweak the regex
+
+Although if the topics are trust-specific, we can keep them under trust/
+too.  But either way, I like having trust/ under ns/
+
+Dave Brondsema wrote:
+> See http://konfidi.berlios.de/ns/1.0/trust.owl
+>
+> Feel free to change the 'ns' directory to 'schema', 'xmlns', or whatever
+> your heart fancies.  You should have permissions on
+> shell.sf.net:/home/groups/konfidi  But make sure you set "umask 002"
+> (group-writable by default) in your current shell and ~/.bashrc first.
+>
+> And should we have /ns/trust/1.0/trust.owl.  I mean, to have groups of
+> namespace files in case we host more than the trust one?
+>
+> After you make a new tagged release, but before we make a big switch
+> again, we should consider a PURL for konfidi.  In case we become
+> incorporated into the Apache Software Fdtn or something :-).  Even
+> giants like DC use purl.org/dc instead of dublincore.org.  I'm not sure
+> the best way to set up our PURLs though.
+>
+> A. Schamp wrote:
+>
+>> right on.
+>>
+>> can we make it really smart, so /schema/trust/n/m server
+>> .../tags/release-n/m ?
+>>
+>>
+>> On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+>>
+>>> I meant:
+>>>
+>>> http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+>>> http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/tags/release-0.1/trust.owl
+>>>
+>>>
+>>>
+>>> Dave Brondsema wrote:
+>>>
+>>>> I just remembered that forrest uses a .htaccess file to redirect their
+>>>> DTD files to actually pull straight from SVN.  So we could do good URIs
+>>>> like you suggest and have it get the files from SVN.  Example:
+>>>>
+>>>> http://www.konfidi.org/schema/trust/0.1/trust.owl serves
+>>>> http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl
+>>>>
+>>>>
+>>>> ----
+>>>> from forrest's (old) http://forrest.apache.org/dtd/.htaccess file
+>>>>
+>>>> # The reason for this .htaccess is to deliver DTDs and associated
+>>>> resources
+>>>> # to some impoverished XML tools that do not use the Catalog Entity
+>>>> Resolver.
+>>>> # We do make every effort to encourage the latter. See ./index.html
+>>>> #
+>>>> #--------------------------------------------------------------------------
+>>>>
+>>>> # NOTE: There is a problem with getting the correct media-types ...
+>>>> # http://svn.apache.org/repos/asf/forrest/trunk/.../*.dtd
+>>>> # Currently the server just delivers text/plain
+>>>> # We can do 'svn propset svn:mime-type' for the *.dtd etc.
+>>>> # which will cause them to be delivered properly.
+>>>> # However there is an Issue for SVN (#1233) whereby the files will
+>>>> be seen
+>>>> # by SVN as binary, hence no diffs.
+>>>> # Please vote for
+>>>> http://subversion.tigris.org/issues/show_bug.cgi?id=1233
+>>>> #
+>>>> # So the workaround is to use ViewCVS to explicity set the media-type.
+>>>> #--------------------------------------------------------------------------
+>>>>
+>>>>
+>>>> # Get the content straight out of ViewCVS and use the appropriate media
+>>>> type:
+>>>> # See http://www.faqs.org/rfcs/rfc3023.html
+>>>> # FIXME: Verify these media types and maybe add charset
+>>>> #
+>>>> RewriteEngine On
+>>>> RewriteRule "(.*)\.dtd$"
+>>>> "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.dtd?content-type=application/xml-dtd"
+>>>>
+>>>>
+>>>> [P]
+>>>> RewriteRule "(.*)\.mod$"
+>>>> "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.mod?content-type=application/xml-dtd"
+>>>>
+>>>>
+>>>> [P]
+>>>> RewriteRule "(.*)\.pen$"
+>>>> "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.pen?content-type=application/xml-external-parsed-entity"
+>>>>
+>>>>
+>>>> [P]
+>>>> RewriteRule "(.*)\.ent$"
+>>>> "http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.ent?content-type=application/xml-external-parsed-entity"
+>>>>
+>>>>
+>>>> [P]
+>>>>
+>>>>
+>>>>
+>>>>
+>>>> A. Schamp wrote:
+>>>>
+>>>>
+>>>>> Those small-remote ones were old that I never updated...RDFlib doesn't
+>>>>> handle that stuff anyway (though the new, more powerful one librdf,
+>>>>> might do that remote stuff.  that's why they were pointed to that old
+>>>>> release.
+>>>>>
+>>>>> I propose this:  that we do something like xmlns.com with the FOAF and
+>>>>> WOT business, with versions built into the URI, and publish that and
+>>>>> change everything to it in our test data (since the schema won't
+>>>>> change for now, and we can build new versions as they are ready and
+>>>>> put that into the URIs, without breaking old ones).  Plus, the
+>>>>> trustserver can be smart and deal appropriately for each version, via
+>>>>> some strategy stuff, probably.
+>>>>>
+>>>>> On 4/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+>>>>>
+>>>>>
+>>>>>> You can see there were some prior inconsistencies regarding
+>>>>>> whether the
+>>>>>> rdf files were using a trunk schema or a release.  Hopefully
+>>>>>> moving them
+>>>>>> all to trunk reduced any possible problems rather than create any
+>>>>>>
+>>>>>> Dave Brondsema at BerliOS wrote:
+>>>>>>
+>>>>>>
+>>>>>>> Modified:
+>>>>>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>>>>> ===================================================================
+>>>>>>> ---
+>>>>>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>>>>> 2005-04-18 17:31:11 UTC (rev 355)
+>>>>>>> +++
+>>>>>>> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+>>>>>>> 2005-04-18 18:03:33 UTC (rev 356)
+>>>>>>> @@ -4,7 +4,7 @@
+>>>>>>> ]>
+>>>>>>> <rdf:RDF
+>>>>>>>    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+>>>>>>> -
+>>>>>>> xmlns="http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#"
+>>>>>>>
+>>>>>>> +
+>>>>>>> xmlns="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>>>>>>>
+>>>>>>>
+>>>>>>>    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>>>>>>>    xmlns:wot="http://xmlns.com/wot/0.1/"
+>>>>>>>    >
+>>>>>>>
+>>>>>>> Modified:
+>>>>>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>>>>>
+>>>>>>> ===================================================================
+>>>>>>> ---
+>>>>>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>>>>>
+>>>>>>> 2005-04-18 17:31:11 UTC (rev 355)
+>>>>>>> +++
+>>>>>>> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+>>>>>>>
+>>>>>>> 2005-04-18 18:03:33 UTC (rev 356)
+>>>>>>> @@ -6,7 +6,7 @@
+>>>>>>>   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>>>>>>>   xmlns:wot="http://xmlns.com/wot/0.1/#"
+>>>>>>>   xmlns:owl="http://www.w3.org/2002/07/owl#"
+>>>>>>> -
+>>>>>>> xmlns:trust="http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#"
+>>>>>>>
+>>>>>>>
+>>>>>>> +
+>>>>>>> xmlns:trust="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#"
+>>>>>>>
+>>>>>>>
+>>>>>>>   >
+>>>>>>>
+>>>>>>> <trust:Truster>
+>>>>>>>
+>>>>>> --
+>>>>>> Dave Brondsema : dave at brondsema.net
+>>>>>> http://www.splike.com : programming
+>>>>>> http://csx.calvin.edu : student org
+>>>>>> http://www.brondsema.net : personal
+>>>>>>
+>>>>>>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/d75b0233/attachment.pgp>
+
+From dave at brondsema.net  Tue Apr 19 01:44:32 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 18 Apr 2005 19:44:32 -0400
+Subject: topic taxonomy
+Message-ID: <42644660.8090904@brondsema.net>
+
+A taxonomy module for RSS:
+
+http://web.resource.org/rss/1.0/modules/taxonomy/
+http://logicerror.com/taxo-quick-start
+
+Seems pretty lame though, because it doesn't have any schema or
+inheritance behind the topics themself.
+
+
+This looks nice, though :-)
+<rdf:Bag>
+       <rdf:li rdf:resource=".."/>
+       <rdf:li rdf:resource=".."/>
+</rdf:Bag>
+
+
+Anyway... it'd be cool to create a basic owl file that represented what
+we know we want short-term:
+internet communication
+  \---- email
+   \---- wiki
+    \---- IM
+     \---- weblog comments
+
+Or something like that.  Maybe combine wiki & weblog comments into
+"public web posting" or similar.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/a9a4ac7a/attachment.pgp>
+
+From schamp at gmail.com  Tue Apr 19 05:55:23 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 18 Apr 2005 23:55:23 -0400
+Subject: r361 - paper
+In-Reply-To: <200504182247.j3IMl3oR022750@sheep.berlios.de>
+References: <200504182247.j3IMl3oR022750@sheep.berlios.de>
+Message-ID: <4264812B.8030808@gmail.com>
+
+I thought it might be a drag having hugely long, single lines for
+paragraphs in LaTeX, but it's sweet, since we can see changes for a
+whole paragraph at once.  Score!
+
+Dave Brondsema at BerliOS wrote:
+
+>Author: brondsem
+>Date: 2005-04-19 00:47:02 +0200 (Tue, 19 Apr 2005)
+>New Revision: 361
+>
+>Modified:
+>   paper/termpaper.tex
+>Log:
+>punctuation; rework infrastructure sentence
+>
+>Modified: paper/termpaper.tex
+>===================================================================
+>--- paper/termpaper.tex	2005-04-18 21:44:19 UTC (rev 360)
+>+++ paper/termpaper.tex	2005-04-18 22:47:02 UTC (rev 361)
+>@@ -23,8 +23,6 @@
+>        \affaddr{Grand Rapids, MI 49546}\\
+>        \email{dave at brondsema.net}
+> \alignauthor Andrew Schamp
+>-%\titlenote{Mr. Schamp is first because he is primarily responsible for this document, while Mr. Brondsema is primarily responsible for the presentation.}
+>-\\
+>        \affaddr{Calvin College}\\
+>        \affaddr{3201 Burton SE}\\
+>        \affaddr{Grand Rapids, MI  49546}\\
+>@@ -54,9 +52,9 @@
+>
+> Ratings system for reputation within certain domains (eBay auctions, for example), may be of some limited use, however, they may also be susceptible to floods of manipulative ratings.  Even if such systems can be guarded against such attacks, why should someone base whether they trust anotehr person on opinions given by others that they neither know nor trust?
+>
+>-A solution growing in popularity is that of creating a network of trust between individuals who know one another and have good reason to trust the ratings they give of others.  However, these systems too can subject to problems if someone impersonating a trusted party provides incorrect data boosting the reputation of an untrustworthy party.  The PGP web of trust provides the necessary verification of an individual's identity, however, it does not allow for expressing any additional information about that individual's trustworthiness on matters apart from personal identification.
+>+A solution growing in popularity is that of creating a network of trust between individuals who know one another and have good reason to trust the ratings they give of others.  However, these systems too can subject to problems if someone impersonating a trusted party provides incorrect data boosting the reputation of an untrustworthy party.  The PGP web of trust provides the necessary verification of an individual's identity; however, it does not allow the expression of any additional information about that individual's trustworthiness on matters apart from personal identification.
+>
+>-In this paper, we will describe some difficulties in integrating these two kinds of trust network, and how we designed a system to overcome them.  We will then describe our structure for representing trust data, and our methods for making trust inferences on this data.  Finally, we will discuss other things (find a better way to phrase this) that we have built to develop the beginnings of a useful infrastructure for this model of trust network.
+>+In this paper, we will describe some difficulties in integrating these two kinds of trust networks, and how we designed a system to overcome them.  We will then describe our structure for representing trust data, and our methods for making trust inferences on this data.  Finally, we will discuss the software we have begun to develop so that this trust network can be put to use.
+>
+> \section{Related Work}
+>
+>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/dde96096/attachment.pgp>
+
+From noreply at berlios.de  Wed Apr 20 00:38:29 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Tue, 19 Apr 2005 18:38:29 -0400 (EDT)
+Subject: [Task #1904] remove hardcoded paths
+Message-ID: <200504192238.j3JMcTRk010689@unicorn.berlios.de>
+
+Task #1904 has been updated. 
+
+Project: konfidi
+Subproject: Trustserver
+Summary: remove hardcoded paths
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: remove hardcoded paths so it can be deployed anywhere
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-19 18:38
+By: schamp
+
+Comment:
+which hardcoded paths?  in which files?
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1904&group_id=3538&group_project_id=891
+
+
+From noreply at berlios.de  Wed Apr 20 04:14:20 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Tue, 19 Apr 2005 22:14:20 -0400 (EDT)
+Subject: [Task #1904] remove hardcoded paths
+Message-ID: <200504200214.j3K2EK7i023251@unicorn.berlios.de>
+
+Task #1904 has been updated. 
+
+Project: konfidi
+Subproject: Trustserver
+Summary: remove hardcoded paths
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: remove hardcoded paths so it can be deployed anywhere
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-19 22:14
+By: brondsem
+
+Comment:
+frontend.py has some references to the ams5 dir.  i guess there isn't as much as i had thought
+
+-------------------------------------------------------
+Date: 2005-Apr-19 18:38
+By: schamp
+
+Comment:
+which hardcoded paths?  in which files?
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1904&group_id=3538&group_project_id=891
+
+
+From noreply at berlios.de  Wed Apr 20 04:23:50 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Tue, 19 Apr 2005 22:23:50 -0400 (EDT)
+Subject: [Task #1904] remove hardcoded paths
+Message-ID: <200504200223.j3K2Nol8024149@unicorn.berlios.de>
+
+Task #1904 has been updated. 
+
+Project: konfidi
+Subproject: Trustserver
+Summary: remove hardcoded paths
+Percent Complete: 100%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: remove hardcoded paths so it can be deployed anywhere
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-19 22:23
+By: schamp
+
+Comment:
+copout, but technically, it's fixed.
+
+-------------------------------------------------------
+Date: 2005-Apr-19 22:14
+By: brondsem
+
+Comment:
+frontend.py has some references to the ams5 dir.  i guess there isn't as much as i had thought
+
+-------------------------------------------------------
+Date: 2005-Apr-19 18:38
+By: schamp
+
+Comment:
+which hardcoded paths?  in which files?
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1904&group_id=3538&group_project_id=891
+
+
+From noreply at berlios.de  Wed Apr 20 04:26:46 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Tue, 19 Apr 2005 22:26:46 -0400 (EDT)
+Subject: [Task #1869] license & copyright
+Message-ID: <200504200226.j3K2QkAi024278@unicorn.berlios.de>
+
+Task #1869 has been updated. 
+
+Project: konfidi
+Subproject: General
+Summary: license & copyright
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: apply a copyright &amp; license header to all source files
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-19 22:26
+By: schamp
+
+Comment:
+is there anyway we can do this automatically with SVN ?
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1869&group_id=3538&group_project_id=895
+
+
+From noreply at berlios.de  Wed Apr 20 04:50:34 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Tue, 19 Apr 2005 22:50:34 -0400 (EDT)
+Subject: [Task #1869] license & copyright
+Message-ID: <200504200250.j3K2oYMv026093@unicorn.berlios.de>
+
+Task #1869 has been updated. 
+
+Project: konfidi
+Subproject: General
+Summary: license & copyright
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: apply a copyright &amp; license header to all source files
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-19 22:50
+By: brondsem
+
+Comment:
+no, it needs to be part of the text of the file.  I think there's some ASF perl scripts to help with this (they even put the comments in the right syntax depending on the file extension).
+
+And what license do we want?  I like ASL 2.0, but MPL/CDDL-style could be good too.  They're a bit less liberal, but I don't know quite enough about them yet
+
+-------------------------------------------------------
+Date: 2005-Apr-19 22:26
+By: schamp
+
+Comment:
+is there anyway we can do this automatically with SVN ?
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1869&group_id=3538&group_project_id=895
+
+
+From dave at brondsema.net  Wed Apr 20 04:56:14 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 19 Apr 2005 22:56:14 -0400
+Subject: r363 - paper
+In-Reply-To: <200504200011.j3K0BZnq020743@sheep.berlios.de>
+References: <200504200011.j3K0BZnq020743@sheep.berlios.de>
+Message-ID: <4265C4CE.8090703@brondsema.net>
+
+Comments in email, rather than inline.  Seems a better medium for
+discussion, when possible.  I dunno, you do loose the discussion from
+the text itself.  Some good, some bad.  Anyway, I typed it all here so
+too late now.
+
+A. M. Schamp at BerliOS wrote:
+
+> -\subsection{Previous Attempt}
+> +\subsection{Trust Inference Using PGP}
+>  % Should we include this at all? Perhaps title it something like "An approach using only PGP" and demphasize the fact that it was an idea we explored during this project?
+> -Our own project began as an exploration of whether we might use the PGP web-of-trust to filter email spam at the client's end. A mail client plugin would filter incoming mail, and check to see if there was a path from the sender to the recipient, in which the recipient had signed someone's key, who had signed another key, which eventually lead to the sender's key. If there was a path within a certain length, the message would be marked as trusted, if not, it would be marked as not trusted. This approach required that most users digitally sign email messages, and it depended on users to be aware of known spammers and keep from signing their keys. However, the recommended PGP keysigning practices require only the careful verification of the key-holder's identity, and a signed key does not entail anything about trustworthiness in other areas.  Whether a user should be trusted to send good email, and not spam, is information over and above that expressed in the PGP web-of-trus
+t!
+>   itself, so the web-of-trust would be inadequate to encode such information.
+> +% how is it now?
+
+I like it
+
+> +One possible approach is to use the PGP web-of-trust to filter email spam at the client's end. For example, a mail client plugin could filter incoming mail, and check to see if there was a path from the sender to the recipient, in which the recipient had signed someone's key, who had signed another key, which eventually lead to the sender's key. If there was a path within a certain length, the message would be marked as trusted, if not, it would be marked as not trusted. This approach required that most users digitally sign email messages, and it depended on users to be aware of known spammers and keep from signing their keys. However, the recommended PGP keysigning practices require only the careful verification of the key-holder's identity, and a signed key does not entail anything about trustworthiness in other areas.  Whether a user should be trusted to send good email, and not spam, is information over and above that expressed in the PGP web-of-trust itself, so the we
+b!
+>  -of-trust would be inadequate to encode such information.
+>
+>  A more serious flaw in an approach that depends so heavily on the client software is this:  because information about key signatures is stored as a part of the key that was signed, and not that of the signer, paths between users can only be constructed from the sender backward to the recipient. When a key is retrieved from a keyserver, all of the signatures on that key are included with it, showing which keys have signed that key, and providing a number of possible links in a chain. However, using the existing keyserver infrastructure, there is no easy way to tell which other keys a particular key has signed. If these paths are built backward using a breadth-first search from the sender to the recipient, a spammer or other malicious user could generate a large number of fake keys that are inter-signed, and then use these keys to sign the sender's key. By adding this artificial information, the client's searching capabilities would be crippled, and the web-of-trust would be
+ !
+>  polluted with fabricated keys, users, and signatures. The PGP system of key-signing and verification was designed to be robust against this sort of impersonation, by requiring photo-identification and fingerprint exchange before any key-signing, but a deluge of false information would put undue strain on the keyserver infrastructure, and would amount to a denial-of-service, of sorts.
+>
+> @@ -101,8 +103,11 @@
+>
+>  \subsection{Trust Ontology}
+>  % representation is seperate from algorithm result, right?  Need to fix this paragraph if so
+> -The schema for representing trust data went through several iterations before stabilizing in its current form.  It seemed that we had the choice of two general kinds of representations:  one that used discrete values for varying levels of trust and returned a discrete binary (yes or no) answer, or one which used a (theoretically) continuous range of trust values and returned an answer within that range.  Now, either kind of representation could be roughly mapped onto the other, however, a continuous range would allow more finely-grained control over the data.  This had its advantages in setting up our test data, but it also took into consideration our thoughts about the way trust between people works.
+> +% what do you mean?  I suppose the algorithm can perform whatever operation on the values it wants, but I think the point is that the domain and range of the network is the same:  an inferred trust rating should look no different from an explicit one.  maybe this is unclear...
+
+I think I follow you now.  But in the discrete one, shouldn't the output
+be one of the discrete levels, not a binary yes/no?  The binary decision
+happens at the client-level at a configured threshold for either model.
+
+
+>  \subsubsection{OWL Schema}
+> +% we need to say more at some point about FOAF, so that it is clear how we are using it and why.  But where?  In related work?  Here?  I'll put it here for now.
+
+Seems good.  Possibly shift some of into \ref{foaf} but I don't see any
+strong reason to do that.
+
+> +As the FOAF project grows in popularity, an infrastructure is growing to support it, as mentioned in \ref{foaf}.  Since there would be many advantages to tapping into this infrastructure, and since the specification of trust relationships fits in naturally alongside the existing \texttt{foaf:knows} property, Konfidi also uses the Resource Description Framework (RDF)\cite{rdf} for representing trust relationships.  In addition to the FOAF vocabulary, there is a vocabulary called WOT defining and describing singing and assurance, which provides the necessary structure for associating persons and organizations with key fingerprints\cite{wot}.  By designing Konfidi's vocabulary to make use of FOAF and WOT vocabulary elements, then, we can take advantage of the established standards and make our extensions compatible with existing FOAF-enabled tools.
+> +
+> +Konfidi uses the Web Ontology Language (OWL)\cite{owl} to define the RDF elements that make up the Konfidi trust ontology.  OWL builds on the existing RDF specification by providing a vocabulary to describe properties and classes, and their relations.  The Konfidi trust ontology provides two objects and five properties, which, in conjunction with the existing FOAF and WOT vocabularies, are sufficient to describe the trust relationships that Konfidi requires.
+> +
+> +% how should we describe the ontology?  how about this for now?
+
+Seems fine for now.  We can give a more thorough review later
+
+> +
+> +The primary element is \texttt{Relationship}\footnote{According to RDF standards, the names of objects are capitalized, while the names of properties remain lowercase.}, which represents a relationship of trust that holds between two people.  There are two properties required for every \texttt{Relationship}, \texttt{truster} and \texttt{trusted}, which indicate the two parties to the relationship.  Both \texttt{truster} and \texttt{trusted} have \texttt{foaf:Person} objects as their targets\footnote{These \texttt{Person} objects should also contain at least one \texttt{wot:fingerprint} property specifying the PGP fingerprint of a public key held by the individual the \texttt{Person} describes.  This property is required for verification; if no \texttt{fingerprint} is available, then Konfidi cannot use the relationship.}, which may be defined in the same file, inline, or in external documents indicated by their resource URIs\footnote{Because it does not matter where the \te
+x!
+
+Should we talk about trust:trusted being a non-person resource?
+
+>
+>  \subsection{FOAFServer}
+> +\label{foafserver}
+> +% in the "owl schema" section, I say that this section talks about the advantages of having distributed FOAF and RDF records, so be sure to cover that here as part of hte motivation of the Foafserver.  you remember what I mean, right?
+
+rdf:seeAlso references to a file with more info, right?  But trustserver
+can't actually use any data from that because it's not stored in the
+foafserver.  Or do you mean store only trust relationships in the
+foafserver and have your main one (and others) hosted elsewhere?
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050419/bd52b6ad/attachment.pgp>
+
+From noreply at berlios.de  Wed Apr 20 17:24:05 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Wed, 20 Apr 2005 11:24:05 -0400 (EDT)
+Subject: [Task #1904] remove hardcoded paths
+Message-ID: <200504201524.j3KFO5wt019058@unicorn.berlios.de>
+
+Task #1904 has been updated. 
+
+Project: konfidi
+Subproject: Trustserver
+Summary: remove hardcoded paths
+Percent Complete: 100%
+Status: Closed
+Authority  : brondsem
+Assigned to: 
+
+Description: remove hardcoded paths so it can be deployed anywhere
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-19 22:23
+By: schamp
+
+Comment:
+copout, but technically, it's fixed.
+
+-------------------------------------------------------
+Date: 2005-Apr-19 22:14
+By: brondsem
+
+Comment:
+frontend.py has some references to the ams5 dir.  i guess there isn't as much as i had thought
+
+-------------------------------------------------------
+Date: 2005-Apr-19 18:38
+By: schamp
+
+Comment:
+which hardcoded paths?  in which files?
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1904&group_id=3538&group_project_id=891
+
+
+From dave at brondsema.net  Wed Apr 20 17:26:41 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 20 Apr 2005 11:26:41 -0400
+Subject: [Task #1904] remove hardcoded paths
+In-Reply-To: <200504201524.j3KFO5wt019058@unicorn.berlios.de>
+References: <200504201524.j3KFO5wt019058@unicorn.berlios.de>
+Message-ID: <426674B1.2090707@brondsema.net>
+
+noreply at berlios.de wrote:
+> Task #1904 has been updated.
+>
+> Project: konfidi
+> Subproject: Trustserver
+> Summary: remove hardcoded paths
+> Percent Complete: 100%
+> Status: Closed
+> Authority  : brondsem
+> Assigned to:
+>
+
+We should mark both status: closed and % complete: 100.  Status is
+pretty straighforward.  % complete is useful because when you browse at
+Status: Any, it doesn't show a 'status' column, but it does show a '%
+complete' column.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050420/4a194f1e/attachment.pgp>
+
+From schamp at gmail.com  Thu Apr 21 05:55:56 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Wed, 20 Apr 2005 23:55:56 -0400
+Subject: r368 - paper
+In-Reply-To: <200504210356.j3L3uVIu008746@sheep.berlios.de>
+References: <200504210356.j3L3uVIu008746@sheep.berlios.de>
+Message-ID: <4267244C.5040005@gmail.com>
+
+Sorry this one was so long.  My questions for Vlinden, just ask for
+general comments and specific answers for the below and anything you can
+think of:
+
+The paper is not yet complete, but getting there.  What do you think of
+the introduction?
+
+How should we present the "desiderata", as you mentioned in the last
+meeting?  Should that  be the title of Section 3, instead of
+"motivation"?  Should we just provide a list, or is a reasonable amount
+of explanation required?  Is there an example we could look to?
+
+Thanks,
+Andy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050420/5dcd5574/attachment.pgp>
+
+From noreply at berlios.de  Thu Apr 21 06:20:30 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Thu, 21 Apr 2005 00:20:30 -0400 (EDT)
+Subject: [Task #1915] path in XML format
+Message-ID: <200504210420.j3L4KU14000611@unicorn.berlios.de>
+
+Task #1915 has been updated. 
+
+Project: konfidi
+Subproject: PGP pathfinder
+Summary: path in XML format
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: Modify wotsap to output the path graph in XML format.  Possible formats:
+
+http://www.cs.rpi.edu/~puninj/RGML/ - RDF
+
+http://www.gupro.de/GXL/ - lots of tools, not RDF.  http://tfs.cs.tu-berlin.de/projekte/gxl-gtxl.html - graph transformation
+
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1915&group_id=3538&group_project_id=896
+
+
+From dave at brondsema.net  Thu Apr 21 06:40:32 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Thu, 21 Apr 2005 00:40:32 -0400
+Subject: r368 - paper
+In-Reply-To: <4267244C.5040005@gmail.com>
+References: <200504210356.j3L3uVIu008746@sheep.berlios.de> <4267244C.5040005@gmail.com>
+Message-ID: <42672EC0.20904@brondsema.net>
+
+A. Schamp wrote:
+> Sorry this one was so long.  My questions for Vlinden, just ask for
+> general comments and specific answers for the below and anything you can
+> think of:
+>
+> The paper is not yet complete, but getting there.  What do you think of
+> the introduction?
+>
+> How should we present the "desiderata", as you mentioned in the last
+> meeting?  Should that  be the title of Section 3, instead of
+> "motivation"?  Should we just provide a list, or is a reasonable amount
+> of explanation required?  Is there an example we could look to?
+>
+
+I feel that the paper is still in the midst of our own revising and it
+would be better to send the next draft when we are more comfortable with
+it ourselves.
+
+How about you just send him the intro text and the "desiderata" question?
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050421/e3733abe/attachment.pgp>
+
+From noreply at berlios.de  Sat Apr 23 21:44:13 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Sat, 23 Apr 2005 15:44:13 -0400 (EDT)
+Subject: [Task #1924] validate sigs on load
+Message-ID: <200504231944.j3NJiDfD000511@unicorn.berlios.de>
+
+Task #1924 has been updated. 
+
+Project: konfidi
+Subproject: FOAF server
+Summary: validate sigs on load
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: When the foafserver starts up, validate all foafs &amp; signatures that are available via the filesystem.
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1924&group_id=3538&group_project_id=892
+
+
+From noreply at berlios.de  Sat Apr 23 21:45:51 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Sat, 23 Apr 2005 15:45:51 -0400 (EDT)
+Subject: [Task #1910] stable trust.owl URI
+Message-ID: <200504231945.j3NJjpUk000609@unicorn.berlios.de>
+
+Task #1910 has been updated. 
+
+Project: konfidi
+Subproject: General
+Summary: stable trust.owl URI
+Percent Complete: 100%
+Status: Closed
+Authority  : brondsem
+Assigned to: 
+
+Description: Create something permanent at konfidi.org for the trust.owl URI
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-23 15:45
+By: brondsem
+
+Comment:
+konfidi.org/ns/trust redirects set up
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1910&group_id=3538&group_project_id=895
+
+
+From noreply at berlios.de  Sat Apr 23 21:46:51 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Sat, 23 Apr 2005 15:46:51 -0400 (EDT)
+Subject: [Task #1925] trust release-1.2
+Message-ID: <200504231946.j3NJkpuQ000659@unicorn.berlios.de>
+
+Task #1925 has been updated. 
+
+Project: konfidi
+Subproject: General
+Summary: trust release-1.2
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: Tag release-1.2 of owl file
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1925&group_id=3538&group_project_id=895
+
+
+From noreply at berlios.de  Sun Apr 24 22:52:37 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Sun, 24 Apr 2005 16:52:37 -0400 (EDT)
+Subject: [Task #1911] stable topics URIs
+Message-ID: <200504242052.j3OKqbsA019422@unicorn.berlios.de>
+
+Task #1911 has been updated. 
+
+Project: konfidi
+Subproject: General
+Summary: stable topics URIs
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: Create something permanent at konfidi.org for the topic URIs that we use
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-24 16:52
+By: schamp
+
+Comment:
+what do you mean? like that apache rewrite directive?
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1911&group_id=3538&group_project_id=895
+
+
+From noreply at berlios.de  Mon Apr 25 00:38:49 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Sun, 24 Apr 2005 18:38:49 -0400 (EDT)
+Subject: [Task #1911] stable topics URIs
+Message-ID: <200504242238.j3OMcnBb008505@unicorn.berlios.de>
+
+Task #1911 has been updated. 
+
+Project: konfidi
+Subproject: General
+Summary: stable topics URIs
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: Create something permanent at konfidi.org for the topic URIs that we use
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-24 18:38
+By: brondsem
+
+Comment:
+Well the URIs we use don't actually have to refer to a real document, right?  So we could just change all the URIs from abudantplunder to konfidi.org/ns/topics/email.  Or whatever format seems best to you.
+
+-------------------------------------------------------
+Date: 2005-Apr-24 16:52
+By: schamp
+
+Comment:
+what do you mean? like that apache rewrite directive?
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1911&group_id=3538&group_project_id=895
+
+
+From dave at brondsema.net  Mon Apr 25 04:13:45 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sun, 24 Apr 2005 22:13:45 -0400
+Subject: licensing
+Message-ID: <426C5259.9000305@brondsema.net>
+
+redland's LGPL/apache2 dual license explanation:
+
+http://librdf.org/FAQS.html
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050424/bc6c7f05/attachment.pgp>
+
+From schamp at gmail.com  Mon Apr 25 15:14:16 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 25 Apr 2005 09:14:16 -0400
+Subject: licensing
+In-Reply-To: <426C5259.9000305@brondsema.net>
+References: <426C5259.9000305@brondsema.net>
+Message-ID: <426CED28.4060307@gmail.com>
+
+It looks like he has good reasons for it, mainly allowing linking with
+the GPL or LGPL if you want to, otherwise, do whatever.  I say, go for it.
+
+Dave Brondsema wrote:
+
+> redland's LGPL/apache2 dual license explanation:
+>
+> http://librdf.org/FAQS.html
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://csx.calvin.edu : student org
+> http://www.brondsema.net : personal
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050425/2f35a524/attachment.pgp>
+
+From schamp at gmail.com  Mon Apr 25 15:25:12 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 25 Apr 2005 09:25:12 -0400
+Subject: r384 - paper
+In-Reply-To: <200504250429.j3P4TrN7025929@sheep.berlios.de>
+References: <200504250429.j3P4TrN7025929@sheep.berlios.de>
+Message-ID: <426CEFB8.7020505@gmail.com>
+
+Dave Brondsema at BerliOS wrote:
+
+>Author: brondsem
+>Date: 2005-04-25 06:29:45 +0200 (Mon, 25 Apr 2005)
+>New Revision: 384
+>
+>Modified:
+>   paper/termpaper.pdf
+>   paper/termpaper.tex
+>Log:
+>talk more about authentication approaches to email.  Are footnotes the best way to provide URLs?
+>
+>
+Remember, Vlinden said that we should just make those additional
+references.  Just make one like foaf and OWL, and I'll figure out how to
+make it display correctly.
+
+Andy
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050425/d48954e0/attachment.pgp>
+
+From dave at brondsema.net  Mon Apr 25 18:08:00 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 25 Apr 2005 12:08:00 -0400
+Subject: falloff rate of multiplicative strategy
+Message-ID: <426D15E0.1000302@brondsema.net>
+
+
+I think we really need to use exponentiation to slow the falloff rate in
+the multiplicative strategy.  Take our demo for example.  Say I trust
+Alice .8, she trusts Bob .7, and he trusts Clara .9.  Reasonable, right?
+  But we get:
+
+.8 * .7 * .9 = .504
+
+This is way too low.  I would imagine .6 or .7 would be the lowest
+cutoff most clients would have.
+
+Andy, can you implement this easily?  An exponent of 1/2 seems to be
+reasonable, but it should be configurable.
+
+.8^(1/2) * .7^(1/2) * .9^(1/2) =
+.894 * .837 * .949 = .710
+
+WDYT?  We should write about this too
+
+Other examples with a 1/2 exponent seem reasonable too:
+.8 # .7 # .9 = .71
+.5 # .5 = .5
+.4 # .3 = .346
+.3 # .7 = .458
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050425/444cf82e/attachment.pgp>
+
+From dave at brondsema.net  Mon Apr 25 20:18:31 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 25 Apr 2005 14:18:31 -0400
+Subject: licensing
+In-Reply-To: <426CED28.4060307@gmail.com>
+References: <426C5259.9000305@brondsema.net> <426CED28.4060307@gmail.com>
+Message-ID: <426D3477.2040104@brondsema.net>
+
+What do you think of this header?  It's a bit lengthy, but follows the
+"applying the license" procedure for both licenses.  librdf sources have
+3 licenses (GPL too) so they have extremely minimal reference to those
+licenses (see
+http://cvs.librdf.org/cvsweb/redland/librdf/librdf/rdf_concepts.h?rev=1.13&content-type=text/vnd.viewcvs-markup)
+
+#  Copyright (C) 2005-2005 Dave Brondsema, Andrew Schamp
+#  This package is part of Konfidi http://konfidi.org/
+#  It is licensed under two alternative licenses (your choice):
+#      1. Apache License, Version 2.0
+#      2. GNU Lesser General Public License, Version 2.1
+#
+#
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+#
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License, or (at your option) any later version.
+#
+#  This library is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with this library; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+
+A. Schamp wrote:
+> It looks like he has good reasons for it, mainly allowing linking with
+> the GPL or LGPL if you want to, otherwise, do whatever.  I say, go for it.
+>
+> Dave Brondsema wrote:
+>
+>
+>>redland's LGPL/apache2 dual license explanation:
+>>
+>>http://librdf.org/FAQS.html
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://csx.calvin.edu : student org
+>>http://www.brondsema.net : personal
+>
+>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050425/95edf2e6/attachment.pgp>
+
+From dave at brondsema.net  Mon Apr 25 20:20:10 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 25 Apr 2005 14:20:10 -0400
+Subject: licensing
+In-Reply-To: <426CED28.4060307@gmail.com>
+References: <426C5259.9000305@brondsema.net> <426CED28.4060307@gmail.com>
+Message-ID: <426D34DA.3060805@brondsema.net>
+
+Should we set up each component (foafserver, trustserver, frontend,
+tests, each client, ..) with their own full license texts, READMEs,
+NOTICEs, etc?  This would allow each one to be distributed seperately.
+I think so.
+
+A. Schamp wrote:
+> It looks like he has good reasons for it, mainly allowing linking with
+> the GPL or LGPL if you want to, otherwise, do whatever.  I say, go for it.
+>
+> Dave Brondsema wrote:
+>
+>
+>>redland's LGPL/apache2 dual license explanation:
+>>
+>>http://librdf.org/FAQS.html
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://csx.calvin.edu : student org
+>>http://www.brondsema.net : personal
+>
+>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050425/1c6cb4aa/attachment.pgp>
+
+From schamp at gmail.com  Tue Apr 26 00:15:14 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 25 Apr 2005 18:15:14 -0400
+Subject: licensing
+In-Reply-To: <426D3477.2040104@brondsema.net>
+References: <426C5259.9000305@brondsema.net> <426CED28.4060307@gmail.com> <426D3477.2040104@brondsema.net>
+Message-ID: <426D6BF2.5070701@gmail.com>
+
+Quoth Dave Brondsema:
+
+> What do you think of this header?  It's a bit lengthy, but follows the
+> "applying the license" procedure for both licenses.  librdf sources have
+> 3 licenses (GPL too) so they have extremely minimal reference to those
+> licenses (see
+> http://cvs.librdf.org/cvsweb/redland/librdf/librdf/rdf_concepts.h?rev=1.13&content-type=text/vnd.viewcvs-markup)
+>
+
+It looks fine, I might cut down on the number of blank spaces between
+things, though that could be useful for clarity.  Whatev.
+
+Andy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050425/f41eee9c/attachment.pgp>
+
+From dave at brondsema.net  Tue Apr 26 21:07:31 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 26 Apr 2005 15:07:31 -0400
+Subject: issue tracker
+Message-ID: <426E9173.4010600@brondsema.net>
+
+
+the sourceforge software issue tracker sucks.  Using mediawiki
+categories and subcategories, we can have a pretty slick way to organize
+them.  See http://www.konfidi.org/wiki/Category:Issue
+
+the wiki is kinda slow, unfortunately.  And I don't know why searches
+don't work.
+
+We can modify the category setup too, if you want.  For example, there's
+no way to get a full listing of all Issues.  Would that be useful?
+Listing by status categories would seem to suffice.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050426/669ff573/attachment.pgp>
+
+From dave at brondsema.net  Tue Apr 26 21:45:07 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 26 Apr 2005 15:45:07 -0400
+Subject: r393 - in paper: . Konfidi_files
+In-Reply-To: <200504261514.j3QFEiA4001257@sheep.berlios.de>
+References: <200504261514.j3QFEiA4001257@sheep.berlios.de>
+Message-ID: <426E9A43.4070900@brondsema.net>
+
+Andrew Schamp at BerliOS wrote:
+> Author: schamp
+> Date: 2005-04-26 17:14:37 +0200 (Tue, 26 Apr 2005)
+> New Revision: 393
+>
+> Modified:
+>    paper/Konfidi.vsd
+>    paper/Konfidi_files/Konfidi_data.xml
+>    paper/Konfidi_files/Konfidi_frames.htm
+>    paper/Konfidi_files/Konfidi_gif_1.gif
+>    paper/Konfidi_files/Konfidi_gif_1.htm
+>    paper/Konfidi_files/Konfidi_gif_5.gif
+>    paper/Konfidi_files/Konfidi_gif_6.gif
+>    paper/Konfidi_files/Konfidi_gif_7.gif
+>    paper/Konfidi_files/Konfidi_vml_1.EMZ
+>    paper/Konfidi_files/Konfidi_vml_1.htm
+>    paper/Konfidi_files/Konfidi_vml_2.EMZ
+>    paper/Konfidi_files/Konfidi_vml_3.EMZ
+>    paper/Konfidi_files/Konfidi_vml_4.EMZ
+>    paper/Konfidi_files/Konfidi_vml_5.EMZ
+>    paper/Konfidi_files/Konfidi_vml_6.EMZ
+>    paper/Konfidi_files/Konfidi_vml_7.EMZ
+>    paper/termpaper.bib
+>    paper/termpaper.pdf
+>    paper/termpaper.tex
+> Log:
+> updated the diagrams (dave, I made up a value of 0.75 from clara to joe.  was your purpose to make that change to show the foafserver in action during the demo?  is that cool?)
+>
+
+I was planning on having the good sender in the demo be Clara.  I didn't
+even set up Joe in the demo data.  Is that okay?
+
+> also, fixed bibliography stuff with urls (use note = {\url{blah.com}} )
+>
+> also, responded a bit more to vlinden's comments (not done, though)
+>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050426/35bfc701/attachment.pgp>
+
+From schamp at gmail.com  Tue Apr 26 22:02:51 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 26 Apr 2005 16:02:51 -0400
+Subject: r397 - presentation
+In-Reply-To: <200504261942.j3QJg32D025195@sheep.berlios.de>
+References: <200504261942.j3QJg32D025195@sheep.berlios.de>
+Message-ID: <5a086d9d05042613027d13de64@mail.gmail.com>
+
+I would change the bit about "asserting webpages about biology are
+trustworthy" to something like "inferring that webpages about biology
+are likely to have correct information".  The system makes no
+assertions, only inferences and assumptions.  besides, a page cannot
+be trusted, only the person who made it can be.  but you get the idea.
+
+On 4/26/05, Dave Brondsema at BerliOS <brondsem at sheep.berlios.de> wrote:
+> Author: brondsem
+> Date: 2005-04-26 21:42:03 +0200 (Tue, 26 Apr 2005)
+> New Revision: 397
+> 
+> Added:
+>    presentation/abstract.txt
+> Log:
+> what do you think of this?  we should finalize it tomorrow
+> 
+> Added: presentation/abstract.txt
+> ===================================================================
+> --- presentation/abstract.txt   2005-04-26 16:30:29 UTC (rev 396)
+> +++ presentation/abstract.txt   2005-04-26 19:42:03 UTC (rev 397)
+> @@ -0,0 +1,3 @@
+> +Konfidi: Stopping Spam with Trust Networks
+> +
+> +We have developed a system to filter emails based on the trustworthiness of the sender.  This uses a network of PGP cryptographic signatures to determine authenticity and network of topical trust between people.  Trust values propogate through your peers' ratings to form a huge invitation-only network of trusted people.  The system can be applied to many other topics, such as asserting webpages about biology are trustworthy, or trusting a seller in an online purchase.
+> \ No newline at end of file
+> 
+> Property changes on: presentation/abstract.txt
+> ___________________________________________________________________
+> Name: svn:eol-style
+>    + native
+> 
+>
+
+
+From schamp at gmail.com  Tue Apr 26 22:03:40 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 26 Apr 2005 16:03:40 -0400
+Subject: r393 - in paper: . Konfidi_files
+In-Reply-To: <426E9A43.4070900@brondsema.net>
+References: <200504261514.j3QFEiA4001257@sheep.berlios.de>
+	 <426E9A43.4070900@brondsema.net>
+Message-ID: <5a086d9d05042613039b52af8@mail.gmail.com>
+
+Oh, okay.  I misunderstood.  Can you explain what kind of foaf editing
+you'll do during the demo, and the query that you'll make based on it?
+
+Andy
+
+On 4/26/05, Dave Brondsema <dave at brondsema.net> wrote:
+> Andrew Schamp at BerliOS wrote:
+> > Author: schamp
+> > Date: 2005-04-26 17:14:37 +0200 (Tue, 26 Apr 2005)
+> > New Revision: 393
+> >
+> > Modified:
+> >    paper/Konfidi.vsd
+> >    paper/Konfidi_files/Konfidi_data.xml
+> >    paper/Konfidi_files/Konfidi_frames.htm
+> >    paper/Konfidi_files/Konfidi_gif_1.gif
+> >    paper/Konfidi_files/Konfidi_gif_1.htm
+> >    paper/Konfidi_files/Konfidi_gif_5.gif
+> >    paper/Konfidi_files/Konfidi_gif_6.gif
+> >    paper/Konfidi_files/Konfidi_gif_7.gif
+> >    paper/Konfidi_files/Konfidi_vml_1.EMZ
+> >    paper/Konfidi_files/Konfidi_vml_1.htm
+> >    paper/Konfidi_files/Konfidi_vml_2.EMZ
+> >    paper/Konfidi_files/Konfidi_vml_3.EMZ
+> >    paper/Konfidi_files/Konfidi_vml_4.EMZ
+> >    paper/Konfidi_files/Konfidi_vml_5.EMZ
+> >    paper/Konfidi_files/Konfidi_vml_6.EMZ
+> >    paper/Konfidi_files/Konfidi_vml_7.EMZ
+> >    paper/termpaper.bib
+> >    paper/termpaper.pdf
+> >    paper/termpaper.tex
+> > Log:
+> > updated the diagrams (dave, I made up a value of 0.75 from clara to joe.  was your purpose to make that change to show the foafserver in action during the demo?  is that cool?)
+> >
+> 
+> I was planning on having the good sender in the demo be Clara.  I didn't
+> even set up Joe in the demo data.  Is that okay?
+> 
+> > also, fixed bibliography stuff with urls (use note = {\url{blah.com}} )
+> >
+> > also, responded a bit more to vlinden's comments (not done, though)
+> >
+> >
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://csx.calvin.edu : student org
+> http://www.brondsema.net : personal
+> 
+> 
+>
+
+
+From dave at brondsema.net  Tue Apr 26 22:16:31 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 26 Apr 2005 16:16:31 -0400
+Subject: r393 - in paper: . Konfidi_files
+In-Reply-To: <5a086d9d05042613039b52af8@mail.gmail.com>
+References: <200504261514.j3QFEiA4001257@sheep.berlios.de>	 <426E9A43.4070900@brondsema.net> <5a086d9d05042613039b52af8@mail.gmail.com>
+Message-ID: <426EA19F.2060501@brondsema.net>
+
+I would have all the foaf records created and loaded except for mine.
+Then I can create my foaf, save it to the foaf server, and do a
+trustserver query from clara to me, and from spammer to me.
+
+A. Schamp wrote:
+> Oh, okay.  I misunderstood.  Can you explain what kind of foaf editing
+> you'll do during the demo, and the query that you'll make based on it?
+>
+> Andy
+>
+> On 4/26/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>Andrew Schamp at BerliOS wrote:
+>>
+>>>Author: schamp
+>>>Date: 2005-04-26 17:14:37 +0200 (Tue, 26 Apr 2005)
+>>>New Revision: 393
+>>>
+>>>Modified:
+>>>   paper/Konfidi.vsd
+>>>   paper/Konfidi_files/Konfidi_data.xml
+>>>   paper/Konfidi_files/Konfidi_frames.htm
+>>>   paper/Konfidi_files/Konfidi_gif_1.gif
+>>>   paper/Konfidi_files/Konfidi_gif_1.htm
+>>>   paper/Konfidi_files/Konfidi_gif_5.gif
+>>>   paper/Konfidi_files/Konfidi_gif_6.gif
+>>>   paper/Konfidi_files/Konfidi_gif_7.gif
+>>>   paper/Konfidi_files/Konfidi_vml_1.EMZ
+>>>   paper/Konfidi_files/Konfidi_vml_1.htm
+>>>   paper/Konfidi_files/Konfidi_vml_2.EMZ
+>>>   paper/Konfidi_files/Konfidi_vml_3.EMZ
+>>>   paper/Konfidi_files/Konfidi_vml_4.EMZ
+>>>   paper/Konfidi_files/Konfidi_vml_5.EMZ
+>>>   paper/Konfidi_files/Konfidi_vml_6.EMZ
+>>>   paper/Konfidi_files/Konfidi_vml_7.EMZ
+>>>   paper/termpaper.bib
+>>>   paper/termpaper.pdf
+>>>   paper/termpaper.tex
+>>>Log:
+>>>updated the diagrams (dave, I made up a value of 0.75 from clara to joe.  was your purpose to make that change to show the foafserver in action during the demo?  is that cool?)
+>>>
+>>
+>>I was planning on having the good sender in the demo be Clara.  I didn't
+>>even set up Joe in the demo data.  Is that okay?
+>>
+>>
+>>>also, fixed bibliography stuff with urls (use note = {\url{blah.com}} )
+>>>
+>>>also, responded a bit more to vlinden's comments (not done, though)
+>>>
+>>>
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://csx.calvin.edu : student org
+>>http://www.brondsema.net : personal
+>>
+>>
+>>
+>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050426/f436ca9a/attachment.pgp>
+
+From schamp at gmail.com  Tue Apr 26 22:22:30 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 26 Apr 2005 16:22:30 -0400
+Subject: r393 - in paper: . Konfidi_files
+In-Reply-To: <426EA19F.2060501@brondsema.net>
+References: <200504261514.j3QFEiA4001257@sheep.berlios.de>
+	 <426E9A43.4070900@brondsema.net>
+	 <5a086d9d05042613039b52af8@mail.gmail.com>
+	 <426EA19F.2060501@brondsema.net>
+Message-ID: <5a086d9d05042613223330407f@mail.gmail.com>
+
+aight, that helps.  thanks.
+
+On 4/26/05, Dave Brondsema <dave at brondsema.net> wrote:
+> I would have all the foaf records created and loaded except for mine.
+> Then I can create my foaf, save it to the foaf server, and do a
+> trustserver query from clara to me, and from spammer to me.
+> 
+> A. Schamp wrote:
+> > Oh, okay.  I misunderstood.  Can you explain what kind of foaf editing
+> > you'll do during the demo, and the query that you'll make based on it?
+> >
+> > Andy
+> >
+> > On 4/26/05, Dave Brondsema <dave at brondsema.net> wrote:
+> >
+> >>Andrew Schamp at BerliOS wrote:
+> >>
+> >>>Author: schamp
+> >>>Date: 2005-04-26 17:14:37 +0200 (Tue, 26 Apr 2005)
+> >>>New Revision: 393
+> >>>
+> >>>Modified:
+> >>>   paper/Konfidi.vsd
+> >>>   paper/Konfidi_files/Konfidi_data.xml
+> >>>   paper/Konfidi_files/Konfidi_frames.htm
+> >>>   paper/Konfidi_files/Konfidi_gif_1.gif
+> >>>   paper/Konfidi_files/Konfidi_gif_1.htm
+> >>>   paper/Konfidi_files/Konfidi_gif_5.gif
+> >>>   paper/Konfidi_files/Konfidi_gif_6.gif
+> >>>   paper/Konfidi_files/Konfidi_gif_7.gif
+> >>>   paper/Konfidi_files/Konfidi_vml_1.EMZ
+> >>>   paper/Konfidi_files/Konfidi_vml_1.htm
+> >>>   paper/Konfidi_files/Konfidi_vml_2.EMZ
+> >>>   paper/Konfidi_files/Konfidi_vml_3.EMZ
+> >>>   paper/Konfidi_files/Konfidi_vml_4.EMZ
+> >>>   paper/Konfidi_files/Konfidi_vml_5.EMZ
+> >>>   paper/Konfidi_files/Konfidi_vml_6.EMZ
+> >>>   paper/Konfidi_files/Konfidi_vml_7.EMZ
+> >>>   paper/termpaper.bib
+> >>>   paper/termpaper.pdf
+> >>>   paper/termpaper.tex
+> >>>Log:
+> >>>updated the diagrams (dave, I made up a value of 0.75 from clara to joe.  was your purpose to make that change to show the foafserver in action during the demo?  is that cool?)
+> >>>
+> >>
+> >>I was planning on having the good sender in the demo be Clara.  I didn't
+> >>even set up Joe in the demo data.  Is that okay?
+> >>
+> >>
+> >>>also, fixed bibliography stuff with urls (use note = {\url{blah.com}} )
+> >>>
+> >>>also, responded a bit more to vlinden's comments (not done, though)
+> >>>
+> >>>
+> >>
+> >>--
+> >>Dave Brondsema : dave at brondsema.net
+> >>http://www.splike.com : programming
+> >>http://csx.calvin.edu : student org
+> >>http://www.brondsema.net : personal
+> >>
+> >>
+> >>
+> >
+> >
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://csx.calvin.edu : student org
+> http://www.brondsema.net : personal
+> 
+> 
+>
+
+
+From schamp at gmail.com  Tue Apr 26 22:23:49 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 26 Apr 2005 16:23:49 -0400
+Subject: r398 - foafserver/trunk presentation
+In-Reply-To: <200504262018.j3QKIPm8026800@sheep.berlios.de>
+References: <200504262018.j3QKIPm8026800@sheep.berlios.de>
+Message-ID: <5a086d9d05042613236811a808@mail.gmail.com>
+
+I would even say "the author is knowledgible" or "trustworthy to
+provide accurate information" or something more specific.  it's just
+too general the way you have it now, I think.
+
+On 4/26/05, Dave Brondsema at BerliOS <brondsem at sheep.berlios.de> wrote:
+> Author: brondsem
+> Date: 2005-04-26 22:18:25 +0200 (Tue, 26 Apr 2005)
+> New Revision: 398
+> 
+> Modified:
+>    foafserver/trunk/server.py
+>    presentation/abstract.txt
+> Log:
+> better wording in bio phrase
+> 
+> Modified: foafserver/trunk/server.py
+> ===================================================================
+> --- foafserver/trunk/server.py  2005-04-26 19:42:03 UTC (rev 397)
+> +++ foafserver/trunk/server.py  2005-04-26 20:18:25 UTC (rev 398)
+> @@ -1,3 +1,39 @@
+> +#  Copyright (C) 2005-2005 Dave Brondsema, Andrew Schamp
+> +#  This package is part of Konfidi http://konfidi.org/
+> +#  It is licensed under two alternative licenses (your choice):
+> +#      1. Apache License, Version 2.0
+> +#      2. GNU Lesser General Public License, Version 2.1
+> +#
+> +#
+> +#
+> +#  Licensed under the Apache License, Version 2.0 (the "License");
+> +#  you may not use this file except in compliance with the License.
+> +#  You may obtain a copy of the License at
+> +#
+> +#      http://www.apache.org/licenses/LICENSE-2.0
+> +#
+> +#  Unless required by applicable law or agreed to in writing, software
+> +#  distributed under the License is distributed on an "AS IS" BASIS,
+> +#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+> +#  See the License for the specific language governing permissions and
+> +#  limitations under the License.
+> +#
+> +#
+> +#
+> +#  This library is free software; you can redistribute it and/or
+> +#  modify it under the terms of the GNU Lesser General Public
+> +#  License as published by the Free Software Foundation; either
+> +#  version 2.1 of the License, or (at your option) any later version.
+> +#
+> +#  This library is distributed in the hope that it will be useful,
+> +#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+> +#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+> +#  Lesser General Public License for more details.
+> +#
+> +#  You should have received a copy of the GNU Lesser General Public
+> +#  License along with this library; if not, write to the Free Software
+> +#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+> +
+>  from mod_python import apache
+> 
+>  # local
+> 
+> Modified: presentation/abstract.txt
+> ===================================================================
+> --- presentation/abstract.txt   2005-04-26 19:42:03 UTC (rev 397)
+> +++ presentation/abstract.txt   2005-04-26 20:18:25 UTC (rev 398)
+> @@ -1,3 +1,3 @@
+>  Konfidi: Stopping Spam with Trust Networks
+> 
+> -We have developed a system to filter emails based on the trustworthiness of the sender.  This uses a network of PGP cryptographic signatures to determine authenticity and network of topical trust between people.  Trust values propogate through your peers' ratings to form a huge invitation-only network of trusted people.  The system can be applied to many other topics, such as asserting webpages about biology are trustworthy, or trusting a seller in an online purchase.
+> \ No newline at end of file
+> +We have developed a system to filter emails based on the trustworthiness of the sender.  This uses a network of PGP cryptographic signatures to determine authenticity and network of topical trust between people.  Trust values propogate through your peers' ratings to form a huge invitation-only network of trusted people.  The system can be applied to many other topics, such as inferring that the author of a biology webpage is trustworthy, or trusting a seller in an online purchase.
+> \ No newline at end of file
+> 
+>
+
+
+From dave at brondsema.net  Tue Apr 26 22:26:07 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 26 Apr 2005 16:26:07 -0400
+Subject: r398 - foafserver/trunk presentation
+In-Reply-To: <200504262018.j3QKIPm8026800@sheep.berlios.de>
+References: <200504262018.j3QKIPm8026800@sheep.berlios.de>
+Message-ID: <426EA3DF.7050604@brondsema.net>
+
+Dave Brondsema at BerliOS wrote:
+> Author: brondsem
+> Date: 2005-04-26 22:18:25 +0200 (Tue, 26 Apr 2005)
+> New Revision: 398
+>
+> Modified:
+>    foafserver/trunk/server.py
+>    presentation/abstract.txt
+> Log:
+> better wording in bio phrase
+
+
+> Modified: presentation/abstract.txt
+> ===================================================================
+> --- presentation/abstract.txt	2005-04-26 19:42:03 UTC (rev 397)
+> +++ presentation/abstract.txt	2005-04-26 20:18:25 UTC (rev 398)
+> @@ -1,3 +1,3 @@
+>  Konfidi: Stopping Spam with Trust Networks
+>
+> -We have developed a system to filter emails based on the trustworthiness of the sender.  This uses a network of PGP cryptographic signatures to determine authenticity and network of topical trust between people.  Trust values propogate through your peers' ratings to form a huge invitation-only network of trusted people.  The system can be applied to many other topics, such as asserting webpages about biology are trustworthy, or trusting a seller in an online purchase.
+> \ No newline at end of file
+> +We have developed a system to filter emails based on the trustworthiness of the sender.  This uses a network of PGP cryptographic signatures to determine authenticity and network of topical trust between people.  Trust values propogate through your peers' ratings to form a huge invitation-only network of trusted people.  The system can be applied to many other topics, such as inferring that the author of a biology webpage is trustworthy, or trusting a seller in an online purchase.
+> \ No newline at end of file
+>
+
+
+I think this is too long.  What phrases can we halve, merge, or drop
+altogether?
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050426/17adf477/attachment.pgp>
+
+From schamp at gmail.com  Tue Apr 26 22:32:08 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 26 Apr 2005 16:32:08 -0400
+Subject: r398 - foafserver/trunk presentation
+In-Reply-To: <426EA3DF.7050604@brondsema.net>
+References: <200504262018.j3QKIPm8026800@sheep.berlios.de>
+	 <426EA3DF.7050604@brondsema.net>
+Message-ID: <5a086d9d050426133248830d0e@mail.gmail.com>
+
+How about this:
+
+We have developed a system to filter emails based on the
+trustworthiness of the sender.  This uses a network of PGP
+cryptographic signatures to determine authenticity and network of
+topical trust to determine trust ratings between individuals.  The
+system can be applied to many other topics, such as rating the
+accuracy of information in a webpage, or trusting a seller in an
+online purchase.
+
+?
+
+
+From schamp at gmail.com  Wed Apr 27 17:16:22 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Wed, 27 Apr 2005 11:16:22 -0400
+Subject: r400 - presentation
+In-Reply-To: <200504271514.j3RFEm45008479@sheep.berlios.de>
+References: <200504271514.j3RFEm45008479@sheep.berlios.de>
+Message-ID: <5a086d9d05042708162358e8fe@mail.gmail.com>
+
+looks good. 
+
+On 4/27/05, Dave Brondsema at BerliOS <brondsem at sheep.berlios.de> wrote:
+> Author: brondsem
+> Date: 2005-04-27 17:14:48 +0200 (Wed, 27 Apr 2005)
+> New Revision: 400
+> 
+> Modified:
+>    presentation/abstract.txt
+> Log:
+> how about this?  it's andy's last email with a shortened last phrase.  Length looks good: 9 lines at 18pt font
+> 
+> Modified: presentation/abstract.txt
+> ===================================================================
+> --- presentation/abstract.txt   2005-04-27 12:26:45 UTC (rev 399)
+> +++ presentation/abstract.txt   2005-04-27 15:14:48 UTC (rev 400)
+> @@ -1,3 +1,3 @@
+>  Konfidi: Stopping Spam with Trust Networks
+> 
+> -We have developed a system to filter emails based on the trustworthiness of the sender.  This uses a network of PGP cryptographic signatures to determine authenticity and network of topical trust between people.  Trust values propogate through your peers' ratings to form a huge invitation-only network of trusted people.  The system can be applied to many other topics, such as inferring that the author of a biology webpage is trustworthy, or trusting a seller in an online purchase.
+> \ No newline at end of file
+> +We have developed a system to filter emails based on the trustworthiness of the sender.  This uses a network of PGP cryptographic signatures to determine authenticity and a network of topical trust to determine trust ratings between people.  The system can be applied to many other topics, such as rating the accuracy of information in a webpage, or trusting an online merchant.
+> \ No newline at end of file
+> 
+>
+
+
+From noreply at berlios.de  Sat Apr 30 04:22:04 2005
+From: noreply at berlios.de (noreply at berlios.de)
+Date: Fri, 29 Apr 2005 22:22:04 -0400 (EDT)
+Subject: [Task #1905] use stderr on startup errors
+Message-ID: <200504300222.j3U2M4FK013406@unicorn.berlios.de>
+
+Task #1905 has been updated. 
+
+Project: konfidi
+Subproject: Trustserver
+Summary: use stderr on startup errors
+Percent Complete: 0%
+Status: Open
+Authority  : brondsem
+Assigned to: 
+
+Description: report something to stderr (not just logfile) if it craps out fast (e.g. port in use)
+
+Follow-Ups:
+
+-------------------------------------------------------
+Date: 2005-Apr-29 22:22
+By: brondsem
+
+Comment:
+another example: no config file found
+
+-------------------------------------------------------
+For more info, visit:
+
+http://developer.berlios.de/pm/task.php?func=detailtask&project_task_id=1905&group_id=3538&group_project_id=891
+
+
+From schamp at gmail.com  Sat Apr 30 06:20:58 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Sat, 30 Apr 2005 00:20:58 -0400
+Subject: r411 - foafserver/trunk frontend/trunk frontend/trunk/PGPPathfinders
+ schema/trunk trustserver/trunk trustserver/trunk/TrustStrategies
+In-Reply-To: <200504300238.j3U2chJm013144@sheep.berlios.de>
+References: <200504300238.j3U2chJm013144@sheep.berlios.de>
+Message-ID: <427307AA.4060800@gmail.com>
+
+Dave Brondsema at BerliOS wrote:
+
+>Author: brondsem
+>Date: 2005-04-30 04:38:37 +0200 (Sat, 30 Apr 2005)
+>New Revision: 411
+>
+>Modified:
+>   foafserver/trunk/FOAFDoc.py
+>   foafserver/trunk/FOAFServerError.py
+>   foafserver/trunk/PGPSig.py
+>   foafserver/trunk/SignedFOAF.py
+>   foafserver/trunk/dump.py
+>   foafserver/trunk/htaccess-dist
+>   frontend/trunk/PGPPathfinders/LocalWotsapPathfinder.py
+>   frontend/trunk/PGPPathfinders/PGPPathfinder.py
+>   frontend/trunk/PGPPathfinders/__init__.py
+>   frontend/trunk/dump.py
+>   frontend/trunk/frontend.py
+>   frontend/trunk/htaccess-dist
+>   frontend/trunk/xmlgen.py
+>   schema/trunk/trust.owl
+>   trustserver/trunk/BasicTrustValue.py
+>   trustserver/trunk/Person.py
+>   trustserver/trunk/QueryListener.py
+>   trustserver/trunk/ReadWriteLock.py
+>   trustserver/trunk/RequestServer.py
+>   trustserver/trunk/TrustPath.py
+>   trustserver/trunk/TrustServer.py
+>   trustserver/trunk/TrustStrategies/DefaultTPF.py
+>   trustserver/trunk/TrustStrategies/MultiplicativeTPF.py
+>   trustserver/trunk/TrustStrategies/PeopleDumpTPF.py
+>   trustserver/trunk/TrustStrategies/PeopleListTPF.py
+>   trustserver/trunk/TrustStrategies/PrototypeTPF.py
+>   trustserver/trunk/TrustStrategies/TrustPathFinder.py
+>   trustserver/trunk/TrustStrategies/__init__.py
+>   trustserver/trunk/TrustValue.py
+>   trustserver/trunk/UpdateListener.py
+>Log:
+>license all the source code.  where did xmlgen.py and cfgparse.py come from?
+>
+>
+xmlgen.py I found in a post to a mailing list from several years ago.
+no license, nothing anywhere else.  I haven't tried to contact the guy.
+
+I don't remember where cfgparse came from, but it's an alternative to
+some kind of built-in config parsing thing.  I could find it in a few
+days, if you really need it.
+
+Andy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050430/51332167/attachment.pgp>
+

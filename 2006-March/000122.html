@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> python GPG interface
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20python%20GPG%20interface&In-Reply-To=%3C5a086d9d0603220517sc6fc28dmde87191ea70c55da%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000120.html">
+   <LINK REL="Next"  HREF="000115.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>python GPG interface</H1>
+    <B>A. Schamp</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20python%20GPG%20interface&In-Reply-To=%3C5a086d9d0603220517sc6fc28dmde87191ea70c55da%40mail.gmail.com%3E"
+       TITLE="python GPG interface">schamp at gmail.com
+       </A><BR>
+    <I>Wed Mar 22 14:17:37 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000120.html">python GPG interface
+</A></li>
+        <LI>Next message: <A HREF="000115.html">papers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#122">[ date ]</a>
+              <a href="thread.html#122">[ thread ]</a>
+              <a href="subject.html#122">[ subject ]</a>
+              <a href="author.html#122">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 3/21/06, Dave Brondsema &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>&gt; wrote:
+&gt;<i> (resending some messages that were apparently dropped)
+</I>&gt;<i>
+</I>&gt;<i> A. Schamp wrote:
+</I>&gt;<i> &gt; I've completed a proof-of-concept multipart/signed email verifier
+</I>&gt;<i> &gt; using GPG.  There's a good (or so it seems) GPG interface for python
+</I>&gt;<i> &gt; that works across platforms.  Unfortunately, due to limitations in
+</I>&gt;<i> &gt; GPG, detached signatures cannot be verified except written to disk as
+</I>&gt;<i> &gt; files.  I have a version that uses temporary files, and invokes verify
+</I>&gt;<i> &gt; on them, but it would probably be better if we could find a way to
+</I>&gt;<i> &gt; &quot;un-detach&quot; the signature, and pass it as a regular signed document to
+</I>&gt;<i> &gt; GPG.  that way, we could use the STDIN interface, and not mess with
+</I>&gt;<i> &gt; temporary files.  Any ideas how to do this?  If we could get it to
+</I>&gt;<i> &gt; work, I think that we could use this GPG module as a drop-in, instead
+</I>&gt;<i> &gt; of modifying it to do detached signatures.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I've also come up with a way to do the from/sig matching check.  I'll
+</I>&gt;<i> &gt; put it in SVN as soon as it's settled down a bit.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Having some trouble verifying signatures in some test emails, namely,
+</I>&gt;<i> &gt; gpg_kmail.test.txt and gpg_evolution.test.txt.  I think it has
+</I>&gt;<i> &gt; something to do with special characters or encoding or something.  I
+</I>&gt;<i> &gt; did get gpg_thunderbird.test.txt to verify correctly.
+</I>&gt;<i>
+</I>&gt;<i> I'll look into this tonight.  There are some test emails that are known
+</I>&gt;<i> to fail.  Good to hear one works though.
+</I>
+I determined that it was a matter of converting LF to CRLF, though my
+first failed attempts made me think it was unnecessary.  I eventually
+got those emails to verify.
+
+&gt;<i> &gt;
+</I>&gt;<i> &gt; Also, there seems to be no problem using automatic key retrieval.
+</I>&gt;<i> &gt; Eventually, we'll have to integrate some kind of configuration to
+</I>&gt;<i> &gt; allow users to specify keyservers, etc.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> This is all controlled by the user's GPG configuration, which is
+</I>&gt;<i> typically in ~/.gnupg/gpg.conf  For now, we should recommend using GPG
+</I>&gt;<i> tools; eventually it will be good to integrate GPG with konfidi for the
+</I>&gt;<i> end-user.
+</I>
+Right, but it can also be passed in through the commandline.  Further
+the GPG module I'm using allows one to specify a GPG home directory,
+so if we wanted konfidi-specific configuration for GPG, it could be
+provided that way.
+
+Andy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000120.html">python GPG interface
+</A></li>
+	<LI>Next message: <A HREF="000115.html">papers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#122">[ date ]</a>
+              <a href="thread.html#122">[ thread ]</a>
+              <a href="subject.html#122">[ subject ]</a>
+              <a href="author.html#122">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

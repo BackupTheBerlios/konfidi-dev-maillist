@@ -1,0 +1,122 @@
+From dave at brondsema.net  Sun Apr  9 15:54:08 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sun, 09 Apr 2006 09:54:08 -0400
+Subject: first release
+Message-ID: <44391200.9060201@brondsema.net>
+
+
+So I think we can tag & distribute our first release of:
+cli-filter
+simple
+foafserver
+trustserver
+frontend
+
+I think the 3-number versioning (major.minor.patch) described at
+http://apr.apache.org/versioning.html and
+http://kasparov.skife.org/blog-live/src/versioning-guidelines.writeback
+is good.  It applies most to libraries, but I think it'd be good for our
+standalone apps.  Especially since we will be releasing libraries soon,
+we can be consistent for all our subprojects.
+
+I also think we should start at 1.0.0, not 0.0.1 or 0.1.0.  This is
+primarily because I see projects often struggle about when to make their
+first 1.* release.  Apache Forrest, for example, is 4 years old and
+"only" at 0.7.  Goals always change over time and it's hard to say
+you're finally ready for 1.0 when there are grand wonderful goals still
+unimplemented.
+
+What do you think?
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060409/88c79a3d/attachment.pgp>
+
+From schamp at gmail.com  Mon Apr 10 14:44:04 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 10 Apr 2006 07:44:04 -0500
+Subject: first release
+In-Reply-To: <44391200.9060201@brondsema.net>
+References: <44391200.9060201@brondsema.net>
+Message-ID: <5a086d9d0604100544t2ba654eco58b701ab510f62f0@mail.gmail.com>
+
+On 4/9/06, Dave Brondsema <dave at brondsema.net> wrote:
+
+> What do you think?
+
+
+I agree.  I haven't tried using  these versions in a while, and I don't know
+whether there are some half-implemented changes of mine that will break it.
+I don't remember.  But if you're happy with the way they are now, that's
+good enough for me.  Once my class is over and summer starts, I think I'll
+have more time to put into the python module.
+
+I expect to be re-designing the interface between the trustserver and the
+outside work somewhat, what with the python module and maybe an WSDL
+descriptor for the service, which will bump up a major release.  But then it
+will just seem like a more mature project, right? : )
+
+Andy
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060410/86f79441/attachment.html>
+
+From dave at brondsema.net  Sat Apr 15 21:21:00 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 15 Apr 2006 15:21:00 -0400
+Subject: announcements
+Message-ID: <20060415152100.2csb144vco0co48w@secure.gandhilinux.org>
+
+1) To where should we announce?
+
+2) What text in the announcement?
+
+my ideas:
+
+1) our "news" list (so people know it'll be used); abstraction-chat (to ask for
+developers); my blog (which gets some readers via planetapache.org)
+
+2) Subject: Konfidi 1.0.0 releases
+Body:
+
+The first major releases of the Konfidi software are now available.  Version
+1.0.0 of the following packages are now available at http://www.konfidi.org/
+FOAFserver
+Trustserver
+Trustserver Frontend
+Client: cli-filter
+Client: simple
+
+Konfidi is a system that uses PGP signatures to determine authenticity, and
+distributed topical trust values to compute an inferred trust value.  The first
+(and motivating) application is to filter email.  You'll be able to set your
+client to accept all email from senders with a high computed trust value and
+rigorously filter anything else.
+
+If you know what a .procmailrc file is, you can start using Konfidi now with the
+cli-filter.
+
+The project could make use of skills in: Java, Python, C/C++, data
+synchronization to UI design, psychology/sociology research, and more.  Join
+our mailing list if you are interested.
+
+
+The Konfidi Team
+http://www.konfidi.org/
+
+
+-- 
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+
+

@@ -1,0 +1,248 @@
+From dave at brondsema.net  Thu Jun 16 23:23:20 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Thu, 16 Jun 2005 17:23:20 -0400
+Subject: r458 - in trustserver/trunk: . TrustStrategies
+In-Reply-To: <200506162037.j5GKbRAZ030283@sheep.berlios.de>
+References: <200506162037.j5GKbRAZ030283@sheep.berlios.de>
+Message-ID: <20050616172320.sudurat9o6e8ckks@secure.gandhilinux.org>
+
+Quoting Andrew Schamp at BerliOS <schamp at sheep.berlios.de>:
+
+> Author: schamp
+> Date: 2005-06-16 22:37:26 +0200 (Thu, 16 Jun 2005)
+> New Revision: 458
+>
+
+> added basic password protection to strategies, rolled options parsing 
+> into ReadOnly and ReadWrite
+>
+
+
+What if we made the URLs more REST-ful like:
+trustserver/StrategyName/someparam/otherparam
+
+and then use apache auth controls on trustserver/SomeStrategy instead of in
+python.
+
+I'm not sure how to make the parameters RESTful.  Order doesn't matter so
+someparam/otherparam/etc doesn't make a whole lot of sense.  Perhaps just
+trustserver/StrategyName?a=b&c=d would be good
+
+-- 
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+
+
+From schamp at gmail.com  Thu Jun 16 22:29:49 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Thu, 16 Jun 2005 16:29:49 -0400
+Subject: r458 - in trustserver/trunk: . TrustStrategies
+In-Reply-To: <20050616172320.sudurat9o6e8ckks@secure.gandhilinux.org>
+References: <200506162037.j5GKbRAZ030283@sheep.berlios.de> <20050616172320.sudurat9o6e8ckks@secure.gandhilinux.org>
+Message-ID: <42B1E13D.3090001@gmail.com>
+
+Dave Brondsema wrote:
+
+> Quoting Andrew Schamp at BerliOS <schamp at sheep.berlios.de>:
+>
+>> Author: schamp
+>> Date: 2005-06-16 22:37:26 +0200 (Thu, 16 Jun 2005)
+>> New Revision: 458
+>>
+>
+>> added basic password protection to strategies, rolled options parsing
+>> into ReadOnly and ReadWrite
+>>
+>
+>
+> What if we made the URLs more REST-ful like:
+> trustserver/StrategyName/someparam/otherparam
+>
+> and then use apache auth controls on trustserver/SomeStrategy instead
+> of in
+> python.
+>
+> I'm not sure how to make the parameters RESTful.  Order doesn't matter so
+> someparam/otherparam/etc doesn't make a whole lot of sense.  Perhaps just
+> trustserver/StrategyName?a=b&c=d would be good
+>
+I've thought about this a bit, and I can't think of a good way, either.
+The main problem, I think, is that there are so many.  I was thinking
+about developing a simple XML based query language, that would have some
+standard features, and still allow for some strategy specific things.
+the thing is, a number of strategies (like the DOTGraph one, for
+example), don't even use the source and sink.
+
+Another thing about apache auth controls is that they won't work for a
+non-apache frontend (if somebody makes one).  I don't know if this is a
+problem, esp. if we start adding signatures or some other encryption
+and/or authentication for communication between the components.  I'm not
+committed to this particular way of doing it.  However, as the
+authentication matters more to the TrustServer than the frontend, maybe
+it makes sense to have it in there--access controls on the frontend kind
+of imply who has access to that feature on the frontend, not access to
+the server.  on the other hand, maybe it's simpler to do it in apache.
+I don't know.  I think, before I do any more with this, we should try
+and get some ideas and settle on a RESTful interface (or something else,
+whatever works).
+
+Andy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050616/2543884b/attachment.pgp>
+
+From dave at brondsema.net  Mon Jun 20 06:18:01 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 20 Jun 2005 00:18:01 -0400
+Subject: r458 - in trustserver/trunk: . TrustStrategies
+In-Reply-To: <42B1E13D.3090001@gmail.com>
+References: <200506162037.j5GKbRAZ030283@sheep.berlios.de> <20050616172320.sudurat9o6e8ckks@secure.gandhilinux.org> <42B1E13D.3090001@gmail.com>
+Message-ID: <42B64379.2030205@brondsema.net>
+
+A. Schamp wrote:
+> Dave Brondsema wrote:
+>
+>
+>>Quoting Andrew Schamp at BerliOS <schamp at sheep.berlios.de>:
+>>
+>>
+>>>Author: schamp
+>>>Date: 2005-06-16 22:37:26 +0200 (Thu, 16 Jun 2005)
+>>>New Revision: 458
+>>>
+>>
+>>>added basic password protection to strategies, rolled options parsing
+>>>into ReadOnly and ReadWrite
+>>>
+>>
+>>
+>>What if we made the URLs more REST-ful like:
+>>trustserver/StrategyName/someparam/otherparam
+>>
+>>and then use apache auth controls on trustserver/SomeStrategy instead
+>>of in
+>>python.
+>>
+>>I'm not sure how to make the parameters RESTful.  Order doesn't matter so
+>>someparam/otherparam/etc doesn't make a whole lot of sense.  Perhaps just
+>>trustserver/StrategyName?a=b&c=d would be good
+>>
+>
+> I've thought about this a bit, and I can't think of a good way, either.
+> The main problem, I think, is that there are so many.  I was thinking
+> about developing a simple XML based query language, that would have some
+> standard features, and still allow for some strategy specific things.
+> the thing is, a number of strategies (like the DOTGraph one, for
+> example), don't even use the source and sink.
+>
+
+Hm... yeah.  Each can have their own params; they don't have to use the
+same ones, right?
+
+> Another thing about apache auth controls is that they won't work for a
+> non-apache frontend (if somebody makes one).  I don't know if this is a
+> problem, esp. if we start adding signatures or some other encryption
+> and/or authentication for communication between the components.  I'm not
+> committed to this particular way of doing it.  However, as the
+> authentication matters more to the TrustServer than the frontend, maybe
+> it makes sense to have it in there--access controls on the frontend kind
+> of imply who has access to that feature on the frontend, not access to
+> the server.  on the other hand, maybe it's simpler to do it in apache.
+> I don't know.  I think, before I do any more with this, we should try
+> and get some ideas and settle on a RESTful interface (or something else,
+> whatever works).
+>
+> Andy
+
+
+I guess I was thinking of intentionally having the frontend do auth and
+anything not central to the TrustServer.  So it would mean rewriting for
+a different auth.  The TS does only the TS work and the frontend is a
+layer on top of that to handle auth, admin, caching, logging, whatever.
+  I think it's good to keep these sorts of tasks seperate from the TS.
+
+I am assuming that the frontend layer will always go hand-in-hand with a
+TS and pretty much all communication will go through it.
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050620/562074d7/attachment.pgp>
+
+From schamp at gmail.com  Mon Jun 20 05:59:28 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Sun, 19 Jun 2005 23:59:28 -0400
+Subject: r458 - in trustserver/trunk: . TrustStrategies
+In-Reply-To: <42B64379.2030205@brondsema.net>
+References: <200506162037.j5GKbRAZ030283@sheep.berlios.de> <20050616172320.sudurat9o6e8ckks@secure.gandhilinux.org> <42B1E13D.3090001@gmail.com> <42B64379.2030205@brondsema.net>
+Message-ID: <42B63F20.2090206@gmail.com>
+
+Quoth Dave Brondsema:
+
+> Quoth A. Schamp:
+>
+>> I've thought about this a bit, and I can't think of a good way, either.
+>> The main problem, I think, is that there are so many.  I was thinking
+>> about developing a simple XML based query language, that would have some
+>> standard features, and still allow for some strategy specific things.
+>> the thing is, a number of strategies (like the DOTGraph one, for
+>> example), don't even use the source and sink.
+>>
+>
+> Hm... yeah.  Each can have their own params; they don't have to use the
+> same ones, right?
+
+Right.  And new ones could be added with any new strategy.
+
+>> Another thing about apache auth controls is that they won't work for a
+>> non-apache frontend (if somebody makes one).  I don't know if this is a
+>> problem, esp. if we start adding signatures or some other encryption
+>> and/or authentication for communication between the components.  I'm not
+>> committed to this particular way of doing it.  However, as the
+>> authentication matters more to the TrustServer than the frontend, maybe
+>> it makes sense to have it in there--access controls on the frontend kind
+>> of imply who has access to that feature on the frontend, not access to
+>> the server.  on the other hand, maybe it's simpler to do it in apache.
+>> I don't know.  I think, before I do any more with this, we should try
+>> and get some ideas and settle on a RESTful interface (or something else,
+>> whatever works).
+>>
+>> Andy
+>
+>
+> I guess I was thinking of intentionally having the frontend do auth and
+> anything not central to the TrustServer.  So it would mean rewriting for
+> a different auth.  The TS does only the TS work and the frontend is a
+> layer on top of that to handle auth, admin, caching, logging, whatever.
+>  I think it's good to keep these sorts of tasks seperate from the TS.
+>
+> I am assuming that the frontend layer will always go hand-in-hand with a
+> TS and pretty much all communication will go through it.
+>
+That makes a lot of sense.  I won't do any more with passwords, but I
+won't take them out until we figure out the REST interface.
+
+Andy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050619/a6b0abf4/attachment.pgp>
+

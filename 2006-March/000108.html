@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> perl module
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20perl%20module&In-Reply-To=%3C4408E25E.4030802%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000107.html">
+   <LINK REL="Next"  HREF="000109.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>perl module</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20perl%20module&In-Reply-To=%3C4408E25E.4030802%40brondsema.net%3E"
+       TITLE="perl module">dave at brondsema.net
+       </A><BR>
+    <I>Sat Mar  4 01:42:06 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000107.html">perl module
+</A></li>
+        <LI>Next message: <A HREF="000109.html">perl module
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I didn't realize/remember POPFile was in perl.  Spamassassin is in perl
+too, so a Konfidi::Client module would mean an easy spamassasin module.
+  I'd take a look at spamassassin to plan for integration there and you
+can probably using some of their parsing modules, etc, too.
+
+Wow, I bet this will be *really* easy, since I'm sure CPAN gives you
+email parsing/modifying, mime parsing, OpenPGP, http fetching, and XML
+parsing.
+
+Cool!
+
+A. Schamp wrote:
+&gt;<i> After examining POPFile, I realized that it's probably better to start
+</I>&gt;<i> with a Konfidi Perl module, and then just use it in POPfile where
+</I>&gt;<i> appropriate (so it can be separately tested, used elsewhere, etc.).
+</I>&gt;<i>
+</I>&gt;<i> here's the pseudocode for it
+</I>&gt;<i>
+</I>&gt;<i> #usage:
+</I>&gt;<i>
+</I>&gt;<i> $k = new Konfidi::Client($config);
+</I>&gt;<i>
+</I>&gt;<i> # $msg is an RFC 2822 standard message
+</I>&gt;<i> $msg = $k-&gt;check_msg($msg);
+</I>&gt;<i>
+</I>&gt;<i> #code:
+</I>&gt;<i>
+</I>&gt;<i> sub check_msg {
+</I>&gt;<i>    my ($self, $msg) = @_;
+</I>&gt;<i>    $msg = $self-&gt;remove_headers($msg);
+</I>&gt;<i>    $msg-&gt;add_header(&quot;X-Konfidi-Client: Perl Module Konfidi::Client $version&quot;);
+</I>&gt;<i>    if ($self-&gt;is_signed($msg)) {
+</I>&gt;<i>       $result = $self-&gt;check_signature($msg);
+</I>&gt;<i>       if ($result = 1) {
+</I>&gt;<i>          if ($self-&gt;from_matches_signing_key($msg)){
+</I>&gt;<i>             $msg-&gt;add_header(&quot;X-PGP-Signature: valid&quot;);
+</I>&gt;<i>             $msg = $self-&gt;konfidi_lookup($msg);
+</I>&gt;<i>          } else {
+</I>&gt;<i>             $msg-&gt;add_header(&quot;X-PGP-Signature: from mismatch&quot;);
+</I>&gt;<i>          }
+</I>&gt;<i>       } elseif ($result == 0) {
+</I>&gt;<i>          $msg-&gt;add_header(&quot;X-PGP-Signature: invalid&quot;)
+</I>&gt;<i>       } elseif ($result == 2) {
+</I>&gt;<i>          $msg-&gt;add_header(&quot;X-PGP-Signature: public key not available&quot;)
+</I>&gt;<i>       }
+</I>&gt;<i>    } else {
+</I>&gt;<i>       $msg-&gt;add_header(&quot;X-PGP-Signature: none&quot;);
+</I>&gt;<i>    }
+</I>&gt;<i>    return $msg;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> # remove all existing PGP and Konfidi headers:
+</I>&gt;<i> sub remove_headers {
+</I>&gt;<i>    my ($self, $msg) = @_;
+</I>&gt;<i>    split('\n', $msg); // may need to check newline character or something
+</I>&gt;<i>    foreach (@_) {
+</I>&gt;<i>       s/^X-PGP-Signature: .*//g;
+</I>&gt;<i>       s/^X-PGP-Fingerprint: .*//g;
+</I>&gt;<i>       s/^X-Konfidi-Email-Rating: .*//g;
+</I>&gt;<i>       s/^X-Konfidi-Email-Level: .*//g;
+</I>&gt;<i>       s/^X-Konfidi-Client: .*//g;
+</I>&gt;<i>    }
+</I>&gt;<i>    return join('\n', @_);
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> sub is_signed {
+</I>&gt;<i>    my ($self, $msg) = @_;
+</I>&gt;<i>    # check to see if the message is signed
+</I>&gt;<i>    # use MIME, etc.
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> sub check_signature {
+</I>&gt;<i>    my ($self, $msg) = @_;
+</I>&gt;<i>    # check to see if the message signature is valid
+</I>&gt;<i>    # get key from keyserver
+</I>&gt;<i>    # invoke gpg, etc.
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> sub from_matches_signing_key {
+</I>&gt;<i>    my ($self, $msg) = @_;
+</I>&gt;<i>    # compare the From: line of the message with the addresses on the signing key
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> sub konfidi_lookup {
+</I>&gt;<i>    my ($self, $msg) = @_;
+</I>&gt;<i>    # extract key from message
+</I>&gt;<i>    # check cache (optional)
+</I>&gt;<i>    # submit query to trustserver
+</I>&gt;<i>    # parse trustserver response
+</I>&gt;<i>    if ($found_trust_link) {
+</I>&gt;<i>       $msg-&gt;add_header(X-Konfidi-Email-Rating: $rating);
+</I>&gt;<i>       $msg-&gt;add_header(&quot;X-Konfidi-Email-Level: &quot;.route($rating*10)x'*');
+</I>&gt;<i>    }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+                &lt;&gt;&lt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060303/cdb2f004/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060303/cdb2f004/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000107.html">perl module
+</A></li>
+	<LI>Next message: <A HREF="000109.html">perl module
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

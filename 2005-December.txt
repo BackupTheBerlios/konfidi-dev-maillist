@@ -1,0 +1,233 @@
+From dave at brondsema.net  Mon Dec 19 04:57:57 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sun, 18 Dec 2005 22:57:57 -0500
+Subject: trust workshop
+In-Reply-To: <5a086d9d0511271717l455b5f9dk5f8cc8a94dac746b@mail.gmail.com>
+References: <43852BD5.4080507@brondsema.net> <5a086d9d0511271717l455b5f9dk5f8cc8a94dac746b@mail.gmail.com>
+Message-ID: <43A62FC5.8070705@brondsema.net>
+
+Can you just send along the proper commands to create the PDF?  Then
+I'll work on it myself.  I want to know the right commands anyway; I
+never could get the internal links, internal index, bibliography, and
+style to all cooperate.
+
+Thanks!
+
+A. Schamp wrote:
+> Dave, that'd be a stretch.  But I'll see what I can do.  You'd better
+> send me some reminder early in december, though..
+>
+> On 11/23/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>http://www.l3s.de/~olmedilla/events/MTW06_Workshop.html
+>>
+>>
+>>Interesting use of term "provenance"
+>>
+>>I think it'd be cool to submit our paper.  Definitely a good topic fit.
+>>  We'd have to cut our 11+ page length to 10.  I think we could easily
+>>do that by shrinking the font and/or content of the appendices XML.  And
+>>format it their style.  Could you do that before Jan 10?
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.brondsema.net : personal
+>>http://www.splike.com : programming
+>>               <><
+>>
+>>
+>>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20051218/6d446e2a/attachment.pgp>
+
+From schamp at gmail.com  Mon Dec 19 06:58:20 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Sun, 18 Dec 2005 23:58:20 -0600
+Subject: trust workshop
+In-Reply-To: <43A62FC5.8070705@brondsema.net>
+References: <43852BD5.4080507@brondsema.net>
+	 <5a086d9d0511271717l455b5f9dk5f8cc8a94dac746b@mail.gmail.com>
+	 <43A62FC5.8070705@brondsema.net>
+Message-ID: <5a086d9d0512182158l232e95b6q12d3430431fa8daa@mail.gmail.com>
+
+Sorry, I forgot all about this!  I have the document on a USB drive
+somewhere.  Wasn't it in SVN?  I'll send it along tomorrow, when I get
+it hooked up.
+
+Andy
+
+On 12/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+> Can you just send along the proper commands to create the PDF?  Then
+> I'll work on it myself.  I want to know the right commands anyway; I
+> never could get the internal links, internal index, bibliography, and
+> style to all cooperate.
+>
+> Thanks!
+>
+> A. Schamp wrote:
+> > Dave, that'd be a stretch.  But I'll see what I can do.  You'd better
+> > send me some reminder early in december, though..
+> >
+> > On 11/23/05, Dave Brondsema <dave at brondsema.net> wrote:
+> >
+> >>http://www.l3s.de/~olmedilla/events/MTW06_Workshop.html
+> >>
+> >>
+> >>Interesting use of term "provenance"
+> >>
+> >>I think it'd be cool to submit our paper.  Definitely a good topic fit.
+> >>  We'd have to cut our 11+ page length to 10.  I think we could easily
+> >>do that by shrinking the font and/or content of the appendices XML.  And
+> >>format it their style.  Could you do that before Jan 10?
+> >>
+> >>--
+> >>Dave Brondsema : dave at brondsema.net
+> >>http://www.brondsema.net : personal
+> >>http://www.splike.com : programming
+> >>               <><
+> >>
+> >>
+> >>
+> >
+>
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                 <><
+>
+>
+>
+
+
+From schamp at gmail.com  Mon Dec 19 07:00:00 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 19 Dec 2005 00:00:00 -0600
+Subject: trust workshop
+In-Reply-To: <5a086d9d0512182158l232e95b6q12d3430431fa8daa@mail.gmail.com>
+References: <43852BD5.4080507@brondsema.net>
+	 <5a086d9d0511271717l455b5f9dk5f8cc8a94dac746b@mail.gmail.com>
+	 <43A62FC5.8070705@brondsema.net>
+	 <5a086d9d0512182158l232e95b6q12d3430431fa8daa@mail.gmail.com>
+Message-ID: <5a086d9d0512182200y20bca40ey971a616ebc7025db@mail.gmail.com>
+
+I think the sequence goes:
+
+$ latex foo.tex
+$ bibtex foo.tex
+$ latex foo.tex
+$ pdflatex foo.tex
+
+or something like that.  There are lots of tutorials about using
+bibtex and latex, and I think I set the commands up in the file so
+that it would hyperlink everything.  But you may need a specific
+stylesheet for it.  If you get errors when you try that, let me know,
+and I'll see what I can remember.
+
+Andy
+
+On 12/18/05, A. Schamp <schamp at gmail.com> wrote:
+> Sorry, I forgot all about this!  I have the document on a USB drive
+> somewhere.  Wasn't it in SVN?  I'll send it along tomorrow, when I get
+> it hooked up.
+>
+> Andy
+>
+> On 12/18/05, Dave Brondsema <dave at brondsema.net> wrote:
+> > Can you just send along the proper commands to create the PDF?  Then
+> > I'll work on it myself.  I want to know the right commands anyway; I
+> > never could get the internal links, internal index, bibliography, and
+> > style to all cooperate.
+> >
+> > Thanks!
+> >
+> > A. Schamp wrote:
+> > > Dave, that'd be a stretch.  But I'll see what I can do.  You'd better
+> > > send me some reminder early in december, though..
+> > >
+> > > On 11/23/05, Dave Brondsema <dave at brondsema.net> wrote:
+> > >
+> > >>http://www.l3s.de/~olmedilla/events/MTW06_Workshop.html
+> > >>
+> > >>
+> > >>Interesting use of term "provenance"
+> > >>
+> > >>I think it'd be cool to submit our paper.  Definitely a good topic fit.
+> > >>  We'd have to cut our 11+ page length to 10.  I think we could easily
+> > >>do that by shrinking the font and/or content of the appendices XML.  And
+> > >>format it their style.  Could you do that before Jan 10?
+> > >>
+> > >>--
+> > >>Dave Brondsema : dave at brondsema.net
+> > >>http://www.brondsema.net : personal
+> > >>http://www.splike.com : programming
+> > >>               <><
+> > >>
+> > >>
+> > >>
+> > >
+> >
+> >
+> > --
+> > Dave Brondsema : dave at brondsema.net
+> > http://www.brondsema.net : personal
+> > http://www.splike.com : programming
+> >                 <><
+> >
+> >
+> >
+>
+
+
+From dave at brondsema.net  Fri Dec 23 16:36:15 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Fri, 23 Dec 2005 10:36:15 -0500
+Subject: identity systems
+Message-ID: <43AC196F.8000008@brondsema.net>
+
+
+In theory we could use identity/crypto systems besides PGP, right?
+
+They would have to
+* credentials are associated with a human being (not computer, or otherwise)
+* such credentials can be verified to be those a specific person (PGP's
+"web-of-trust")
+* credentials can be referenced in RDF
+* can use cryptography (or other mechanism?) to assure
+owner-authenticity of a document
+* interoperability with other identity systems, if konfidi were to
+support multiple identity systems simultaneously
+
+
+does that make sense?
+
+no, i don't have specific plans for any of this, but i think it would be
+good to know & understand
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20051223/0469b384/attachment.pgp>
+

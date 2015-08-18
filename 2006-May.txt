@@ -1,0 +1,25 @@
+From dave at brondsema.net  Mon May 15 01:58:19 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sun, 14 May 2006 19:58:19 -0400
+Subject: Old list, new list
+Message-ID: <4467C41B.4070202@brondsema.net>
+
+
+This list is discontinued, the new list can be subscribed to at
+https://lists.sourceforge.net/lists/listinfo/konfidi-devel (current
+members have been already subscribed).  Archives are at
+http://sourceforge.net/mailarchive/forum.php?forum=konfidi-devel
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060514/01afae7c/attachment.pgp>
+

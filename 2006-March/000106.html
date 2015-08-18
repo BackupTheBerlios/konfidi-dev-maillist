@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> wot ontology usage
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20wot%20ontology%20usage&In-Reply-To=%3C5a086d9d0603010951p2c3d6b7dn82add2f009ac0800%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000104.html">
+   <LINK REL="Next"  HREF="000105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>wot ontology usage</H1>
+    <B>A. Schamp</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20wot%20ontology%20usage&In-Reply-To=%3C5a086d9d0603010951p2c3d6b7dn82add2f009ac0800%40mail.gmail.com%3E"
+       TITLE="wot ontology usage">schamp at gmail.com
+       </A><BR>
+    <I>Wed Mar  1 18:51:58 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000104.html">wot ontology usage
+</A></li>
+        <LI>Next message: <A HREF="000105.html">privacy, etc
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#106">[ date ]</a>
+              <a href="thread.html#106">[ thread ]</a>
+              <a href="subject.html#106">[ subject ]</a>
+              <a href="author.html#106">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 2/28/06, Dave Brondsema &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>&gt; wrote:
+&gt;<i> We do this:
+</I>&gt;<i>
+</I>&gt;<i> &lt;foaf:Person rdf:nodeID=&quot;me&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;wot:fingerprint&gt;EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70&lt;/wot:fingerprint&gt;
+</I>&gt;<i> &lt;/foaf:Person&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> But <A HREF="http://xmlns.com/wot/0.1/">http://xmlns.com/wot/0.1/</A> seems to indicate that this is correct (or
+</I>&gt;<i> at least, preferred):
+</I>&gt;<i>
+</I>&gt;<i> &lt;foaf:Person rdf:nodeID=&quot;me&quot;&gt;
+</I>&gt;<i>   &lt;wot:hasKey&gt;
+</I>&gt;<i>    &lt;wot:PubKey&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;wot:fingerprint&gt;EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70&lt;/wot:fingerprint&gt;
+</I>&gt;<i>    &lt;wot:PubKey&gt;
+</I>&gt;<i>   &lt;/wot:hasKey&gt;
+</I>&gt;<i> &lt;/foaf:Person&gt;
+</I>
+Hm, you're probably right.  I wouldn't be opposed to making this
+change, it seems to be more correct.
+
+&gt;<i> Also, <A HREF="http://xmlns.com/wot/0.1/#term_fingerprint">http://xmlns.com/wot/0.1/#term_fingerprint</A> seems to contradict
+</I>&gt;<i> itself on whitespace.  What's your interpretation?  (Until we have
+</I>&gt;<i> foaf-o-matic, it'd be easier to permit whitespace)
+</I>
+Ah, yes.  The web page description shows that contradiction, but the
+RDF definition itself (as seen from viewing the page source and
+looking at the bottom) mentions only that top line &quot;A public key hex
+fingerprint string (40 digits, white space insignificant.).&quot;  So
+that's what I'd go by, I think.
+
+Andy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000104.html">wot ontology usage
+</A></li>
+	<LI>Next message: <A HREF="000105.html">privacy, etc
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#106">[ date ]</a>
+              <a href="thread.html#106">[ thread ]</a>
+              <a href="subject.html#106">[ subject ]</a>
+              <a href="author.html#106">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

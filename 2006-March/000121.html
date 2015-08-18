@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> r520 - python_module/Konfidi
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r520%20-%20python_module/Konfidi&In-Reply-To=%3C4420D4B9.80106%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000119.html">
+   <LINK REL="Next"  HREF="000123.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>r520 - python_module/Konfidi</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r520%20-%20python_module/Konfidi&In-Reply-To=%3C4420D4B9.80106%40brondsema.net%3E"
+       TITLE="r520 - python_module/Konfidi">dave at brondsema.net
+       </A><BR>
+    <I>Wed Mar 22 05:38:17 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000119.html">[Fwd: Response to Why we need explicit temporal labelling]
+</A></li>
+        <LI>Next message: <A HREF="000123.html">r520 - python_module/Konfidi
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>(resending some messages that were apparently dropped)
+
+schamp at BerliOS wrote:
+&gt;<i> Author: schamp
+</I>&gt;<i> Date: 2006-03-20 03:59:17 +0100 (Mon, 20 Mar 2006)
+</I>&gt;<i> New Revision: 520
+</I>&gt;<i>
+</I>&gt;<i> Modified:
+</I>&gt;<i>    python_module/Konfidi/Client.py
+</I>&gt;<i> Log:
+</I>&gt;<i> progress on from-mismatch checking
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Modified: python_module/Konfidi/Client.py
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- python_module/Konfidi/Client.py	2006-03-20 02:28:09 UTC (rev 519)
+</I>&gt;<i> +++ python_module/Konfidi/Client.py	2006-03-20 02:59:17 UTC (rev 520)
+</I>&gt;<i> @@ -17,6 +17,9 @@
+</I>&gt;<i>
+</I>&gt;<i>  class FromMismatchError(Exception):
+</I>&gt;<i>      pass
+</I>&gt;<i> +
+</I>&gt;<i> +class InvalidEmailAddressError(Exception):
+</I>&gt;<i> +    pass
+</I>&gt;<i>
+</I>&gt;<i>  def check_message(filename):
+</I>&gt;<i>      m = email.message_from_file(open(filename))
+</I>&gt;<i> @@ -28,8 +31,11 @@
+</I>&gt;<i>              raise ContentTypeError(sig.get_content_type())
+</I>&gt;<i>
+</I>&gt;<i>          sig = verify(m.get_payload()[0], m.get_payload()[1])
+</I>&gt;<i> -        if sig.stderr.find(email.Utils.parseaddr(m['From'][1])) &lt; 0:
+</I>&gt;<i> -            raise FromMismatchError(email.Utils.parseaddr(m['From'][1]))
+</I>&gt;<i> +        email_address = re.compile(r'[\w\-][\w\-\.]+@[\w\-][\w\-\.]+[a-zA-Z]{1,4}').search(m['From']).group()
+</I>
+I don't think that's the most reliable way to do it.
+
+<A HREF="http://www.rfcsearch.org/rfcview/RFC/2822#3.6.2.">http://www.rfcsearch.org/rfcview/RFC/2822#3.6.2.</A> specifies what is
+allowed.  Gets kinda messy though.  There must be some python package
+that'll parse mailbox text.
+
+If not, you probably could find a regex that somebody else wrote that
+does correct matching.
+
+
+
+
+&gt;<i> +        if email_address is None:
+</I>&gt;<i> +            raise InvalidEmailAddressError(m['From'])
+</I>&gt;<i> +        if sig.stderr.find(email_address.group()) &lt; 0:
+</I>&gt;<i> +            raise FromMismatchError(email.Utils.parseaddr(m['From']))
+</I>&gt;<i>
+</I>&gt;<i>          konfidi_lookup(source, sig.fingerprint)
+</I>&gt;<i>
+</I>&gt;<i> @@ -39,6 +45,8 @@
+</I>&gt;<i>          m['X-PGP-Signature'] = &quot;public key not available&quot;
+</I>&gt;<i>      except ValidationError, e:
+</I>&gt;<i>          m['X-PGP-Signature'] = &quot;invalid: %s&quot; % (e.error_text)
+</I>&gt;<i> +#    except InvalidEmailAddressError, i:
+</I>&gt;<i> +#        m['X-PGP-Signature'] =
+</I>&gt;<i>      except FromMismatchError, f:
+</I>&gt;<i>          m['X-PGP-Signature'] = &quot;from mismatch: %s not found&quot; % (f.address)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+--
+Dave Brondsema
+Software Developer
+Cornerstone University
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060321/27f534ab/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060321/27f534ab/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000119.html">[Fwd: Response to Why we need explicit temporal labelling]
+</A></li>
+	<LI>Next message: <A HREF="000123.html">r520 - python_module/Konfidi
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

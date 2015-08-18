@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> probability
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20probability&In-Reply-To=%3C44220F18.8080709%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000125.html">
+   <LINK REL="Next"  HREF="000128.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>probability</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20probability&In-Reply-To=%3C44220F18.8080709%40brondsema.net%3E"
+       TITLE="probability">dave at brondsema.net
+       </A><BR>
+    <I>Thu Mar 23 03:59:36 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000125.html">privacy, etc
+</A></li>
+        <LI>Next message: <A HREF="000128.html">r530 - paper
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>(back on-list, now that the list is working again)
+
+Dave Brondsema wrote:
+&gt;<i> A. Schamp wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i>On 3/20/06, Dave Brondsema &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>&gt; wrote:
+</I>&gt;&gt;&gt;<i>Also, we should consider the feedback we got from the conference
+</I>&gt;&gt;&gt;<i>committee, especially the last review in the email.
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> The last review points to
+</I>&gt;<i> <A HREF="http://en.wikipedia.org/wiki/Dempster-Shafer_theory">http://en.wikipedia.org/wiki/Dempster-Shafer_theory</A> which I've (tried
+</I>&gt;<i> to) read.  This theory and bayesian network theory could help us a lot.
+</I>
+So I've been thinking about this, and how it is closely related to
+probability theory.  Our original intuition of a propagation algorithm
+said just multiply trust values, but that dropped off too quickly.  And
+the model we settled on was a value in [0-1].  That has &quot;probability&quot;
+written all over it.
+
+You could define a trust rating as the probability that the agent will
+
+If all we're dealing with is probability, there's probably a lot of
+theory we can apply.
+
+Using the probability model, then, we wouldn't square-root each value,
+just multiply.  Typical trust values would be extremely high (e.g.
+0.999999) since I sincerely think the probability of you sending me spam
+is one in a million.  With those sorts of values it takes a *long* path
+to start dropping off.  Works great, eh?  Only downside is that it
+becomes difficult to assign trust values.  I can't decide if I should
+assign 0.99 or 0.99999 or 1.  As a human truster, I would consider all
+three of those values the same.
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+                &lt;&gt;&lt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060322/d0ddc695/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060322/d0ddc695/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000125.html">privacy, etc
+</A></li>
+	<LI>Next message: <A HREF="000128.html">r530 - paper
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

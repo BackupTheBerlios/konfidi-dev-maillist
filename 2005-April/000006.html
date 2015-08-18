@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-April/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r356%20-%20clients/simple%20foafserver/trunk%20frontend/trunk%20paper%20schema/trunk%0A%20tests/trunk/edgecases%20tests/trunk/prototype%20tests/trunk/small%20tests/trunk/small-remote%0A%20trustserver/trunk%20trustserver/trunk/prototype&In-Reply-To=%3C426403F6.9030707%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r356%20-%20clients/simple%20foafserver/trunk%20frontend/trunk%20paper%20schema/trunk%0A%20tests/trunk/edgecases%20tests/trunk/prototype%20tests/trunk/small%20tests/trunk/small-remote%0A%20trustserver/trunk%20trustserver/trunk/prototype&In-Reply-To=%3C426403F6.9030707%40brondsema.net%3E"
+       TITLE="r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype">dave at brondsema.net
+       </A><BR>
+    <I>Mon Apr 18 21:01:10 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype
+</A></li>
+        <LI>Next message: <A HREF="000007.html">r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I meant:
+
+<A HREF="http://www.konfidi.org/schema/trust/0.1/trust.owl">http://www.konfidi.org/schema/trust/0.1/trust.owl</A> serves
+<A HREF="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/tags/release-0.1/trust.owl">http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/tags/release-0.1/trust.owl</A>
+
+
+Dave Brondsema wrote:
+&gt;<i> I just remembered that forrest uses a .htaccess file to redirect their
+</I>&gt;<i> DTD files to actually pull straight from SVN.  So we could do good URIs
+</I>&gt;<i> like you suggest and have it get the files from SVN.  Example:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://www.konfidi.org/schema/trust/0.1/trust.owl">http://www.konfidi.org/schema/trust/0.1/trust.owl</A> serves
+</I>&gt;<i> <A HREF="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl">http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ----
+</I>&gt;<i> from forrest's (old) <A HREF="http://forrest.apache.org/dtd/.htaccess">http://forrest.apache.org/dtd/.htaccess</A> file
+</I>&gt;<i>
+</I>&gt;<i> # The reason for this .htaccess is to deliver DTDs and associated resources
+</I>&gt;<i> # to some impoverished XML tools that do not use the Catalog Entity
+</I>&gt;<i> Resolver.
+</I>&gt;<i> # We do make every effort to encourage the latter. See ./index.html
+</I>&gt;<i> #
+</I>&gt;<i> #--------------------------------------------------------------------------
+</I>&gt;<i> # NOTE: There is a problem with getting the correct media-types ...
+</I>&gt;<i> # <A HREF="http://svn.apache.org/repos/asf/forrest/trunk/.../*.dtd">http://svn.apache.org/repos/asf/forrest/trunk/.../*.dtd</A>
+</I>&gt;<i> # Currently the server just delivers text/plain
+</I>&gt;<i> # We can do 'svn propset svn:mime-type' for the *.dtd etc.
+</I>&gt;<i> # which will cause them to be delivered properly.
+</I>&gt;<i> # However there is an Issue for SVN (#1233) whereby the files will be seen
+</I>&gt;<i> # by SVN as binary, hence no diffs.
+</I>&gt;<i> # Please vote for <A HREF="http://subversion.tigris.org/issues/show_bug.cgi?id=1233">http://subversion.tigris.org/issues/show_bug.cgi?id=1233</A>
+</I>&gt;<i> #
+</I>&gt;<i> # So the workaround is to use ViewCVS to explicity set the media-type.
+</I>&gt;<i> #--------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> # Get the content straight out of ViewCVS and use the appropriate media
+</I>&gt;<i> type:
+</I>&gt;<i> # See <A HREF="http://www.faqs.org/rfcs/rfc3023.html">http://www.faqs.org/rfcs/rfc3023.html</A>
+</I>&gt;<i> # FIXME: Verify these media types and maybe add charset
+</I>&gt;<i> #
+</I>&gt;<i> RewriteEngine On
+</I>&gt;<i> RewriteRule &quot;(.*)\.dtd$&quot;
+</I>&gt;<i> &quot;<A HREF="http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.dtd?content-type=application/xml-dtd">http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.dtd?content-type=application/xml-dtd</A>&quot;
+</I>&gt;<i>
+</I>&gt;<i> [P]
+</I>&gt;<i> RewriteRule &quot;(.*)\.mod$&quot;
+</I>&gt;<i> &quot;<A HREF="http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.mod?content-type=application/xml-dtd">http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.mod?content-type=application/xml-dtd</A>&quot;
+</I>&gt;<i>
+</I>&gt;<i> [P]
+</I>&gt;<i> RewriteRule &quot;(.*)\.pen$&quot;
+</I>&gt;<i> &quot;<A HREF="http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.pen?content-type=application/xml-external-parsed-entity">http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.pen?content-type=application/xml-external-parsed-entity</A>&quot;
+</I>&gt;<i>
+</I>&gt;<i> [P]
+</I>&gt;<i> RewriteRule &quot;(.*)\.ent$&quot;
+</I>&gt;<i> &quot;<A HREF="http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.ent?content-type=application/xml-external-parsed-entity">http://svn.apache.org/viewcvs.cgi/*checkout*/forrest/trunk/main/webapp/resources/schema/dtd/$1.ent?content-type=application/xml-external-parsed-entity</A>&quot;
+</I>&gt;<i>
+</I>&gt;<i> [P]
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> A. Schamp wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Those small-remote ones were old that I never updated...RDFlib doesn't
+</I>&gt;&gt;<i> handle that stuff anyway (though the new, more powerful one librdf,
+</I>&gt;&gt;<i> might do that remote stuff.  that's why they were pointed to that old
+</I>&gt;&gt;<i> release.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I propose this:  that we do something like xmlns.com with the FOAF and
+</I>&gt;&gt;<i> WOT business, with versions built into the URI, and publish that and
+</I>&gt;&gt;<i> change everything to it in our test data (since the schema won't
+</I>&gt;&gt;<i> change for now, and we can build new versions as they are ready and
+</I>&gt;&gt;<i> put that into the URIs, without breaking old ones).  Plus, the
+</I>&gt;&gt;<i> trustserver can be smart and deal appropriately for each version, via
+</I>&gt;&gt;<i> some strategy stuff, probably.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On 4/18/05, Dave Brondsema &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> You can see there were some prior inconsistencies regarding whether the
+</I>&gt;&gt;&gt;<i> rdf files were using a trunk schema or a release.  Hopefully moving them
+</I>&gt;&gt;&gt;<i> all to trunk reduced any possible problems rather than create any
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Dave Brondsema at BerliOS wrote:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> Modified:
+</I>&gt;&gt;&gt;&gt;<i> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+</I>&gt;&gt;&gt;&gt;<i> ===================================================================
+</I>&gt;&gt;&gt;&gt;<i> ---
+</I>&gt;&gt;&gt;&gt;<i> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+</I>&gt;&gt;&gt;&gt;<i> 2005-04-18 17:31:11 UTC (rev 355)
+</I>&gt;&gt;&gt;&gt;<i> +++
+</I>&gt;&gt;&gt;&gt;<i> tests/trunk/small/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf
+</I>&gt;&gt;&gt;&gt;<i> 2005-04-18 18:03:33 UTC (rev 356)
+</I>&gt;&gt;&gt;&gt;<i> @@ -4,7 +4,7 @@
+</I>&gt;&gt;&gt;&gt;<i> ]&gt;
+</I>&gt;&gt;&gt;&gt;<i> &lt;rdf:RDF
+</I>&gt;&gt;&gt;&gt;<i>     xmlns:foaf=&quot;<A HREF="http://xmlns.com/foaf/0.1/">http://xmlns.com/foaf/0.1/</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i> -
+</I>&gt;&gt;&gt;&gt;<i> xmlns=&quot;<A HREF="http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#">http://brondsema.gotdns.com/svn/dmail/schema/trunk/trust.owl#</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i> +
+</I>&gt;&gt;&gt;&gt;<i> xmlns=&quot;<A HREF="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#">http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>     xmlns:rdf=&quot;<A HREF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i>     xmlns:wot=&quot;<A HREF="http://xmlns.com/wot/0.1/">http://xmlns.com/wot/0.1/</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i>     &gt;
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> Modified:
+</I>&gt;&gt;&gt;&gt;<i> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+</I>&gt;&gt;&gt;&gt;<i> ===================================================================
+</I>&gt;&gt;&gt;&gt;<i> ---
+</I>&gt;&gt;&gt;&gt;<i> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+</I>&gt;&gt;&gt;&gt;<i> 2005-04-18 17:31:11 UTC (rev 355)
+</I>&gt;&gt;&gt;&gt;<i> +++
+</I>&gt;&gt;&gt;&gt;<i> tests/trunk/small-remote/4135692DA2AD1F1EB9B27422FBA13B553109E447.rdf
+</I>&gt;&gt;&gt;&gt;<i> 2005-04-18 18:03:33 UTC (rev 356)
+</I>&gt;&gt;&gt;&gt;<i> @@ -6,7 +6,7 @@
+</I>&gt;&gt;&gt;&gt;<i>    xmlns:rdf=&quot;<A HREF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i>    xmlns:wot=&quot;<A HREF="http://xmlns.com/wot/0.1/#">http://xmlns.com/wot/0.1/#</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i>    xmlns:owl=&quot;<A HREF="http://www.w3.org/2002/07/owl#">http://www.w3.org/2002/07/owl#</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i> -
+</I>&gt;&gt;&gt;&gt;<i> xmlns:trust=&quot;<A HREF="http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#">http://brondsema.gotdns.com/svn/dmail/schema/tags/release-1.0/trust.owl#</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> +
+</I>&gt;&gt;&gt;&gt;<i> xmlns:trust=&quot;<A HREF="http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#">http://svn.berlios.de/viewcvs/*checkout*/konfidi/schema/trunk/trust.owl#</A>&quot;
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i>    &gt;
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;&gt;<i> &lt;trust:Truster&gt;
+</I>&gt;&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> --
+</I>&gt;&gt;&gt;<i> Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+</I>&gt;&gt;&gt;<i> <A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+</I>&gt;&gt;&gt;<i> <A HREF="http://csx.calvin.edu">http://csx.calvin.edu</A> : student org
+</I>&gt;&gt;&gt;<i> <A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+</I>&gt;<i> <A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+</I>&gt;<i> <A HREF="http://csx.calvin.edu">http://csx.calvin.edu</A> : student org
+</I>&gt;<i> <A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+</I>
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+<A HREF="http://csx.calvin.edu">http://csx.calvin.edu</A> : student org
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/5a87e916/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/5a87e916/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype
+</A></li>
+	<LI>Next message: <A HREF="000007.html">r356 - clients/simple foafserver/trunk frontend/trunk paper schema/trunk tests/trunk/edgecases tests/trunk/prototype tests/trunk/small tests/trunk/small-remote trustserver/trunk trustserver/trunk/prototype
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

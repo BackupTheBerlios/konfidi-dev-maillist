@@ -1,0 +1,2369 @@
+From dave at brondsema.net  Wed Mar  1 05:01:52 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 28 Feb 2006 23:01:52 -0500
+Subject: clients
+In-Reply-To: <5a086d9d0602280656j3c8fc400mca0bf4a5b5390c75@mail.gmail.com>
+References: <5a086d9d0602280656j3c8fc400mca0bf4a5b5390c75@mail.gmail.com>
+Message-ID: <44051CB0.7050105@brondsema.net>
+
+A. Schamp wrote:
+> also, I think a popfile-esque proxy client would be easier to
+> implement than a Thunderbird plugin, so I'm going to start working on
+> that first.
+>
+> Andy
+>
+
+Cool.  That will applicable for many MUAs too.  I bit more know-how for
+end-users, but we're not at grandma-izing konfidi yet.
+
+And you can probably leverage a significant amount of functionality from
+popfile or other similar proxies.
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060228/51b1a9da/attachment.pgp>
+
+From dave at brondsema.net  Wed Mar  1 05:13:41 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 28 Feb 2006 23:13:41 -0500
+Subject: wot ontology usage
+Message-ID: <44051F75.4030704@brondsema.net>
+
+We do this:
+
+<foaf:Person rdf:nodeID="me">
+
+<wot:fingerprint>EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70</wot:fingerprint>
+</foaf:Person>
+
+
+
+But http://xmlns.com/wot/0.1/ seems to indicate that this is correct (or
+at least, preferred):
+
+<foaf:Person rdf:nodeID="me">
+  <wot:hasKey>
+   <wot:PubKey>
+
+<wot:fingerprint>EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70</wot:fingerprint>
+   <wot:PubKey>
+  </wot:hasKey>
+</foaf:Person>
+
+
+
+Also, http://xmlns.com/wot/0.1/#term_fingerprint seems to contradict
+itself on whitespace.  What's your interpretation?  (Until we have
+foaf-o-matic, it'd be easier to permit whitespace)
+
+
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060228/e4d6575d/attachment.pgp>
+
+From dave at brondsema.net  Wed Mar  1 05:35:27 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 28 Feb 2006 23:35:27 -0500
+Subject: privacy, etc
+In-Reply-To: <5a086d9d0602280650s5897006ao752a48fb7078aa4a@mail.gmail.com>
+References: <5a086d9d0602280650s5897006ao752a48fb7078aa4a@mail.gmail.com>
+Message-ID: <4405248F.7080006@brondsema.net>
+
+A. Schamp wrote:
+> I was thinking about privacy, and the social implications of people
+> being able to see the trust ratings that others give to them (and
+> others), and how several papers we read mentioned it was a bad thing.
+> I think I agree, the best way is probably to hide the intermediate
+> steps for normal use (being available as debugging output if needed).
+>
+> One question:  how, then, are users to post a trustified foaf to a
+> foafserver while keeping that other data private?
+>
+> A few answers: One way I've seen is to have the regular foaf reference
+> another document that is encrypted to the foafserver's public key and
+> sent in along with the first.  so the foaf data is public, but only
+> the foafserver (and whomever it gives access) can see the trust data.
+> One other way would be to just have the trust data in the same file,
+> but when the foafserver serves out that file, it doesn't show the
+> trust data, by filtering it out.  Of course, then, the trustserver
+> would still need that trust data, and anyone who wanted to see it
+> could set up their own mirror, etc., and have access.  ultimately, I
+> don't know of a way it can be truly hidden, just obscured or made too
+> hasslelicious to get to.
+
+And somebody could set up a mirror and put a public interface on it all,
+rendering it all low-hassle.
+
+First, I'm not sure if privacy would be a big demand.  I'm sure some
+people would want it and some wouldn't.  I don't know how to estimate
+its importance.  What do you think?
+
+Second, I think if we were to implement it, it would require a design
+change to be effective.  (It may not be very feasible at all since the
+premise of Konfidi is that *sharing* trust makes inference possible).
+The paper I mentioned at
+http://lists.berlios.de/pipermail/konfidi-dev/2006-February/000097.html
+comes to mind.  The nature of the system is fairly different, but one
+concept we could borrow is that of users (or users' daemons) "speaking
+up" with output when asked.  Decentralizing the computation,
+essentially.  This requires the users to be online, or after a period of
+time it will default (in that system, the default is to admit/claim
+responsibility for a message).  Not sure how defaults could work for
+konfidi, nor what sort of algorithm we could use to distribute the
+computation.  I'll have to ponder it.
+
+P.S. if such a system were algorithmically possible, we could make it
+practical by requiring privacy-desiring users to have a web service set
+up to answer requests.  Other users could just publish.  So you'd have
+to be online all the time if you want privacy (or perhaps a hosting
+service for konfidi web services? ...)
+
+I tried to think of an algorithm, but didn't come up with anything.
+Onion routing could be useful.
+
+I did think of a major concern.  In any sort of privacy system, must the
+very existence of a trust link be private?  I think it probably would.
+If so, how would you find paths at all?  I don't think you could.  I
+guess you could, if the users give the private info to a server and it
+never reveals paths (see below, though).  A doubt a decentralized system
+would work though, because it couldn't know how to route one
+step-calculation to the next.
+
+>
+> Another question:  will the information really be obscured, since any
+> user can request a trust rating between any two other users (e.g., get
+> the value for any particular edge in the graph), and, step-by-step,
+> reconstruct it?
+>
+> A few more answers:  Well, we could restrict it so that individuals
+> could only do searches with themselves as either the source or the
+> sink.
+
+I think that'd be an acceptable constraint, if we found it to help in
+some way.  Even limiting to searches with themself as only the source.
+
+
+>  Or, we could use some kind of rounding to obscure the number of
+> steps involved (e.g., if there's one step, the value is likely to be a
+> whole number, whereas if there are many steps, the value is likely to
+> be some long decimal.  so, we could round everything off, say, to the
+> nearest 0.05 or 0.005 or what have you.  Would we still have to
+> obscure the path that the trust rating takes, or just the value?  This
+> might be useful information for debugging your own web, say, if you
+> get crummy data because you trust someone, who trusts someone else who
+> is sketchy, and this sketchy person trusts a spammer.  you'd want to
+> know where the problem was, so that you could enter explicit distrust
+> of the sketchy individual without harming your trust of the
+> intermediate fellow, which you'd like to maintain, etc. etc.
+
+Rounding could help some, but not a lot.  And of course if you round a
+lot the values become less useful.
+
+Yes I think showing the path is very important.  I expect polished
+clients would have easy ways to see the path and make adjustments.
+
+>
+> Your thoughts on this?
+>
+> Andrew
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060228/25af9d9f/attachment.pgp>
+
+From schamp at gmail.com  Wed Mar  1 18:51:58 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Wed, 1 Mar 2006 11:51:58 -0600
+Subject: wot ontology usage
+In-Reply-To: <44051F75.4030704@brondsema.net>
+References: <44051F75.4030704@brondsema.net>
+Message-ID: <5a086d9d0603010951p2c3d6b7dn82add2f009ac0800@mail.gmail.com>
+
+On 2/28/06, Dave Brondsema <dave at brondsema.net> wrote:
+> We do this:
+>
+> <foaf:Person rdf:nodeID="me">
+>
+> <wot:fingerprint>EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70</wot:fingerprint>
+> </foaf:Person>
+>
+>
+>
+> But http://xmlns.com/wot/0.1/ seems to indicate that this is correct (or
+> at least, preferred):
+>
+> <foaf:Person rdf:nodeID="me">
+>   <wot:hasKey>
+>    <wot:PubKey>
+>
+> <wot:fingerprint>EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70</wot:fingerprint>
+>    <wot:PubKey>
+>   </wot:hasKey>
+> </foaf:Person>
+
+Hm, you're probably right.  I wouldn't be opposed to making this
+change, it seems to be more correct.
+
+> Also, http://xmlns.com/wot/0.1/#term_fingerprint seems to contradict
+> itself on whitespace.  What's your interpretation?  (Until we have
+> foaf-o-matic, it'd be easier to permit whitespace)
+
+Ah, yes.  The web page description shows that contradiction, but the
+RDF definition itself (as seen from viewing the page source and
+looking at the bottom) mentions only that top line "A public key hex
+fingerprint string (40 digits, white space insignificant.)."  So
+that's what I'd go by, I think.
+
+Andy
+
+
+From schamp at gmail.com  Fri Mar  3 17:54:41 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Fri, 3 Mar 2006 10:54:41 -0600
+Subject: perl module
+Message-ID: <5a086d9d0603030854g1302a209t549597ce98aaff02@mail.gmail.com>
+
+After examining POPFile, I realized that it's probably better to start
+with a Konfidi Perl module, and then just use it in POPfile where
+appropriate (so it can be separately tested, used elsewhere, etc.).
+
+here's the pseudocode for it
+
+#usage:
+
+$k = new Konfidi::Client($config);
+
+# $msg is an RFC 2822 standard message
+$msg = $k->check_msg($msg);
+
+#code:
+
+sub check_msg {
+   my ($self, $msg) = @_;
+   $msg = $self->remove_headers($msg);
+   $msg->add_header("X-Konfidi-Client: Perl Module Konfidi::Client $version");
+   if ($self->is_signed($msg)) {
+      $result = $self->check_signature($msg);
+      if ($result = 1) {
+         if ($self->from_matches_signing_key($msg)){
+            $msg->add_header("X-PGP-Signature: valid");
+            $msg = $self->konfidi_lookup($msg);
+         } else {
+            $msg->add_header("X-PGP-Signature: from mismatch");
+         }
+      } elseif ($result == 0) {
+         $msg->add_header("X-PGP-Signature: invalid")
+      } elseif ($result == 2) {
+         $msg->add_header("X-PGP-Signature: public key not available")
+      }
+   } else {
+      $msg->add_header("X-PGP-Signature: none");
+   }
+   return $msg;
+}
+
+# remove all existing PGP and Konfidi headers:
+sub remove_headers {
+   my ($self, $msg) = @_;
+   split('\n', $msg); // may need to check newline character or something
+   foreach (@_) {
+      s/^X-PGP-Signature: .*//g;
+      s/^X-PGP-Fingerprint: .*//g;
+      s/^X-Konfidi-Email-Rating: .*//g;
+      s/^X-Konfidi-Email-Level: .*//g;
+      s/^X-Konfidi-Client: .*//g;
+   }
+   return join('\n', @_);
+}
+
+sub is_signed {
+   my ($self, $msg) = @_;
+   # check to see if the message is signed
+   # use MIME, etc.
+}
+
+sub check_signature {
+   my ($self, $msg) = @_;
+   # check to see if the message signature is valid
+   # get key from keyserver
+   # invoke gpg, etc.
+}
+
+sub from_matches_signing_key {
+   my ($self, $msg) = @_;
+   # compare the From: line of the message with the addresses on the signing key
+}
+
+sub konfidi_lookup {
+   my ($self, $msg) = @_;
+   # extract key from message
+   # check cache (optional)
+   # submit query to trustserver
+   # parse trustserver response
+   if ($found_trust_link) {
+      $msg->add_header(X-Konfidi-Email-Rating: $rating);
+      $msg->add_header("X-Konfidi-Email-Level: ".route($rating*10)x'*');
+   }
+}
+
+
+From dave at brondsema.net  Sat Mar  4 01:42:06 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Fri, 03 Mar 2006 19:42:06 -0500
+Subject: perl module
+In-Reply-To: <5a086d9d0603030854g1302a209t549597ce98aaff02@mail.gmail.com>
+References: <5a086d9d0603030854g1302a209t549597ce98aaff02@mail.gmail.com>
+Message-ID: <4408E25E.4030802@brondsema.net>
+
+I didn't realize/remember POPFile was in perl.  Spamassassin is in perl
+too, so a Konfidi::Client module would mean an easy spamassasin module.
+  I'd take a look at spamassassin to plan for integration there and you
+can probably using some of their parsing modules, etc, too.
+
+Wow, I bet this will be *really* easy, since I'm sure CPAN gives you
+email parsing/modifying, mime parsing, OpenPGP, http fetching, and XML
+parsing.
+
+Cool!
+
+A. Schamp wrote:
+> After examining POPFile, I realized that it's probably better to start
+> with a Konfidi Perl module, and then just use it in POPfile where
+> appropriate (so it can be separately tested, used elsewhere, etc.).
+>
+> here's the pseudocode for it
+>
+> #usage:
+>
+> $k = new Konfidi::Client($config);
+>
+> # $msg is an RFC 2822 standard message
+> $msg = $k->check_msg($msg);
+>
+> #code:
+>
+> sub check_msg {
+>    my ($self, $msg) = @_;
+>    $msg = $self->remove_headers($msg);
+>    $msg->add_header("X-Konfidi-Client: Perl Module Konfidi::Client $version");
+>    if ($self->is_signed($msg)) {
+>       $result = $self->check_signature($msg);
+>       if ($result = 1) {
+>          if ($self->from_matches_signing_key($msg)){
+>             $msg->add_header("X-PGP-Signature: valid");
+>             $msg = $self->konfidi_lookup($msg);
+>          } else {
+>             $msg->add_header("X-PGP-Signature: from mismatch");
+>          }
+>       } elseif ($result == 0) {
+>          $msg->add_header("X-PGP-Signature: invalid")
+>       } elseif ($result == 2) {
+>          $msg->add_header("X-PGP-Signature: public key not available")
+>       }
+>    } else {
+>       $msg->add_header("X-PGP-Signature: none");
+>    }
+>    return $msg;
+> }
+>
+> # remove all existing PGP and Konfidi headers:
+> sub remove_headers {
+>    my ($self, $msg) = @_;
+>    split('\n', $msg); // may need to check newline character or something
+>    foreach (@_) {
+>       s/^X-PGP-Signature: .*//g;
+>       s/^X-PGP-Fingerprint: .*//g;
+>       s/^X-Konfidi-Email-Rating: .*//g;
+>       s/^X-Konfidi-Email-Level: .*//g;
+>       s/^X-Konfidi-Client: .*//g;
+>    }
+>    return join('\n', @_);
+> }
+>
+> sub is_signed {
+>    my ($self, $msg) = @_;
+>    # check to see if the message is signed
+>    # use MIME, etc.
+> }
+>
+> sub check_signature {
+>    my ($self, $msg) = @_;
+>    # check to see if the message signature is valid
+>    # get key from keyserver
+>    # invoke gpg, etc.
+> }
+>
+> sub from_matches_signing_key {
+>    my ($self, $msg) = @_;
+>    # compare the From: line of the message with the addresses on the signing key
+> }
+>
+> sub konfidi_lookup {
+>    my ($self, $msg) = @_;
+>    # extract key from message
+>    # check cache (optional)
+>    # submit query to trustserver
+>    # parse trustserver response
+>    if ($found_trust_link) {
+>       $msg->add_header(X-Konfidi-Email-Rating: $rating);
+>       $msg->add_header("X-Konfidi-Email-Level: ".route($rating*10)x'*');
+>    }
+> }
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060303/cdb2f004/attachment.pgp>
+
+From schamp at gmail.com  Sat Mar  4 05:46:37 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Fri, 3 Mar 2006 22:46:37 -0600
+Subject: perl module
+In-Reply-To: <4408E25E.4030802@brondsema.net>
+References: <5a086d9d0603030854g1302a209t549597ce98aaff02@mail.gmail.com>
+	 <4408E25E.4030802@brondsema.net>
+Message-ID: <5a086d9d0603032046x3f7fcb33s58924592b11dcef9@mail.gmail.com>
+
+Oooooooh yeah.  CPAN to the rescue.
+
+On 3/3/06, Dave Brondsema <dave at brondsema.net> wrote:
+> I didn't realize/remember POPFile was in perl.  Spamassassin is in perl
+> too, so a Konfidi::Client module would mean an easy spamassasin module.
+>   I'd take a look at spamassassin to plan for integration there and you
+> can probably using some of their parsing modules, etc, too.
+>
+> Wow, I bet this will be *really* easy, since I'm sure CPAN gives you
+> email parsing/modifying, mime parsing, OpenPGP, http fetching, and XML
+> parsing.
+>
+> Cool!
+>
+> A. Schamp wrote:
+> > After examining POPFile, I realized that it's probably better to start
+> > with a Konfidi Perl module, and then just use it in POPfile where
+> > appropriate (so it can be separately tested, used elsewhere, etc.).
+> >
+> > here's the pseudocode for it
+> >
+> > #usage:
+> >
+> > $k = new Konfidi::Client($config);
+> >
+> > # $msg is an RFC 2822 standard message
+> > $msg = $k->check_msg($msg);
+> >
+> > #code:
+> >
+> > sub check_msg {
+> >    my ($self, $msg) = @_;
+> >    $msg = $self->remove_headers($msg);
+> >    $msg->add_header("X-Konfidi-Client: Perl Module Konfidi::Client $version");
+> >    if ($self->is_signed($msg)) {
+> >       $result = $self->check_signature($msg);
+> >       if ($result = 1) {
+> >          if ($self->from_matches_signing_key($msg)){
+> >             $msg->add_header("X-PGP-Signature: valid");
+> >             $msg = $self->konfidi_lookup($msg);
+> >          } else {
+> >             $msg->add_header("X-PGP-Signature: from mismatch");
+> >          }
+> >       } elseif ($result == 0) {
+> >          $msg->add_header("X-PGP-Signature: invalid")
+> >       } elseif ($result == 2) {
+> >          $msg->add_header("X-PGP-Signature: public key not available")
+> >       }
+> >    } else {
+> >       $msg->add_header("X-PGP-Signature: none");
+> >    }
+> >    return $msg;
+> > }
+> >
+> > # remove all existing PGP and Konfidi headers:
+> > sub remove_headers {
+> >    my ($self, $msg) = @_;
+> >    split('\n', $msg); // may need to check newline character or something
+> >    foreach (@_) {
+> >       s/^X-PGP-Signature: .*//g;
+> >       s/^X-PGP-Fingerprint: .*//g;
+> >       s/^X-Konfidi-Email-Rating: .*//g;
+> >       s/^X-Konfidi-Email-Level: .*//g;
+> >       s/^X-Konfidi-Client: .*//g;
+> >    }
+> >    return join('\n', @_);
+> > }
+> >
+> > sub is_signed {
+> >    my ($self, $msg) = @_;
+> >    # check to see if the message is signed
+> >    # use MIME, etc.
+> > }
+> >
+> > sub check_signature {
+> >    my ($self, $msg) = @_;
+> >    # check to see if the message signature is valid
+> >    # get key from keyserver
+> >    # invoke gpg, etc.
+> > }
+> >
+> > sub from_matches_signing_key {
+> >    my ($self, $msg) = @_;
+> >    # compare the From: line of the message with the addresses on the signing key
+> > }
+> >
+> > sub konfidi_lookup {
+> >    my ($self, $msg) = @_;
+> >    # extract key from message
+> >    # check cache (optional)
+> >    # submit query to trustserver
+> >    # parse trustserver response
+> >    if ($found_trust_link) {
+> >       $msg->add_header(X-Konfidi-Email-Rating: $rating);
+> >       $msg->add_header("X-Konfidi-Email-Level: ".route($rating*10)x'*');
+> >    }
+> > }
+> >
+>
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                 <><
+>
+>
+>
+
+
+From dave at brondsema.net  Tue Mar  7 04:27:41 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 06 Mar 2006 22:27:41 -0500
+Subject: <wot:assurance rdf:resource="../trustsig"/>
+Message-ID: <440CFDAD.3070906@brondsema.net>
+
+I randomly noticed <wot:assurance rdf:resource="../trustsig"/> in trust.owl.
+
+I deleted the empty (?) 'trustsig' file a little while ago.  Do you
+think we should use be using it?
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060306/f19bfdf1/attachment.pgp>
+
+From schamp at gmail.com  Tue Mar  7 04:31:31 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 6 Mar 2006 21:31:31 -0600
+Subject: <wot:assurance rdf:resource="../trustsig"/>
+In-Reply-To: <440CFDAD.3070906@brondsema.net>
+References: <440CFDAD.3070906@brondsema.net>
+Message-ID: <5a086d9d0603061931u4a166cb7w257857fa22fe33c7@mail.gmail.com>
+
+I forget what it's for.  the signature to go with the file?
+
+On 3/6/06, Dave Brondsema <dave at brondsema.net> wrote:
+> I randomly noticed <wot:assurance rdf:resource="../trustsig"/> in trust.owl.
+>
+> I deleted the empty (?) 'trustsig' file a little while ago.  Do you
+> think we should use be using it?
+>
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                 <><
+>
+>
+>
+
+
+From dave at brondsema.net  Tue Mar  7 04:58:00 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 06 Mar 2006 22:58:00 -0500
+Subject: <wot:assurance rdf:resource="../trustsig"/>
+In-Reply-To: <5a086d9d0603061931u4a166cb7w257857fa22fe33c7@mail.gmail.com>
+References: <440CFDAD.3070906@brondsema.net> <5a086d9d0603061931u4a166cb7w257857fa22fe33c7@mail.gmail.com>
+Message-ID: <440D04C8.50605@brondsema.net>
+
+Yes, that's what it would be for
+
+A. Schamp wrote:
+> I forget what it's for.  the signature to go with the file?
+>
+> On 3/6/06, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>I randomly noticed <wot:assurance rdf:resource="../trustsig"/> in trust.owl.
+>>
+>>I deleted the empty (?) 'trustsig' file a little while ago.  Do you
+>>think we should use be using it?
+>>
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.brondsema.net : personal
+>>http://www.splike.com : programming
+>>                <><
+>>
+>>
+>>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060306/15fafc00/attachment.pgp>
+
+From schamp at gmail.com  Sat Mar 18 23:09:46 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Sat, 18 Mar 2006 16:09:46 -0600
+Subject: gpg with python
+Message-ID: <5a086d9d0603181409s37de7d3fk6518a8a4176a54e1@mail.gmail.com>
+
+I'm making good progress, having found a (seemingly) x-platform way to
+interact with GPG.  I'm modifying an existing program to do what we
+want, and I think it'll be great.
+
+A little stuck now on splitting the email messages properly to end up
+with a signature that will verify; still working on that.
+
+I had a few ideas for using setup.py for installation.  What do you
+think about making a python package that includes the konfidi client
+model, the trustserver, and all other konfidi-specific packages?
+
+Andy
+
+
+From schamp at gmail.com  Sun Mar 19 17:25:52 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Sun, 19 Mar 2006 10:25:52 -0600
+Subject: python GPG interface
+Message-ID: <5a086d9d0603190825n551f5d7bob19f3a7b0e2df95f@mail.gmail.com>
+
+I've completed a proof-of-concept multipart/signed email verifier
+using GPG.  There's a good (or so it seems) GPG interface for python
+that works across platforms.  Unfortunately, due to limitations in
+GPG, detached signatures cannot be verified except written to disk as
+files.  I have a version that uses temporary files, and invokes verify
+on them, but it would probably be better if we could find a way to
+"un-detach" the signature, and pass it as a regular signed document to
+GPG.  that way, we could use the STDIN interface, and not mess with
+temporary files.  Any ideas how to do this?  If we could get it to
+work, I think that we could use this GPG module as a drop-in, instead
+of modifying it to do detached signatures.
+
+I've also come up with a way to do the from/sig matching check.  I'll
+put it in SVN as soon as it's settled down a bit.
+
+Having some trouble verifying signatures in some test emails, namely,
+gpg_kmail.test.txt and gpg_evolution.test.txt.  I think it has
+something to do with special characters or encoding or something.  I
+did get gpg_thunderbird.test.txt to verify correctly.
+
+Also, there seems to be no problem using automatic key retrieval. 
+Eventually, we'll have to integrate some kind of configuration to
+allow users to specify keyservers, etc.
+
+Andy
+
+
+From dave at brondsema.net  Mon Mar 20 13:36:16 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 20 Mar 2006 07:36:16 -0500
+Subject: papers
+Message-ID: <441EA1C0.60000@brondsema.net>
+
+http://www.cs.umbc.edu/swpw/
+http://cs.umbc.edu/pm4w/
+
+Those are the other two workshops linked from the MTW'06 page.
+
+I'll start with the first (swpw) if you want to take the second.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060320/e8e4a01e/attachment.pgp>
+
+From dave at brondsema.net  Mon Mar 20 18:16:42 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 20 Mar 2006 17:16:42 +0000
+Subject: r519 - / python_module python_module/Konfidi
+In-Reply-To: <200603200228.k2K2SKTN000877@sheep.berlios.de>
+References: <200603200228.k2K2SKTN000877@sheep.berlios.de>
+Message-ID: <441EE37A.7040606@brondsema.net>
+
+schamp at BerliOS wrote:
+> Author: schamp
+> Date: 2006-03-20 03:28:09 +0100 (Mon, 20 Mar 2006)
+> New Revision: 519
+> 
+> Added:
+>    python_module/
+>    python_module/Konfidi/
+>    python_module/Konfidi/Client.py
+>    python_module/Konfidi/GPG.py
+>    python_module/Konfidi/GPG2.py
+>    python_module/Konfidi/GPG3.py
+>    python_module/Konfidi/__init__.py
+>    python_module/setup.py
+> Log:
+> 
+
+I think a better location for this in SVN would be
+clients/python_module/trunk
+
+
+
+-- 
+Dave Brondsema
+Software Developer
+Cornerstone University
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 250 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060320/085e2c4f/attachment.pgp>
+
+From dave at brondsema.net  Mon Mar 20 18:19:31 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 20 Mar 2006 17:19:31 +0000
+Subject: gpg with python
+In-Reply-To: <5a086d9d0603181409s37de7d3fk6518a8a4176a54e1@mail.gmail.com>
+References: <5a086d9d0603181409s37de7d3fk6518a8a4176a54e1@mail.gmail.com>
+Message-ID: <441EE423.6030403@brondsema.net>
+
+A. Schamp wrote:
+> I'm making good progress, having found a (seemingly) x-platform way to
+> interact with GPG.  I'm modifying an existing program to do what we
+> want, and I think it'll be great.
+> 
+
+Cool
+
+> A little stuck now on splitting the email messages properly to end up
+> with a signature that will verify; still working on that.
+> 
+> I had a few ideas for using setup.py for installation.  What do you
+> think about making a python package that includes the konfidi client
+> model, the trustserver, and all other konfidi-specific packages?
+> 
+
+python installation sounds good to me.  They'd be separate for each
+konfidi subproject, right?
+
+
+Any thoughts about how a "real" installer for the python client would
+work?  Bundling the python interpreter might be good, since most users
+won't have one.
+
+-- 
+Dave Brondsema
+Software Developer
+Cornerstone University
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 250 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060320/5b22e412/attachment.pgp>
+
+From dave at brondsema.net  Wed Mar 22 03:41:48 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 21 Mar 2006 21:41:48 -0500
+Subject: [Fwd: More long-winded stuff]
+Message-ID: <4420B96C.8000303@brondsema.net>
+
+
+<quote src="http://dannyayers.com/2006/03/21/more-long-winded-stuff">
+PS. New mailing list : Semantic Web And User Interaction Design Group,
+public-semweb-ui at w3.org
+</quote>
+
+This could be useful when we develop the foaf-o-matic, and maybe trust
+clients too.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060321/0ff3410e/attachment.pgp>
+
+From dave at brondsema.net  Wed Mar 22 05:37:58 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 21 Mar 2006 23:37:58 -0500
+Subject: [Fwd: Response to Why we need explicit temporal labelling]
+Message-ID: <4420D4A6.9020803@brondsema.net>
+
+(resending some messages that were apparently dropped)
+
+<http://www.semergence.com/archives/2006/03/19/15/38/13/>
+
+Interesting blog entry from the latest in an ongoing discussion orbiting
+around planetrdf.com
+
+We'll certainly need to keep track of timestamps of submitted trust data
+when synchronization is implemented, but it'd be useful also to
+accurately reconstruct trust paths from the past.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                 <><
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060321/8a9f38e7/attachment.pgp>
+
+From dave at brondsema.net  Wed Mar 22 05:38:51 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 21 Mar 2006 23:38:51 -0500
+Subject: python GPG interface
+In-Reply-To: <5a086d9d0603190825n551f5d7bob19f3a7b0e2df95f@mail.gmail.com>
+References: <5a086d9d0603190825n551f5d7bob19f3a7b0e2df95f@mail.gmail.com>
+Message-ID: <4420D4DB.4050004@brondsema.net>
+
+(resending some messages that were apparently dropped)
+
+A. Schamp wrote:
+> I've completed a proof-of-concept multipart/signed email verifier
+> using GPG.  There's a good (or so it seems) GPG interface for python
+> that works across platforms.  Unfortunately, due to limitations in
+> GPG, detached signatures cannot be verified except written to disk as
+> files.  I have a version that uses temporary files, and invokes verify
+> on them, but it would probably be better if we could find a way to
+> "un-detach" the signature, and pass it as a regular signed document to
+> GPG.  that way, we could use the STDIN interface, and not mess with
+> temporary files.  Any ideas how to do this?  If we could get it to
+> work, I think that we could use this GPG module as a drop-in, instead
+> of modifying it to do detached signatures.
+>
+> I've also come up with a way to do the from/sig matching check.  I'll
+> put it in SVN as soon as it's settled down a bit.
+>
+> Having some trouble verifying signatures in some test emails, namely,
+> gpg_kmail.test.txt and gpg_evolution.test.txt.  I think it has
+> something to do with special characters or encoding or something.  I
+> did get gpg_thunderbird.test.txt to verify correctly.
+
+I'll look into this tonight.  There are some test emails that are known
+to fail.  Good to hear one works though.
+
+>
+> Also, there seems to be no problem using automatic key retrieval.
+> Eventually, we'll have to integrate some kind of configuration to
+> allow users to specify keyservers, etc.
+>
+
+This is all controlled by the user's GPG configuration, which is
+typically in ~/.gnupg/gpg.conf  For now, we should recommend using GPG
+tools; eventually it will be good to integrate GPG with konfidi for the
+end-user.
+
+
+--
+Dave Brondsema
+Software Developer
+Cornerstone University
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060321/d1e87af5/attachment.pgp>
+
+From dave at brondsema.net  Wed Mar 22 05:38:17 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 21 Mar 2006 23:38:17 -0500
+Subject: r520 - python_module/Konfidi
+In-Reply-To: <200603200259.k2K2xZNh010256@sheep.berlios.de>
+References: <200603200259.k2K2xZNh010256@sheep.berlios.de>
+Message-ID: <4420D4B9.80106@brondsema.net>
+
+(resending some messages that were apparently dropped)
+
+schamp at BerliOS wrote:
+> Author: schamp
+> Date: 2006-03-20 03:59:17 +0100 (Mon, 20 Mar 2006)
+> New Revision: 520
+>
+> Modified:
+>    python_module/Konfidi/Client.py
+> Log:
+> progress on from-mismatch checking
+>
+>
+> Modified: python_module/Konfidi/Client.py
+> ===================================================================
+> --- python_module/Konfidi/Client.py	2006-03-20 02:28:09 UTC (rev 519)
+> +++ python_module/Konfidi/Client.py	2006-03-20 02:59:17 UTC (rev 520)
+> @@ -17,6 +17,9 @@
+>
+>  class FromMismatchError(Exception):
+>      pass
+> +
+> +class InvalidEmailAddressError(Exception):
+> +    pass
+>
+>  def check_message(filename):
+>      m = email.message_from_file(open(filename))
+> @@ -28,8 +31,11 @@
+>              raise ContentTypeError(sig.get_content_type())
+>
+>          sig = verify(m.get_payload()[0], m.get_payload()[1])
+> -        if sig.stderr.find(email.Utils.parseaddr(m['From'][1])) < 0:
+> -            raise FromMismatchError(email.Utils.parseaddr(m['From'][1]))
+> +        email_address = re.compile(r'[\w\-][\w\-\.]+@[\w\-][\w\-\.]+[a-zA-Z]{1,4}').search(m['From']).group()
+
+I don't think that's the most reliable way to do it.
+
+http://www.rfcsearch.org/rfcview/RFC/2822#3.6.2. specifies what is
+allowed.  Gets kinda messy though.  There must be some python package
+that'll parse mailbox text.
+
+If not, you probably could find a regex that somebody else wrote that
+does correct matching.
+
+
+
+
+> +        if email_address is None:
+> +            raise InvalidEmailAddressError(m['From'])
+> +        if sig.stderr.find(email_address.group()) < 0:
+> +            raise FromMismatchError(email.Utils.parseaddr(m['From']))
+>
+>          konfidi_lookup(source, sig.fingerprint)
+>
+> @@ -39,6 +45,8 @@
+>          m['X-PGP-Signature'] = "public key not available"
+>      except ValidationError, e:
+>          m['X-PGP-Signature'] = "invalid: %s" % (e.error_text)
+> +#    except InvalidEmailAddressError, i:
+> +#        m['X-PGP-Signature'] =
+>      except FromMismatchError, f:
+>          m['X-PGP-Signature'] = "from mismatch: %s not found" % (f.address)
+>
+>
+
+
+--
+Dave Brondsema
+Software Developer
+Cornerstone University
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060321/27f534ab/attachment.pgp>
+
+From schamp at gmail.com  Wed Mar 22 14:17:37 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Wed, 22 Mar 2006 07:17:37 -0600
+Subject: python GPG interface
+In-Reply-To: <4420D4DB.4050004@brondsema.net>
+References: <5a086d9d0603190825n551f5d7bob19f3a7b0e2df95f@mail.gmail.com>
+	 <4420D4DB.4050004@brondsema.net>
+Message-ID: <5a086d9d0603220517sc6fc28dmde87191ea70c55da@mail.gmail.com>
+
+On 3/21/06, Dave Brondsema <dave at brondsema.net> wrote:
+> (resending some messages that were apparently dropped)
+>
+> A. Schamp wrote:
+> > I've completed a proof-of-concept multipart/signed email verifier
+> > using GPG.  There's a good (or so it seems) GPG interface for python
+> > that works across platforms.  Unfortunately, due to limitations in
+> > GPG, detached signatures cannot be verified except written to disk as
+> > files.  I have a version that uses temporary files, and invokes verify
+> > on them, but it would probably be better if we could find a way to
+> > "un-detach" the signature, and pass it as a regular signed document to
+> > GPG.  that way, we could use the STDIN interface, and not mess with
+> > temporary files.  Any ideas how to do this?  If we could get it to
+> > work, I think that we could use this GPG module as a drop-in, instead
+> > of modifying it to do detached signatures.
+> >
+> > I've also come up with a way to do the from/sig matching check.  I'll
+> > put it in SVN as soon as it's settled down a bit.
+> >
+> > Having some trouble verifying signatures in some test emails, namely,
+> > gpg_kmail.test.txt and gpg_evolution.test.txt.  I think it has
+> > something to do with special characters or encoding or something.  I
+> > did get gpg_thunderbird.test.txt to verify correctly.
+>
+> I'll look into this tonight.  There are some test emails that are known
+> to fail.  Good to hear one works though.
+
+I determined that it was a matter of converting LF to CRLF, though my
+first failed attempts made me think it was unnecessary.  I eventually
+got those emails to verify.
+
+> >
+> > Also, there seems to be no problem using automatic key retrieval.
+> > Eventually, we'll have to integrate some kind of configuration to
+> > allow users to specify keyservers, etc.
+> >
+>
+> This is all controlled by the user's GPG configuration, which is
+> typically in ~/.gnupg/gpg.conf  For now, we should recommend using GPG
+> tools; eventually it will be good to integrate GPG with konfidi for the
+> end-user.
+
+Right, but it can also be passed in through the commandline.  Further
+the GPG module I'm using allows one to specify a GPG home directory,
+so if we wanted konfidi-specific configuration for GPG, it could be
+provided that way.
+
+Andy
+
+
+From schamp at gmail.com  Wed Mar 22 14:21:08 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Wed, 22 Mar 2006 07:21:08 -0600
+Subject: r520 - python_module/Konfidi
+In-Reply-To: <4420D4B9.80106@brondsema.net>
+References: <200603200259.k2K2xZNh010256@sheep.berlios.de>
+	 <4420D4B9.80106@brondsema.net>
+Message-ID: <5a086d9d0603220521k2904491fs9dc533912fce11b9@mail.gmail.com>
+
+On 3/21/06, Dave Brondsema <dave at brondsema.net> wrote:
+> (resending some messages that were apparently dropped)
+>
+> schamp at BerliOS wrote:
+
+> > -        if sig.stderr.find(email.Utils.parseaddr(m['From'][1])) < 0:
+> > -            raise FromMismatchError(email.Utils.parseaddr(m['From'][1]))
+> > +        email_address = re.compile(r'[\w\-][\w\-\.]+@[\w\-][\w\-\.]+[a-zA-Z]{1,4}').search(m['From']).group()
+>
+> I don't think that's the most reliable way to do it.
+>
+> http://www.rfcsearch.org/rfcview/RFC/2822#3.6.2. specifies what is
+> allowed.  Gets kinda messy though.  There must be some python package
+> that'll parse mailbox text.
+>
+> If not, you probably could find a regex that somebody else wrote that
+> does correct matching.
+
+This was just a hack for testing.
+email.Utils.parseaddr won't really work for us because it doesn't
+handle special characters in the name.  I'll spend more time looking
+for a better regex.
+
+Andy
+
+
+From dave at brondsema.net  Thu Mar 23 00:50:24 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 22 Mar 2006 18:50:24 -0500
+Subject: Fwd: Vander Linden's comments
+Message-ID: <4421E2C0.3050405@brondsema.net>
+
+
+
+-------- Original Message --------
+Subject: Re: Konfidi paper accepted at a workshop!
+Date: Wed, 22 Mar 2006 11:56:21 -0500
+From: Keith Vander Linden
+To: Dave Brondsema <dave at brondsema.net>
+References: <44183B1D.9040905 at brondsema.net> <4418414A.30202 at calvin.edu>
+<4420DD77.9030101 at brondsema.net>
+
+Good.  Those reviews look pretty good - it's relatively rare to have a
+complete bill of health from all reviewers for new work.  I think the
+paper looks pretty good now.  Here are some, mostly minor,
+comments/suggestions:
+
+- Yes, I would include a link to konfidi.org, probably as a footnote to
+the first sentence in the future work section.
+
+- I'd add a citation/reference for PGP in the 2nd intro paragraph.
+
+- "However, unless some there is a system to verify the raters,..."  Get
+rid of the "some".
+
+- The last paragraph in the introduction should answer the rhetorical
+question posed in the 2nd to last paragraph: "why should someone base
+their trust in another person on ratings given by people that they
+neither know nor trust?"  The answer, it seems, is that they shouldn't
+and that Konfidi addresses this problem by combining "the a trust
+network with the PGP web-of-trust."
+
+- I'd just drop the phrase "Rather than creating an entirely new system
+from the ground up".   This is rarely said in this sort of paper.
+
+- Section 2.1 - I'd add a sentence explaining what you will do about
+this, presumably you'll just adopt a similar arbitrary model.  In
+looking forward to section 2.6, I see that you've saved statements like
+this to be consolidated later.  I'd prefer to see them at the end of
+each section, immediately after the relevant presentation.  This is your
+call.  But I note that you didn't clearly include the information on
+your use of an arbitrary trust model from section 2.1 in section 2.6;
+putting things together will ensure that you cover all the bases.  And
+then I'd just drop section 2.6.
+
+- Section 2.3 - What does "FOAF" stand for?
+
+- Cite/reference RDF.
+
+- Section 2.4.1 - How does adding cryptography solve the "not enough
+data" problem stated in the previous sentence?
+
+- Section 2.5 - Where can one get this python script?
+
+- Section 2.5 is about a system, while the rest of the 2.x sections are
+about general topics.  Could you make this consistent somehow?
+
+- The Konfidi architecture diagram is a bit clunky looking.  I'd at
+least try shading the background of the "konfidi server" box with light
+grey, which will make the sub-parts stand out a bit more.  And the "6.
+response" text blocks off part of the server box.  I'd also use a
+larger/different font for the names of the systems as opposed to the
+numbered messages.
+
+- "the person to WHOM the path leads."  ???
+
+- Acknowledgments - I'd drop the "prof" thing and use everyone's first name.
+
+Nice work!
+
+keith
+
+
+Dave Brondsema wrote:
+> Thanks.  The final draft of the paper is due soon, so we're making some
+> changes to it now and have a question for you.  We've set up
+> www.konfidi.org as the open source project site for the continued
+> development of the Konfidi project.  Would it be appropriate to mention
+> that in the paper? If so, how would you recommend doing so?  In the text
+> of the Future Work section, a footnote, a reference, etc.
+>
+> If you're interested, the draft we submitted and the feedback we
+> recieved are attached.
+>
+>
+> Keith Vander Linden wrote:
+>> Congratulations - I'm happy to prep you for the workshop and
+>> presentation.  Just let me know when you ready to go.
+>>
+>> keith
+>>
+>>
+>> Dave Brondsema wrote:
+>>
+>>> The Konfidi paper that Andy & I wrote has been accepted at the Models of
+>>> Trust for the Web workshop
+>>> (http://www.l3s.de/~olmedilla/events/MTW06_Workshop.html) at the WWW2006
+>>> conference.  If you remember, there weren't any appropriate workshops to
+>>> submit to at the time we first finished the paper.  But I've been
+>>> keeping my eyes open since then.  I also submitted it recently to the
+>>> Spam Conference (http://spamconference.org/) but it did not get
+>>> accepted.
+>>>
+>>> Andy is unable to go, but I am planning on going to present the paper.
+>>> It's in Edinburgh, Scotland on May 22.
+>>>
+>>> I'd like to meet with you once or twice before then, since I've never
+>>> attended a workshop like this, much less presented at one.  I'm busy
+>>> next week and on vacation the following week, but I'll give you a call
+>>> in April.
+>>>
+>>
+>
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                 <><
+>
+> ------------------------------------------------------------------------
+>
+> Subject:
+> MTW'06 paper reviews
+> From:
+> MTW'06 <mtw06 at l3s.de>
+> Date:
+> Tue, 14 Mar 2006 04:57:14 +0000
+> To:
+> dave at brondsema.net
+>
+> To:
+> dave at brondsema.net
+>
+>
+> -------------------- review 56 --------------------
+>
+> OVERALL RATING: -1 (weak reject)
+> CONFIDENCE: 3 (high)
+> ORIGINALITY AND CONTRIBUTION: 2 (poor)
+> TECHNICAL CONTENT: 2 (poor)
+> PAPER PRESENTATION: 3 (fair)
+>
+> ----------------------- REVIEW --------------------
+>
+> The system described is a useful implementation, but the paper stays a bit too much on the "pragmatic" side, containing no real innovations. Regarding your trust algorithm, you should present that in more detail, and compare it more clearly to existing approaches. Your discussion left me wondering about the details of your algorithm, as well as how much (if any) it adds to existing approaches.
+>
+>
+> -------------------- review 41 --------------------
+>
+> OVERALL RATING: 2 (accept)
+> CONFIDENCE: 2 (medium)
+> ORIGINALITY AND CONTRIBUTION: 4 (good)
+> TECHNICAL CONTENT: 4 (good)
+> PAPER PRESENTATION: 5 (excellent)
+>
+> ----------------------- REVIEW --------------------
+>
+> This paper presents Konfidi, a trust networks system. Konfidi is a combination of PGP in web-of-trust and RDF trust network. Konfidi uses PGP connections to determine authenticity, and then uses RDF to compute the trust ratings. The problem is well motivated: PGP system does not support trust rating, and on the other hand the reputation system is vulnerable to manipulate ratings.
+>
+> I think the idea of this paper is very interesting. The paper is well written and easy to follow. The examples and figures are particularly helpful. Even through the authors have not fully implemented the Konfidi system, clearly, they have carefully studied the possible designs and presented some implementation details. I think we should accept this paper.
+>
+> Minor comments:
+>
+> - FOAF is used in the page 1 (section 2.2) without being defined.
+>
+> - I like the idea of trust topics in section 3.1.3 and the discussion about trust and distrust in section 3.1.1
+>
+>
+> -------------------- review 31 --------------------
+>
+> OVERALL RATING: 2 (accept)
+> CONFIDENCE: 3 (high)
+> ORIGINALITY AND CONTRIBUTION: 4 (good)
+> TECHNICAL CONTENT: 4 (good)
+> PAPER PRESENTATION: 5 (excellent)
+>
+> ----------------------- REVIEW --------------------
+>
+> Foremost, the presentation clarity of this paper is outstanding!
+>
+> The authors present a design and a working implementation of a system for filtering e-mails based on a combination of identities expressed via PGP signatures and trust statements expressed in FOAF ontology.  The work matches closely the workshop topics.
+>
+> In their work, the authors compute a trust level of an e-mail sender by traversing signature paths from the receiver to the sender and weighting each link by associated trust level.  Their approach does not rely on any specific mathematical model, although for the sake of simulation / validation they have chosen one based on simple multiplication with a fall-off of x^1/2.
+>
+> The authors did not present any experimental results, as it is an early stage project; however, (1) they may have additional results in time of the workshop and (2) the work even without the results is, in my opinion, should be accepted.
+>
+> At the same time, I would be interested in the authors? opinion on using a derivation of Dempster-Shafer theory [1] on the trust / belief model.  The authors point out the issue where Alice may trust Bob in domain A, trust him less in domain B, and is interested in computing her trust in Bob in domain C.  Their answer, however, is based on trust and distrust only.  Using the Dempster-Shafer theory, I believe that computing trust, distrust, and ignorance (no opinion) is likely to provide better results.
+>
+> Additionally, a minor comment - on page 1, remove the word ?some? from ?However, unless some there is a system to verify the raters...?
+>
+> [1] http://en.wikipedia.org/wiki/Dempster-Shafer_theory
+>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060322/98f5e00a/attachment.pgp>
+
+From dave at brondsema.net  Thu Mar 23 03:42:13 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 22 Mar 2006 21:42:13 -0500
+Subject: privacy, etc
+In-Reply-To: <5a086d9d0602280650s5897006ao752a48fb7078aa4a@mail.gmail.com>
+References: <5a086d9d0602280650s5897006ao752a48fb7078aa4a@mail.gmail.com>
+Message-ID: <44220B05.5030204@brondsema.net>
+
+A. Schamp wrote:
+> I was thinking about privacy, and the social implications of people
+> being able to see the trust ratings that others give to them (and
+> others), and how several papers we read mentioned it was a bad thing.
+> I think I agree, the best way is probably to hide the intermediate
+> steps for normal use (being available as debugging output if needed).
+>
+> One question:  how, then, are users to post a trustified foaf to a
+> foafserver while keeping that other data private?
+>
+
+A very simple answer that should "just work": don't post your private
+data.  If you don't want to share it, you don't have to.
+
+To privately trust someone, simply set the MUA to filter their valid
+signed emails as non-spam.  Konfidi client will even provide headers
+like these to help:
+
+X-PGP-Fingerprint: EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70
+X-PGP-Signature: valid
+
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060322/8526d217/attachment.pgp>
+
+From dave at brondsema.net  Thu Mar 23 03:59:36 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 22 Mar 2006 21:59:36 -0500
+Subject: probability
+In-Reply-To: <442037EA.6080608@brondsema.net>
+References: <441F84BA.6040509@brondsema.net> <5a086d9d0603210507re8e4095mc668e1c08a9ef857@mail.gmail.com> <442037EA.6080608@brondsema.net>
+Message-ID: <44220F18.8080709@brondsema.net>
+
+(back on-list, now that the list is working again)
+
+Dave Brondsema wrote:
+> A. Schamp wrote:
+>
+>>On 3/20/06, Dave Brondsema <dave at brondsema.net> wrote:
+>>>Also, we should consider the feedback we got from the conference
+>>>committee, especially the last review in the email.
+>>
+>
+> The last review points to
+> http://en.wikipedia.org/wiki/Dempster-Shafer_theory which I've (tried
+> to) read.  This theory and bayesian network theory could help us a lot.
+
+So I've been thinking about this, and how it is closely related to
+probability theory.  Our original intuition of a propagation algorithm
+said just multiply trust values, but that dropped off too quickly.  And
+the model we settled on was a value in [0-1].  That has "probability"
+written all over it.
+
+You could define a trust rating as the probability that the agent will
+
+If all we're dealing with is probability, there's probably a lot of
+theory we can apply.
+
+Using the probability model, then, we wouldn't square-root each value,
+just multiply.  Typical trust values would be extremely high (e.g.
+0.999999) since I sincerely think the probability of you sending me spam
+is one in a million.  With those sorts of values it takes a *long* path
+to start dropping off.  Works great, eh?  Only downside is that it
+becomes difficult to assign trust values.  I can't decide if I should
+assign 0.99 or 0.99999 or 1.  As a human truster, I would consider all
+three of those values the same.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060322/d0ddc695/attachment.pgp>
+
+From dave at brondsema.net  Fri Mar 24 05:40:48 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Thu, 23 Mar 2006 23:40:48 -0500
+Subject: Fwd: Vander Linden's comments
+In-Reply-To: <4421E2C0.3050405@brondsema.net>
+References: <4421E2C0.3050405@brondsema.net>
+Message-ID: <44237850.1040606@brondsema.net>
+
+Please see my inline responses to each suggestion.
+
+Dave Brondsema wrote:
+>
+>
+> -------- Original Message --------
+> Subject: Re: Konfidi paper accepted at a workshop!
+> Date: Wed, 22 Mar 2006 11:56:21 -0500
+> From: Keith Vander Linden
+> To: Dave Brondsema <dave at brondsema.net>
+> References: <44183B1D.9040905 at brondsema.net> <4418414A.30202 at calvin.edu>
+> <4420DD77.9030101 at brondsema.net>
+>
+> Good.  Those reviews look pretty good - it's relatively rare to have a
+> complete bill of health from all reviewers for new work.  I think the
+> paper looks pretty good now.  Here are some, mostly minor,
+> comments/suggestions:
+>
+> - Yes, I would include a link to konfidi.org, probably as a footnote to
+> the first sentence in the future work section.
+>
+
+done
+
+> - I'd add a citation/reference for PGP in the 2nd intro paragraph.
+
+done, using OpenPGP
+
+>
+> - "However, unless some there is a system to verify the raters,..."  Get
+> rid of the "some".
+
+done
+
+>
+> - The last paragraph in the introduction should answer the rhetorical
+> question posed in the 2nd to last paragraph: "why should someone base
+> their trust in another person on ratings given by people that they
+> neither know nor trust?"  The answer, it seems, is that they shouldn't
+> and that Konfidi addresses this problem by combining "the a trust
+> network with the PGP web-of-trust."
+>
+
+Changed to be a declarative statement.
+
+> - I'd just drop the phrase "Rather than creating an entirely new system
+> from the ground up".   This is rarely said in this sort of paper.
+>
+
+done
+
+> - Section 2.1 - I'd add a sentence explaining what you will do about
+> this, presumably you'll just adopt a similar arbitrary model.  In
+> looking forward to section 2.6, I see that you've saved statements like
+> this to be consolidated later.  I'd prefer to see them at the end of
+> each section, immediately after the relevant presentation.  This is your
+> call.  But I note that you didn't clearly include the information on
+> your use of an arbitrary trust model from section 2.1 in section 2.6;
+> putting things together will ensure that you cover all the bases.  And
+> then I'd just drop section 2.6.
+>
+
+Did not change, but you can feel free to do so.
+
+> - Section 2.3 - What does "FOAF" stand for?
+>
+
+done
+
+> - Cite/reference RDF.
+>
+
+created a new first reference to RDF to more accurately describe FOAF
+
+removed all other RDF full spellings & references
+
+> - Section 2.4.1 - How does adding cryptography solve the "not enough
+> data" problem stated in the previous sentence?
+
+It doesn't; should we say so explicitly?
+
+>
+> - Section 2.5 - Where can one get this python script?
+>
+
+Clarified that it was part of wotsap
+
+> - Section 2.5 is about a system, while the rest of the 2.x sections are
+> about general topics.  Could you make this consistent somehow?
+
+Renamed the header "Wotsap" -> "PGP Web of Trust" (we use "web-of-trust"
+everywhere else, but I thought this'd be better for a header).  The
+section's paragraph is the same.
+
+Is this good enough?
+
+>
+> - The Konfidi architecture diagram is a bit clunky looking.  I'd at
+> least try shading the background of the "konfidi server" box with light
+> grey, which will make the sub-parts stand out a bit more.  And the "6.
+> response" text blocks off part of the server box.  I'd also use a
+> larger/different font for the names of the systems as opposed to the
+> numbered messages.
+
+Too much work.
+
+>
+> - "the person to WHOM the path leads."  ???
+
+done
+
+>
+> - Acknowledgments - I'd drop the "prof" thing and use everyone's first
+> name.
+
+done
+
+>
+> Nice work!
+>
+> keith
+>
+>
+> Dave Brondsema wrote:
+>
+>> Thanks.  The final draft of the paper is due soon, so we're making some
+>> changes to it now and have a question for you.  We've set up
+>> www.konfidi.org as the open source project site for the continued
+>> development of the Konfidi project.  Would it be appropriate to mention
+>> that in the paper? If so, how would you recommend doing so?  In the text
+>> of the Future Work section, a footnote, a reference, etc.
+>>
+>> If you're interested, the draft we submitted and the feedback we
+>> recieved are attached.
+>>
+>>
+>> Keith Vander Linden wrote:
+>>
+>>> Congratulations - I'm happy to prep you for the workshop and
+>>> presentation.  Just let me know when you ready to go.
+>>>
+>>> keith
+>>>
+>>>
+>>> Dave Brondsema wrote:
+>>>
+>>>> The Konfidi paper that Andy & I wrote has been accepted at the
+>>>> Models of
+>>>> Trust for the Web workshop
+>>>> (http://www.l3s.de/~olmedilla/events/MTW06_Workshop.html) at the
+>>>> WWW2006
+>>>> conference.  If you remember, there weren't any appropriate
+>>>> workshops to
+>>>> submit to at the time we first finished the paper.  But I've been
+>>>> keeping my eyes open since then.  I also submitted it recently to the
+>>>> Spam Conference (http://spamconference.org/) but it did not get
+>>>> accepted.
+>>>>
+>>>> Andy is unable to go, but I am planning on going to present the paper.
+>>>> It's in Edinburgh, Scotland on May 22.
+>>>>
+>>>> I'd like to meet with you once or twice before then, since I've never
+>>>> attended a workshop like this, much less presented at one.  I'm busy
+>>>> next week and on vacation the following week, but I'll give you a call
+>>>> in April.
+>>>>
+>>>
+>>
+>>
+>> --
+>> Dave Brondsema : dave at brondsema.net
+>> http://www.brondsema.net : personal
+>> http://www.splike.com : programming
+>>                 <><
+>>
+>> ------------------------------------------------------------------------
+>>
+>> Subject:
+>> MTW'06 paper reviews
+>> From:
+>> MTW'06 <mtw06 at l3s.de>
+>> Date:
+>> Tue, 14 Mar 2006 04:57:14 +0000
+>> To:
+>> dave at brondsema.net
+>>
+>> To:
+>> dave at brondsema.net
+>>
+>>
+>> -------------------- review 56 --------------------
+>>
+>> OVERALL RATING: -1 (weak reject)
+>> CONFIDENCE: 3 (high)
+>> ORIGINALITY AND CONTRIBUTION: 2 (poor)
+>> TECHNICAL CONTENT: 2 (poor)
+>> PAPER PRESENTATION: 3 (fair)
+>>
+>> ----------------------- REVIEW --------------------
+>>
+>> The system described is a useful implementation, but the paper stays a
+>> bit too much on the "pragmatic" side, containing no real innovations.
+>> Regarding your trust algorithm, you should present that in more
+>> detail, and compare it more clearly to existing approaches. Your
+>> discussion left me wondering about the details of your algorithm, as
+>> well as how much (if any) it adds to existing approaches.
+>>
+>>
+>> -------------------- review 41 --------------------
+>>
+>> OVERALL RATING: 2 (accept)
+>> CONFIDENCE: 2 (medium)
+>> ORIGINALITY AND CONTRIBUTION: 4 (good)
+>> TECHNICAL CONTENT: 4 (good)
+>> PAPER PRESENTATION: 5 (excellent)
+>>
+>> ----------------------- REVIEW --------------------
+>>
+>> This paper presents Konfidi, a trust networks system. Konfidi is a
+>> combination of PGP in web-of-trust and RDF trust network. Konfidi uses
+>> PGP connections to determine authenticity, and then uses RDF to
+>> compute the trust ratings. The problem is well motivated: PGP system
+>> does not support trust rating, and on the other hand the reputation
+>> system is vulnerable to manipulate ratings.
+>>
+>> I think the idea of this paper is very interesting. The paper is well
+>> written and easy to follow. The examples and figures are particularly
+>> helpful. Even through the authors have not fully implemented the
+>> Konfidi system, clearly, they have carefully studied the possible
+>> designs and presented some implementation details. I think we should
+>> accept this paper.
+>>
+>> Minor comments:
+>>
+>> - FOAF is used in the page 1 (section 2.2) without being defined.
+>>
+>> - I like the idea of trust topics in section 3.1.3 and the discussion
+>> about trust and distrust in section 3.1.1
+>>
+>>
+>> -------------------- review 31 --------------------
+>>
+>> OVERALL RATING: 2 (accept)
+>> CONFIDENCE: 3 (high)
+>> ORIGINALITY AND CONTRIBUTION: 4 (good)
+>> TECHNICAL CONTENT: 4 (good)
+>> PAPER PRESENTATION: 5 (excellent)
+>>
+>> ----------------------- REVIEW --------------------
+>>
+>> Foremost, the presentation clarity of this paper is outstanding!
+>>
+>> The authors present a design and a working implementation of a system
+>> for filtering e-mails based on a combination of identities expressed
+>> via PGP signatures and trust statements expressed in FOAF ontology.
+>> The work matches closely the workshop topics.
+>>
+>> In their work, the authors compute a trust level of an e-mail sender
+>> by traversing signature paths from the receiver to the sender and
+>> weighting each link by associated trust level.  Their approach does
+>> not rely on any specific mathematical model, although for the sake of
+>> simulation / validation they have chosen one based on simple
+>> multiplication with a fall-off of x^1/2.
+>>
+>> The authors did not present any experimental results, as it is an
+>> early stage project; however, (1) they may have additional results in
+>> time of the workshop and (2) the work even without the results is, in
+>> my opinion, should be accepted.
+>>
+>> At the same time, I would be interested in the authors? opinion on
+>> using a derivation of Dempster-Shafer theory [1] on the trust / belief
+>> model.  The authors point out the issue where Alice may trust Bob in
+>> domain A, trust him less in domain B, and is interested in computing
+>> her trust in Bob in domain C.  Their answer, however, is based on
+>> trust and distrust only.  Using the Dempster-Shafer theory, I believe
+>> that computing trust, distrust, and ignorance (no opinion) is likely
+>> to provide better results.
+>>
+>> Additionally, a minor comment - on page 1, remove the word ?some? from
+>> ?However, unless some there is a system to verify the raters...?
+>>
+>> [1] http://en.wikipedia.org/wiki/Dempster-Shafer_theory
+>>
+>>
+>
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                <><
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 258 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060323/f6ba12f3/attachment.pgp>
+
+From schamp at gmail.com  Wed Mar 29 19:22:11 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Wed, 29 Mar 2006 11:22:11 -0600
+Subject: r530 - paper
+In-Reply-To: <200603291719.k2THJVev003479@sheep.berlios.de>
+References: <200603291719.k2THJVev003479@sheep.berlios.de>
+Message-ID: <5a086d9d0603290922k5af777e9w94adb58540e4c612@mail.gmail.com>
+
+Did you have any general comments about these?
+
+Andy
+
+On 3/29/06, brondsem at berlios.de <brondsem at berlios.de> wrote:
+>
+> Author: brondsem
+> Date: 2006-03-29 19:19:04 +0200 (Wed, 29 Mar 2006)
+> New Revision: 530
+>
+> Modified:
+>    paper/MTW-06.tex
+> Log:
+> include most of Andy's minor changes
+>
+> Modified: paper/MTW-06.tex
+> ===================================================================
+> --- paper/MTW-06.tex    2006-03-24 04:30:42 UTC (rev 529)
+> +++ paper/MTW-06.tex    2006-03-29 17:19:04 UTC (rev 530)
+> @@ -68,7 +68,7 @@
+>
+> \maketitle
+> \begin{abstract}
+> -Email filtering and many other processes could be improved through social
+> networks of trust.  To do this, we propose the Konfidi system.  Konfidi uses
+> PGP connections to determine authenticity, and topical trust connections
+> described in RDF to compute inferred trust values.  Between yourself and
+> some person X whom you do not know, Konfidi works to find a path of
+> cryptographic PGP signatures to assure the identity of X, and estimates a
+> trust rating by an algorithm that operates along the trust paths that
+> connect you to X.  The trust paths are formed from public person-to-person
+> trust ratings that are maintained by those individuals.  We discuss the
+> design of the network and system architecture and the current state of
+> implementation.
+> +Trust networks have great potential for improving the effectiveness of
+> email filtering and many other processes concerned with the validity of
+> identity and content.  To explore this potential, we propose the Konfidi
+> system.  Konfidi uses PGP connections to determine authenticity, and topical
+> trust connections described in RDF to compute inferred trust
+> values.  Between yourself and some person X whom you do not know, Konfidi
+> works to find a path of cryptographic PGP signatures to assure the identity
+> of X, and estimates a trust rating by an algorithm that operates along the
+> trust paths that connect you to X.  The trust paths are formed from public
+> person-to-person trust ratings that are maintained by those individuals.  We
+> discuss the design of the network and system architecture and the current
+> state of implementation.
+> \end{abstract}
+>
+> \keywords{Semantic web, trust network, FOAF, RDF, OpenPGP, PGP, GPG,
+> reputation, propagation, distributed, inference, delegation, social network}
+> @@ -79,10 +79,10 @@
+>
+> There have been a number of attempts to answer either one question or the
+> other.  The OpenPGP encryption system \citep{rfc2440} (hereafter PGP) has
+> developed a web-of-trust which can help provide verification of an
+> individual's identity;  however, it does not allow the expression of any
+> additional information about that individual's trustworthiness on matters
+> other than personal identification.  As for the second question, one answer
+> that is growing in popularity is that of creating a network of trust between
+> individuals who know one another and have good reason to trust their
+> estimations of others.  However, these systems can be subject to problems;
+> suppose someone impersonating a trusted party provides incorrect data
+> boosting the reputation of an untrustworthy party.  A simple rating system
+> for reputation within certain domains, such as eBay online auctions, may be
+> of some limited use.  However, unless there is a system to verify the
+> raters, they may also be susceptible t!
+> o malicious users who manipulate ratings.  Even if such systems can be
+> guarded against such attacks, one should not have to base their trust in
+> another person on ratings given by people that they neither know nor trust.
+>
+> -In this paper, we present a system that combines the a trust network with
+> the PGP web-of-trust.  We describe some difficulties in integrating the
+> networks, and how it might be possible to overcome them.  We then describe
+> our structure for representing trust data, and our methods for making trust
+> inferences on this data.  Finally, we discuss the our proof-of-concept
+> software for putting this trust to use.
+> +In this paper, we present a system that combines the a trust network with
+> the PGP web-of-trust.  We describe some difficulties in integrating the
+> networks, and analyze various strategies for overcoming them.  We then
+> describe our structure for representing trust data, and our methods for
+> making trust inferences on this data.  Finally, we discuss the our
+> proof-of-concept software for putting this trust to use.
+>
+> \section{Related Work}
+> -We have incorporated into our project a number of existing technologies
+> designed to serve various purposes.  We introduce them here, and explain
+> later in the paper how we have integrated them.  We also discuss here
+> related academic research on the relevant topics.
+> +We have incorporated into our project a number of existing technologies
+> designed to serve various purposes.  We introduce them here, and explain
+> later in the paper how we have integrated them.  We also include a
+> discussion of related academic research on the relevant topics.
+>
+> \subsection{Representing Trust Relationships}
+> There seems to be a general lack of psychological research on ways of
+> representing trust relationships between individuals and procedures for
+> inferring unspecified trust values.  We found no recommendations for a
+> particular scheme for modeling trust relationships or networks
+> mathematically.  Most work on this topic in the fields of mathematics and
+> computer science adopts an arbitrary model appropriate to the algorithm
+> under consideration. Guha points out \citep{guha04propagation} that there
+> are compelling reasons for a trust representation scheme to express explicit
+> distrust as well as trust.
+> @@ -103,7 +103,7 @@
+> Dan Brickley has made a practical attempt to investigate the use of FOAF,
+> particularly the \texttt{mbox\_sha1} property, to automatically generate
+> email whitelists. By hashing the sender's email address using SHA1, privacy
+> is protected (and the address cannot be gathered by spiders), and so users
+> can share whitelists of \texttt{mbox\_sha1}s of addresses they know not to
+> send spam. Then for all incoming mail, the sender's address is hashed and
+> the whitelist searched for the resulting value, and then is filtered
+> accordingly. This use of FOAF is promising, but since it is decentralized,
+> it is difficult for updates to propagate \citep{foafWhitelisting}. No effort
+> is taken in this project to verify the sender's identity.
+>
+> \subsection{Email Filtering}
+> -Filtering email to reduce unsolicited email has received considerable
+> attention in many areas.  Domain-level solutions, such as Sender Policy
+> Framework (SPF) \citep{spf} and DomainKeys Identified Mail (DKIM)
+> \citep{dkim}, are designed mostly to prevent phishing (emails with a forged
+> From: address to trick users into divulging personal information) and also
+> assume that a domain's administrator can control and monitor all its user's
+> activities. Greylisting and blacklisting often have too many false positives
+> and false negatives. User-level filtering, which Konfidi does in the context
+> of email, is not very common. Challenge-response mechanisms to build a
+> whitelist are tedious for the sender and receiver and do not validate
+> authenticity. Content-level testing is the most common, but Bayesian
+> filtering and other header checks are reactionary and must be updated often,
+> and are becoming less effective as spammers create emails that look ever
+> more legitimate.
+> +Filtering email to reduce unsolicited email has received considerable
+> attention in many areas.  Domain-level solutions, such as Sender Policy
+> Framework (SPF) \citep{spf} and DomainKeys Identified Mail (DKIM)
+> \citep{dkim}, are designed mostly to prevent phishing (emails with a forged
+> From: address to trick users into divulging personal information) and also
+> assume that a domain's administrator can control and monitor all its user's
+> activities. Greylisting and blacklisting often have too many false positives
+> and false negatives. User-level filtering, which Konfidi does in the context
+> of email, is not very common. Challenge-response mechanisms to build a
+> whitelist are tedious for the sender and receiver and do not validate
+> authenticity. Content-level testing is the most common, but Bayesian
+> filtering and other header checks are reactionary and must be updated often,
+> and are becoming less effective as spammers create emails that look ever
+> more legitimate, attempting either to f!
+> ool the filter or to distort the probabilities.
+>
+> There has been some work to bring authentication to email through the
+> domain-level efforts of SPF and DKIM.  Their goal is to prevent phishing by
+> assuring authenticity through cryptographic data in DNS records.  These
+> approaches limit their applicability to domain-related data such as email or
+> webpages and do not address any issues of trust, since DNS records must be
+> assumed to be authentic.  Also, the granularity of the system is too coarse:
+> cryptographic keys are normally created on a per-domain, not per-address,
+> basis.
+>
+> @@ -119,30 +119,30 @@
+>
+> \subsubsection{Trust Inference Using PGP}
+> \label{earlierPGP}
+> -One approach would be for a Mail User Agent (MUA) to find a path from any
+> PGP-signed email's sender to the recipient.\footnote{In the web-of-trust,
+> nodes are PGP keys and edges are key signatures.  Paths are made when the
+> recipient had signed someone's key, who had signed another key, and so on
+> until a signature is found on the sender's key}  There are some MUA plugins,
+> such as Enigmail \citep{enigmail}, that implement some of this.  Enigmail
+> uses PGP to sign emails and validate any emails that are received with a PGP
+> signature, fetching keys from the keyserver when necessary.  If there is a
+> short enough path of signatures from the recipient to the sender, the
+> signature is considered ``trusted".  It does not fetch keys in an attempt to
+> find such a path; you must already have the keys locally that form the
+> path.  Fetching all the keys along the path would be necessary, but is
+> problematic for reasons explained later.
+> +One approach would be for a Mail User Agent (MUA) to find a path from any
+> PGP-signed email's sender to the recipient.\footnote{In the web-of-trust,
+> nodes are PGP keys and edges are key signatures.  Paths are made when the
+> recipient has signed someone's key, who has signed another key, and so on
+> all the way until a signature is found on someone who has signed the
+> sender's key}  There are some MUA plugins, such as Enigmail
+> \citep{enigmail}, that implement some of this.  Enigmail uses PGP to sign
+> emails and validate any emails that are received with a PGP signature,
+> fetching keys from the keyserver when necessary.  If there is a short enough
+> path of signatures from the recipient to the sender, the signature is
+> considered ``trusted".  It does not fetch keys in an attempt to find such a
+> path; you must already have the keys locally that form the path.  Fetching
+> all the keys along the path would be necessary, but is problematic for
+> reasons explained later.
+>
+> -This approach requires that most users digitally sign email messages, and
+> it depends on users to be aware of known spammers and avoid signing their
+> keys. However, the recommended PGP keysigning practices require only the
+> careful verification of the key-holder's identity, and a signed key does not
+> entail anything about trustworthiness in other areas.  Furthermore, if the
+> identification requirements for keysigning are met, even by a spammer, it
+> would be unfair to refrain from signing that spammer's key\footnote{In fact,
+> such positive identification might be of use.}.  Whether a user should be
+> trusted to send good email, and not spam, is information over and above that
+> expressed in the PGP web-of-trust itself, so another system would be
+> required to encode such information.
+> +Using this approach to filter spam would require that most users
+> digitally sign email messages, and it depends on users to be aware of known
+> spammers and avoid signing their keys. However, the recommended PGP
+> keysigning practices require only the careful verification of the
+> key-holder's identity, and a signed key does not entail anything about
+> trustworthiness in other areas.  Furthermore, if the identification
+> requirements for keysigning are met, even by a spammer, it would be unfair
+> to refrain from signing that spammer's key\footnote{In fact, such positive
+> identification might be of use.}.  Whether a user should be trusted to send
+> good email, and not spam, is information over and above that expressed in
+> the PGP web-of-trust itself, so another system would be required to encode
+> such information.
+>
+> -Another serious flaw in this approach is this:  because information about
+> key signatures is stored with the signed key and not the signing key, the
+> MUA must search for a path between users can only be constructed from the
+> sender to the recipient.  Since these paths would have to be built by
+> searching from the sender to the recipient, a spammer or other malicious
+> user could generate a large number of fake keys that are inter-signed, and
+> then use these keys to sign their sender's key.  This could inundate the
+> client's search domain making such a search impractical.  A deluge of false
+> information would put undue strain on the clients and keyserver
+> infrastructure, and would amount to a denial-of-service, of sorts.  Existing
+> keyserver infrastructure provides no effecient way to tell which keys a
+> particular key has signed, which would allow safer searches in the reverse
+> direction.
+> +Another serious flaw in this approach is this:  because key signatures
+> are listed with the signed key and not the signing key, the MUA must search
+> for a path between users that can only be constructed from the sender to the
+> recipient.  Since these paths would have to be built starting from the
+> sender, a spammer or other malicious user could generate a large number of
+> fake keys that are inter-signed, and then use these keys to sign their
+> sender's key.  This could inundate the client's search domain making such a
+> search impractical.  A deluge of false information would put undue strain on
+> the clients and keyserver infrastructure, and would amount to a
+> denial-of-service, of sorts.  Existing keyserver infrastructure provides no
+> effecient way to tell which keys a particular key has signed, which would
+> allow searches in the reverse direction that are not susceptible to this
+> mis-use.
+>
+> \subsection{PGP Web of Trust}
+> \label{wotsap}
+> Wotsap \citep{wotsap} is a tool to work with the PGP web-of-trust.  From a
+> keyserver it creates a data file with the names, email addresses, and
+> signature connections of all keys from the largest strongly connected set of
+> keys, but no cryptographic data.  For technical reasons, it does not include
+> all keys or even all reachable keys.  Wotsap includes a python script to use
+> this data file to find paths between keys and generate statistics.
+>
+> \subsection{Summary}
+> -This related work forms many of the building blocks, both technical and
+> theoretical, for our work.  The system should determine authenticity through
+> a decentralized network and determine trust in a topic through a similar
+> network topology.  We integrate PGP, RDF and FOAF, and design ideas from
+> Golbeck, Guha, and others.  We are extending FOAF with an RDF trust ontology
+> to represent our trust network, which ties into the PGP web-of-trust to
+> verify authorship and identity.  We expanded Golbeck's trust ontology to a
+> relationship-centered model with values in a continuous range which
+> represent trust and distrust.
+> +This related work forms many of the building blocks, both technical and
+> theoretical, for our work.  A proper system should determine authenticity
+> through a decentralized network and determine trust in a topic through a
+> similar network topology.  We integrate PGP, RDF and FOAF, and design ideas
+> from Golbeck, Guha, and others.  We are extending FOAF with an RDF trust
+> ontology to represent our trust network, which ties into the PGP
+> web-of-trust to verify authorship and identity.  We expanded Golbeck's trust
+> ontology to a relationship-centered model with values in a continuous range
+> which represent trust and distrust.
+>
+> \section{Konfidi}
+>
+> -Konfidi refers to the trust network design, the ontology used to encode
+> it, and the software to make it usable.  The central idea is that between
+> yourself and person X whom you do not know, there is a path of PGP
+> signatures to assure the identity of X, and an estimated trust rating is
+> computed by some algorithm that operates along the trust paths that connect
+> you to X.  Figure~\ref{fig:arch} shows the components of the Konfidi
+> architecture and how they relate to external components and one
+> another.  The numbered paths indicate the steps in the process:
+> +Konfidi refers to the trust network design, the ontology used to encode
+> it, and the software to make it usable.  The central idea is that between
+> yourself and person X whom you do not know, there is a path of PGP
+> signatures to assure the identity of X.  An estimated trust rating can then
+> be computed by some algorithm that operates along the trust paths that
+> connect you to X.  Figure~\ref{fig:arch} shows the components of the Konfidi
+> architecture and how they relate to external components and one
+> another.  The numbered paths indicate the steps in the process:
+>
+> \begin{enumerate_tight}
+> -\item  A client makes a request to the Konfidi server, indicating the
+> source, which is the person at the beginning of a desired path\footnote{and
+> usually the one making the request} and the sink, which is the person to
+> whom the path leads.
+> +\item  A client makes a request to the Konfidi server, indicating the
+> source and the sink.\footnote{Source is defined as the entity at the
+> beginning of a desired path, and usually the one making the request.  Sink
+> is defined as the entity to which the path leads}
+> \item  The frontend passes the request to the PGP Pathfinder, which
+> verifies that some path exists from the source to the sink in the PGP
+> web-of-trust.
+> \item  The Pathfinder returns its response.
+> -\item  The frontend passes the request to the TrustServer, which
+> traverses the Konfidi trust network that is built from data kept up-to-date
+> by the FOAFServer.
+> +\item  If thre is a valid PGP web-of-trust connection, the frontend
+> passes the request to the TrustServer, which traverses the Konfidi trust
+> network that is built from data kept up-to-date by the FOAFServer.
+> \item  The TrustServer responds with the inferred trust value or an
+> appropriate error message.
+> -\item  The Frontend combines the responses of the Pathfinder and the
+> TrustServer, and sends it back to the client.
+> +\item  The Frontend combines the responses of the Pathfinder and the
+> TrustServer, and sends them back to the client.
+> \end{enumerate_tight}
+>
+> In the remainder of this section, we discuss the underlying data structure
+> for representing trust, how it is implemented in these steps, and the
+> rationale for the system design.
+> @@ -150,7 +150,7 @@
+> \subsection{Trust Ontology}
+> In the current research on trust inference networks, there seem to be two
+> general kinds of representations:  one that uses discrete values for varying
+> levels of trust, and one which uses a continuous range of trust
+> values.  Both return an answer in the same range as their domain.  Either
+> kind of representation could be roughly mapped onto the other, however, a
+> continuous range would allow more finely-grained control over the
+> data.  Further, the inferred trust values returned by searches would not
+> have to be rounded to a discrete level, which would lose precision.
+>
+> -In our representation, trust is considered as a continuum of both trust
+> and distrust, not a measure of just one or the other.  For example, if Alice
+> trusts Bob at some moderate level (say, .75 of a scale of 0 to 1), then it
+> seems that she also \textit{distrusts} him at some minimal level (say,
+> .25).  If Alice trusts Bob neutrally, then she trusts him about as much as
+> she distrusts him.  If she distrusts him completely, then she doesn't trust
+> him at all.  But in all of these cases, there is a trade-off between trust
+> and distrust.  Only in the extreme cases are either of them eliminated
+> completely.  Our trust model represents a range of values from 0 to 1,
+> treating 0 as complete distrust, 1 as complete trust, and 0.5 as
+> neutral.  This also makes many propagation algorithms simpler, as we'll
+> discuss later.
+> +In our representation, trust is considered as a continuum of both trust
+> and distrust, not a measure of just one or the other.  For example, if Alice
+> trusts Bob at some moderate level (say, .75 of a scale of 0 to 1), then it
+> seems that she also \textit{distrusts} him at some minimal level (say,
+> .25).  If Alice trusts Bob neutrally, then she trusts him about as much as
+> she distrusts him.  If she distrusts him completely, then she doesn't trust
+> him at all.  But in all of these cases, there is a trade-off between trust
+> and distrust.  Only in the extreme cases are either of them eliminated
+> completely.  Our trust model represents a range of values from 0 to 1,
+> treating 0 as complete distrust, 1 as complete trust, and 0.5 as
+> neutral.  This also makes many propagation algorithms simpler, as we'll
+> discuss later.\footnote{Considering trust in this range naturally evokes
+> fond memories of probability theory, however, probabilistic approaches to
+> these problems are beyond the scope of th!
+> is paper.  Further consideration is merited, and might be implemented
+> strategically as discussed in Section \ref{trustserver}.}
+>
+> \subsubsection{Distrust}
+> The choice of representation is closely related to the concern that it an
+> account of distrust.  If the trust network contained values ranging from
+> neutral trust to complete trust, then everyone in the network is trusted,
+> explicitly or by inference, on some level at or above neutral.  If the
+> system makes a trust inference between Alice and Bob at one level, but Alice
+> really trusts Bob at a different level, she can explicitly state this
+> previously implicit trust to have a more accurate result (for herself and
+> for others who build inference paths through her to Bob).  But, suppose that
+> Alice feels strong negative feelings about Bob.  In this case, she would
+> still only be able to represent this relationship as one of neutral
+> trust.  So, the trust network must account for distrust in some reasonable
+> way.
+> @@ -162,13 +162,13 @@
+> \label{fig:trust}
+> \end{figure}
+>
+> -One of the difficulties of using explicit distrust in an inference
+> network is that it is unclear how inferences should proceed once a link of
+> distrust has been encountered.  Consider a trust network like that depicted
+> in Figure~\ref{fig:trust}.  Suppose Alice distrusts Bob, and Bob distrusts
+> Clara.  As Guha points out \citep{guha04propagation}, there are at least two
+> interpretations of this situation.  On the one hand, Alice might think
+> something like ``the enemy of my enemy is my friend" and so decide to put
+> trust in Clara.  On the other hand, she might realize that if someone as
+> scheming as Bob distrusts Clara, then Clara must \textit{really} be an
+> unreliable character, and so decide to distrust her.  Further, suppose Bob
+> expressed trust for Elaine.  At first consideration, it might seem
+> reasonable to simply distrust everyone that Bob distrusts, including
+> Elaine.  But suppose there were another path through different nodes
+> indicating some minimal level of trust for Elaine!
+> .  Which path should be chosen as one which provides the correct
+> inference?  Since Konfidi represents trust on an interval, and concatenates
+> (combines trust path ratings) values by multiplication, any distrust will
+> make the computed score drop quickly below the minimum threshold.  This
+> effectively stops propagation along a path when distrust is encountered.
+> +One of the difficulties of using explicit distrust in an inference
+> network is that it is unclear how inferences should proceed once a link of
+> distrust has been encountered.  Consider a trust network like that depicted
+> in Figure~\ref{fig:trust}.  Suppose Alice distrusts Bob, and Bob distrusts
+> Clara.  As Guha points out \citep{guha04propagation}, there are at least two
+> possible interpretations of this situation.  On the one hand, Alice might
+> think something like ``the enemy of my enemy is my friend" and so decide to
+> put trust in Clara.  On the other hand, she might realize that if someone as
+> scheming as Bob distrusts Clara, then Clara must \textit{really} be an
+> unreliable character, and so decide to distrust her.  Further, suppose Bob
+> expressed trust for Elaine.  At first consideration, it might seem
+> reasonable to simply distrust everyone that Bob distrusts, including
+> Elaine.  But suppose there were another path through different nodes
+> indicating some minimal level of trust f!
+> or Elaine.  Which path should be chosen as one which provides the correct
+> inference?  Since Konfidi represents trust on an interval, and concatenates
+> (combines trust path ratings) values by multiplication, any distrust will
+> make the computed score drop quickly below the minimum threshold.  This
+> effectively stops propagation along a path when distrust is encountered.
+>
+> \subsubsection{Data Structure}
+> \label{rating}
+> -Golbeck's ontology represents trust as a relationship between a person
+> and a composite object comprising a topic, a person, and a
+> rating\footnote{Subject, trusted Person, and Value according to her
+> terminology}.  However, this representation requires trust relationships to
+> be in the context of a person.  Accordingly, it may be difficult to
+> associate additional information with the trust relationship.
+> +Golbeck's ontology represents trust as a relationship between a person
+> and a composite object comprising a topic, a person, and a
+> rating\footnote{\texttt{Subject}, trusted \texttt{Person}, and
+> \texttt{Value} according to her terminology}.  However, this representation
+> requires trust relationships to be in the context of a person.  Accordingly,
+> it may be difficult to associate additional information with the trust
+> relationship.
+>
+> -In our schema, we represent each trust relationship as an object, and the
+> trusting person and the trusted subject (typically a person) are associated
+> with that object.  Each relationship goes one-way from truster to trusted,
+> but since the truster is responsible for the accuracy of the information,
+> that is fine.  Trust relationships also have trust items specified.  See
+> Section~\ref{owlschema} for a specific description of the structure.
+> +In our schema, we represent each trust relationship as an object, and the
+> trusting person and the trusted entity (typically a person) are associated
+> with that object.  Each relationship goes one-way from truster to trusted,
+> but since the truster is responsible for the accuracy of the information,
+> that avoids the pitfalls of the PGP web-of-trust implementation as discussed
+> in Section \ref{earlierPGP}.  Trust relationships also have trust items
+> specified.  See Section~\ref{owlschema} for a specific description of the
+> structure.
+>
+> Because the trust relationship is represented as its own object, other
+> attributes may be added as the need arises, such as the dates the
+> relationship began, annotations, etc.
+>
+> @@ -187,9 +187,9 @@
+>
+> The primary element is \texttt{Re\-la\-tion\-ship}, which represents a
+> relationship of trust that holds between two persons.  There are two
+> properties that are required for every \texttt{Re\-la\-tion\-ship},
+> \texttt{trust\-er} and \texttt{trust\-ed}, which indicate the two parties to
+> the relationship.  Both \texttt{trust\-er} and \texttt{trust\-ed} have
+> \texttt{foaf:\-Per\-son} objects as their targets.  These \texttt{Per\-son}
+> objects should also contain at least one \texttt{wot:\-fin\-ger\-print}
+> property specifying the PGP fingerprint of a public key held by the
+> individual the \texttt{Per\-son} describes.  This property is required for
+> verification; if no \texttt{fin\-ger\-print} is available, then Konfidi
+> cannot use the relationship.  In general, any object described in RDF with a
+> resource URI can be the \texttt{trust\-ed} party, such as specific documents
+> or websites, but for simplicity in our examples, we will focus on persons.
+> which may be defined in the same file, i!
+> nline, or in external documents indicated by their resource URIs.  Because
+> it does not matter where the \texttt{foaf:\-Per\-son} data is stored, users
+> may keep files indicating trust relationships separate from main FOAF
+> files.  However, to ensure authenticity, any file containing one or more
+> \texttt{Re\-la\-tion\-ship} objects must have a valid PGP signature from a
+> public key corresponding to the \texttt{fin\-ger\-print} of each
+> \texttt{Per\-son} listed as a \texttt{trust\-er} in that file.  As described
+> in Section~\ref{foafserver}, flexibility in data location can have a number
+> of advantages.
+>
+> -In addition to \texttt{truster} and \texttt{trusted}, each
+> \texttt{Relationship} requires at least one \texttt{about} property, which
+> relates the trust \texttt{Re\-la\-tion\-ship} to a trust \texttt{Item}.  A
+> \texttt{Re\-la\-tion\-ship} is not limited in the other properties it can
+> have, so auxiliary information about the relationship, such as when it
+> began, who introduced it and so on may be recorded without having an effect
+> on the requirements of Konfidi.  Each \texttt{Item} has two properties
+> belonging to it.  The \texttt{topic} property specifies the subject of the
+> trust according to a trust topic hierarchy\footnote{yet to be developed} and
+> the \texttt{rating} property indicates the value, according to the 0-1 scale
+> of trust (specified in Section~\ref{rating}) that is assigned to the
+> relationship on that topic.
+> +In addition to \texttt{truster} and \texttt{trusted}, each
+> \texttt{Relationship} requires at least one \texttt{about} property, which
+> relates the trust \texttt{Re\-la\-tion\-ship} to a trust \texttt{Item}.  A
+> \texttt{Re\-la\-tion\-ship} is not limited in the other properties it can
+> have, so the schema can be extended to include auxiliary information about
+> the relationship, such as when it began, who introduced it and so on may be
+> recorded without having an effect on the requirements of Konfidi.  Each
+> \texttt{Item} has two properties belonging to it.  The \texttt{topic}
+> property specifies the subject of the trust according to a trust topic
+> hierarchy\footnote{yet to be developed} and the \texttt{rating} property
+> indicates the value, according to the 0-1 scale of trust (specified in
+> Section~\ref{rating}) that is assigned to the relationship on that topic.
+>
+> -A \texttt{Relationship} may have more than one \texttt{Item} that it is
+> about.  For example, remember the example given above, in which Alice trusts
+> Bob highly about cooking, and distrusts him somewhat about the
+> weather.  This might be represented in our ontology as something like the
+> following\footnote{That is, supposing that the objects \texttt{alice123},
+> \texttt{bob1812}, \texttt{cooking}, and \texttt{weather} are all defined
+> elsewhere in the same file.}:
+> +A \texttt{Relationship} may have more than one \texttt{Item} that it is
+> about.  For example, remember the example given above, in which Alice trusts
+> Bob highly about cooking, and distrusts him somewhat about the
+> weather.  This might be represented in our ontology as something like the
+> following\footnote{That is, supposing that the objects \texttt{alice123} and
+> \texttt{bob1812} are defined elsewhere in the same file, and
+> \texttt{cooking}, and \texttt{weather} are defined as part of the topic
+> hierarchy.}:
+>
+> \begin{verbatim}
+> <Relationship>
+> @@ -210,7 +210,7 @@
+> </Relationship>
+> \end{verbatim}
+>
+> -For RDF corresponding to some of the network depicted in
+> Figure~\ref{fig:trust}, see Appendix~\ref{app:trustExample}.  See
+> Appendix~\ref{app:schemaCode} for the full OWL source code.
+> +For RDF corresponding to some of the network depicted in
+> Figure~\ref{fig:trust}, see Appendix~\ref{app:trustExample}.  See
+> Appendix~\ref{app:schemaCode} for the full OWL source code of the schema.
+>
+> \subsection{The Konfidi Server}
+> The Konfidi server handles requests for trust ratings, verifies that a PGP
+> connection exists, and traverses the internal representation to find a
+> path.  Since these three tasks are so distinct, all of Konfidi is divided
+> into three parts.  Figure~\ref{fig:arch} shows the relationships between a
+> frontend which listens for requests and dispatches them, and two internal
+> components, one to search the PGP web-of-trust and another to query against
+> Konfidi's trust network.  This separation, in addition to simplifying the
+> design by encapsulating the different functions, also allows for increased
+> flexibility and scalability.  Each part is loosely coupled to the other
+> parts, with a simple API for handling communications between them.
+> @@ -336,7 +336,7 @@
+> If the client stops at any point, it will still add appropriate headers
+> before writing the message to standard out.
+>
+> \section{Future Work}
+> -There are a number of things to be done to develop Konfidi from a
+> proof-of-concept to a useful system.\footnote{Development is ongoing at
+> \url{http://www.konfidi.org/}}  As we've mentioned above, one thing we
+> need most is a good base of psychological research backing up our trust
+> representation and propagation, or suggesting a new one.  Unfortunately, we
+> must leave this to the experts in psychology.  The rest of the system can be
+> developed in its absence, so long as it is understood that we have just
+> approximated how trust might work.
+> +There are a number of things to be done to develop Konfidi from a
+> proof-of-concept to a useful system.\footnote{Development is ongoing at
+> \url{http://www.konfidi.org/}}  As we've mentioned above, one thing we
+> need most is a good base of psychological and sociological research backing
+> up our trust representation and propagation, or suggesting a new
+> one.  Unfortunately, we must leave this to the experts in psychology.  The
+> rest of the system can be developed in its absence, so long as it is
+> understood that we have just approximated how trust might work.
+>
+> As we've said, a trust system is only as useful as it is trusted.  Thus, a
+> system of secure communication between every different component is
+> required, most likely using PGP multipart/signed data.  It is hard to say
+> how a user's trust in a system like Konfidi can be represented within
+> itself, but that may have implications, too.
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060329/6d50c56a/attachment.html>
+
+From dave at brondsema.net  Wed Mar 29 23:16:36 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 29 Mar 2006 16:16:36 -0500
+Subject: r530 - paper
+In-Reply-To: <5a086d9d0603290922k5af777e9w94adb58540e4c612@mail.gmail.com>
+References: <200603291719.k2THJVev003479@sheep.berlios.de> <5a086d9d0603290922k5af777e9w94adb58540e4c612@mail.gmail.com>
+Message-ID: <442AF934.6080709@brondsema.net>
+
+A. Schamp wrote:
+> Did you have any general comments about these?
+> 
+> Andy
+> 
+
+Not really.  The textual changes were fine, and the ones that added some 
+meaning we're very appropriate (e.g. pysch *and* sociology; reference to 
+probability)
+
+

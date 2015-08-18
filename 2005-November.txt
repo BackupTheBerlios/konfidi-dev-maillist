@@ -1,0 +1,232 @@
+From dave at brondsema.net  Mon Nov  7 01:40:28 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 07 Nov 2005 00:40:28 +0000
+Subject: map of identity standards
+Message-ID: <436EA27C.6090408@brondsema.net>
+
+
+http://identity4all.blogspot.com/2005/11/topology-of-identity-standards.html
+
+
+Wow.  I recognize the 3 in the upper right, sxip, and xmpp, but that is
+it.  Too bad PGP isn't on there.  And too bad there's no legend for the
+arrows
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20051107/a5a5f853/attachment.pgp>
+
+From schamp at gmail.com  Tue Nov 22 15:54:06 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 22 Nov 2005 08:54:06 -0600
+Subject: pgp trust network membership
+Message-ID: <5a086d9d0511220654j6d4fe527qf323364aa73cedff@mail.gmail.com>
+
+So I was thinking about the requirement that there be a PGP
+web-of-trust link between the source and the sink for the FOAF record
+to be considered valid, and then I was thinking that in order for it
+to really work, there must be a WOT link between the source and every
+step in the Konfidi trust network along the way, since if there is a
+forged FOAF record anywhere in the chain the result is useless.  But
+it's pretty cumbersome to check the WOT link for every step as it find
+a path, and it would be a drag to find a path first, and then check
+the WOT, and then find a new one if it wasn't there.
+
+Then I had this other idea:  since all that matters is that there be a
+WOT link, of any length, between each member, and not necessarily
+matter what that WOT path is, we could build up a WOT group membership
+list, in which every key that is connected together by some link is in
+a group.  When a FOAF is added to the Konfidi trust network, we would
+determine the PGP group of the signing key and add that as an
+attribute to the record.  Then, we conduct the Konfidi trust network
+search in such a way that only those trust links that belong to the
+same pgp group are considered.  Because, if we construct the groups
+properly, everyone with a certain group number is by definition
+connected through PGP to any other node with the same group number. 
+This moves the bulk of the PGP computation to the front, so that it
+need only occur when a FOAF record is added or updated.  We can even
+build up a subgroup or equivalent group system so that we don't have
+to recompute everything when two PGP groups merge.
+
+What do you think of this?
+
+Andy
+
+
+From dave at brondsema.net  Thu Nov 24 03:52:20 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Thu, 24 Nov 2005 02:52:20 +0000
+Subject: pgp trust network membership
+In-Reply-To: <5a086d9d0511220654j6d4fe527qf323364aa73cedff@mail.gmail.com>
+References: <5a086d9d0511220654j6d4fe527qf323364aa73cedff@mail.gmail.com>
+Message-ID: <43852AE4.7040809@brondsema.net>
+
+A. Schamp wrote:
+> So I was thinking about the requirement that there be a PGP
+> web-of-trust link between the source and the sink for the FOAF record
+> to be considered valid, and then I was thinking that in order for it
+> to really work, there must be a WOT link between the source and every
+> step in the Konfidi trust network along the way, since if there is a
+> forged FOAF record anywhere in the chain the result is useless.  But
+> it's pretty cumbersome to check the WOT link for every step as it find
+> a path, and it would be a drag to find a path first, and then check
+> the WOT, and then find a new one if it wasn't there.
+>
+
+I don't think so.  Or maybe I don't get it :-)
+
+Let's say "B" is "bad".  The trustserver has A trusts B trusts C.  A ->
+B -> C.  The trustserver only accepts authentic (owner-signed) foafs.
+The client can relatively easily verify all the results that the
+trustserver provides.  How can B be bad/forged if it is authentic and A
+decided to trust it?
+
+I had thought that trust-o-matic clients should/must warn the end-user
+before trusting a person they don't know the identity of (WOT
+connection).  Perhaps this helps?  The trustserver could enforce this if
+we want.
+
+> Then I had this other idea:  since all that matters is that there be a
+> WOT link, of any length, between each member, and not necessarily
+> matter what that WOT path is, we could build up a WOT group membership
+> list, in which every key that is connected together by some link is in
+> a group.  When a FOAF is added to the Konfidi trust network, we would
+> determine the PGP group of the signing key and add that as an
+> attribute to the record.  Then, we conduct the Konfidi trust network
+> search in such a way that only those trust links that belong to the
+> same pgp group are considered.  Because, if we construct the groups
+> properly, everyone with a certain group number is by definition
+> connected through PGP to any other node with the same group number.
+> This moves the bulk of the PGP computation to the front, so that it
+> need only occur when a FOAF record is added or updated.  We can even
+> build up a subgroup or equivalent group system so that we don't have
+> to recompute everything when two PGP groups merge.
+
+If your premise (1st paragraph) is correct, this seems to follow.  And
+is a good idea.
+
+>
+> What do you think of this?
+>
+> Andy
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20051124/099373e4/attachment.pgp>
+
+From dave at brondsema.net  Thu Nov 24 03:56:21 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Thu, 24 Nov 2005 02:56:21 +0000
+Subject: trust workshop
+Message-ID: <43852BD5.4080507@brondsema.net>
+
+
+http://www.l3s.de/~olmedilla/events/MTW06_Workshop.html
+
+
+Interesting use of term "provenance"
+
+I think it'd be cool to submit our paper.  Definitely a good topic fit.
+   We'd have to cut our 11+ page length to 10.  I think we could easily
+do that by shrinking the font and/or content of the appendices XML.  And
+format it their style.  Could you do that before Jan 10?
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20051124/5788d643/attachment.pgp>
+
+From schamp at gmail.com  Sat Nov 26 05:48:37 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Fri, 25 Nov 2005 22:48:37 -0600
+Subject: trust workshop
+In-Reply-To: <43852BD5.4080507@brondsema.net>
+References: <43852BD5.4080507@brondsema.net>
+Message-ID: <5a086d9d0511252048o5c2da853v8ac8ee5bcf77c52@mail.gmail.com>
+
+Dave, that'd be a stretch.  But I'll see what I can do.  You'd better
+send me some reminder early in december, though..
+
+On 11/23/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+> http://www.l3s.de/~olmedilla/events/MTW06_Workshop.html
+>
+>
+> Interesting use of term "provenance"
+>
+> I think it'd be cool to submit our paper.  Definitely a good topic fit.
+>   We'd have to cut our 11+ page length to 10.  I think we could easily
+> do that by shrinking the font and/or content of the appendices XML.  And
+> format it their style.  Could you do that before Jan 10?
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                <><
+>
+>
+>
+
+
+From schamp at gmail.com  Mon Nov 28 02:17:05 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Sun, 27 Nov 2005 19:17:05 -0600
+Subject: trust workshop
+In-Reply-To: <43852BD5.4080507@brondsema.net>
+References: <43852BD5.4080507@brondsema.net>
+Message-ID: <5a086d9d0511271717l455b5f9dk5f8cc8a94dac746b@mail.gmail.com>
+
+Dave, that'd be a stretch.  But I'll see what I can do.  You'd better
+send me some reminder early in december, though..
+
+On 11/23/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+> http://www.l3s.de/~olmedilla/events/MTW06_Workshop.html
+>
+>
+> Interesting use of term "provenance"
+>
+> I think it'd be cool to submit our paper.  Definitely a good topic fit.
+>   We'd have to cut our 11+ page length to 10.  I think we could easily
+> do that by shrinking the font and/or content of the appendices XML.  And
+> format it their style.  Could you do that before Jan 10?
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                <><
+>
+>
+>
+
+

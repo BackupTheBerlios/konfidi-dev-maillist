@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> python GPG interface
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20python%20GPG%20interface&In-Reply-To=%3C5a086d9d0603190825n551f5d7bob19f3a7b0e2df95f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000117.html">
+   <LINK REL="Next"  HREF="000120.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>python GPG interface</H1>
+    <B>A. Schamp</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20python%20GPG%20interface&In-Reply-To=%3C5a086d9d0603190825n551f5d7bob19f3a7b0e2df95f%40mail.gmail.com%3E"
+       TITLE="python GPG interface">schamp at gmail.com
+       </A><BR>
+    <I>Sun Mar 19 17:25:52 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000117.html">gpg with python
+</A></li>
+        <LI>Next message: <A HREF="000120.html">python GPG interface
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#114">[ date ]</a>
+              <a href="thread.html#114">[ thread ]</a>
+              <a href="subject.html#114">[ subject ]</a>
+              <a href="author.html#114">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've completed a proof-of-concept multipart/signed email verifier
+using GPG.  There's a good (or so it seems) GPG interface for python
+that works across platforms.  Unfortunately, due to limitations in
+GPG, detached signatures cannot be verified except written to disk as
+files.  I have a version that uses temporary files, and invokes verify
+on them, but it would probably be better if we could find a way to
+&quot;un-detach&quot; the signature, and pass it as a regular signed document to
+GPG.  that way, we could use the STDIN interface, and not mess with
+temporary files.  Any ideas how to do this?  If we could get it to
+work, I think that we could use this GPG module as a drop-in, instead
+of modifying it to do detached signatures.
+
+I've also come up with a way to do the from/sig matching check.  I'll
+put it in SVN as soon as it's settled down a bit.
+
+Having some trouble verifying signatures in some test emails, namely,
+gpg_kmail.test.txt and gpg_evolution.test.txt.  I think it has
+something to do with special characters or encoding or something.  I
+did get gpg_thunderbird.test.txt to verify correctly.
+
+Also, there seems to be no problem using automatic key retrieval. 
+Eventually, we'll have to integrate some kind of configuration to
+allow users to specify keyservers, etc.
+
+Andy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000117.html">gpg with python
+</A></li>
+	<LI>Next message: <A HREF="000120.html">python GPG interface
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#114">[ date ]</a>
+              <a href="thread.html#114">[ thread ]</a>
+              <a href="subject.html#114">[ subject ]</a>
+              <a href="author.html#114">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

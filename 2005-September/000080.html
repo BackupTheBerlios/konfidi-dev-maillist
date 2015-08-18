@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> pyme setup update
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-September/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20pyme%20setup%20update&In-Reply-To=%3C43353F11.2060500%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000081.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>pyme setup update</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20pyme%20setup%20update&In-Reply-To=%3C43353F11.2060500%40brondsema.net%3E"
+       TITLE="pyme setup update">dave at brondsema.net
+       </A><BR>
+    <I>Sat Sep 24 13:57:05 CEST 2005</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000081.html">trustserver functionality
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#80">[ date ]</a>
+              <a href="thread.html#80">[ thread ]</a>
+              <a href="subject.html#80">[ subject ]</a>
+              <a href="author.html#80">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Wow.
+
+chmod 700 .
+
+Need that to keep the GNUPGHOME directory secure.  gpg will give a
+useful error message when that's not the case, but not gpgme nor pyme.
+
+Dave Brondsema wrote:
+&gt;<i>
+</I>&gt;<i> So setting GNUPGHOME helps.  But now I have this problem.
+</I>&gt;<i>
+</I>&gt;<i> su - userx
+</I>&gt;<i> mkdir mygnupghome
+</I>&gt;<i> cd !$
+</I>&gt;<i> echo 'keyserver-options auto-key-retrieve
+</I>&gt;<i> keyserver x-<A HREF="hkp://random.sks.keyserver.penguin.de">hkp://random.sks.keyserver.penguin.de</A>' &gt;&gt; gpg.conf
+</I>&gt;<i> chmod 600 gpg.conf
+</I>&gt;<i> GNUPGHOME=. python server.py
+</I>&gt;<i>
+</I>&gt;<i> where server.py is:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> from pyme import core, gpgme
+</I>&gt;<i> def handler():
+</I>&gt;<i>     stext=&quot;&quot;&quot;test
+</I>&gt;<i> abcd
+</I>&gt;<i> &quot;&quot;&quot;
+</I>&gt;<i>     content=&quot;&quot;&quot;-----BEGIN PGP SIGNATURE-----
+</I>&gt;<i> Version: GnuPG v1.4.1 (GNU/Linux)
+</I>&gt;<i>
+</I>&gt;<i> iD8DBQBC9PRzVvBSb5uzznARApa6AKCwZhFcYGIoDXS/7x+R5teHqPB52QCfSbwx
+</I>&gt;<i> +zyyVRMkKIP4UaLj5eyEA9Y=
+</I>&gt;<i> =buAb
+</I>&gt;<i> -----END PGP SIGNATURE-----
+</I>&gt;<i> &quot;&quot;&quot;
+</I>&gt;<i>
+</I>&gt;<i>     ctx = core.Context()
+</I>&gt;<i>     ctx.op_verify(core.Data(content), core.Data(stext), None)
+</I>&gt;<i>     result = ctx.op_verify_result()
+</I>&gt;<i>     sign = result.signatures
+</I>&gt;<i>     if sign:
+</I>&gt;<i>         key = ctx.get_key(sign.fpr, 0)
+</I>&gt;<i>         raise Exception(&quot;success: &quot; + sign.fpr + &quot;|&quot; + key.uids.uid)
+</I>&gt;<i>     if sign is None:
+</I>&gt;<i>         raise Exception(&quot;No PGP signature found in: &quot; + content + stext)
+</I>&gt;<i>
+</I>&gt;<i>     # List results for all signatures. Status equal 0 means &quot;Ok&quot;.
+</I>&gt;<i>     if result.signatures.status != 0:
+</I>&gt;<i>         raise Exception(&quot;PGP signature is not valid&quot;)
+</I>&gt;<i>     return apache.OK
+</I>&gt;<i>
+</I>&gt;<i> handler()
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> That fails with &quot;GPGME: End of file&quot;, which I'm pretty sure just means
+</I>&gt;<i> the key wasn't found.  But if done as 'root' instead of 'userx', it auto
+</I>&gt;<i> retrieves the key from a keyserver and succeeds.  Crazy gpg!  Nothing
+</I>&gt;<i> seems particularly root-y in there, does it?
+</I>&gt;<i>
+</I>&gt;<i> I know you probably can't shed much light, but maybe you can, and maybe
+</I>&gt;<i> writing this will help me.  But darn, it hasn't yet.
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+</I>&gt;<i> <A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+</I>&gt;<i> <A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+</I>&gt;<i>                &lt;&gt;&lt;
+</I>
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+                &lt;&gt;&lt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050924/fcbc81a0/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050924/fcbc81a0/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000081.html">trustserver functionality
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#80">[ date ]</a>
+              <a href="thread.html#80">[ thread ]</a>
+              <a href="subject.html#80">[ subject ]</a>
+              <a href="author.html#80">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> pgp trust network membership
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-November/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20pgp%20trust%20network%20membership&In-Reply-To=%3C5a086d9d0511220654j6d4fe527qf323364aa73cedff%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000087.html">
+   <LINK REL="Next"  HREF="000089.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>pgp trust network membership</H1>
+    <B>A. Schamp</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20pgp%20trust%20network%20membership&In-Reply-To=%3C5a086d9d0511220654j6d4fe527qf323364aa73cedff%40mail.gmail.com%3E"
+       TITLE="pgp trust network membership">schamp at gmail.com
+       </A><BR>
+    <I>Tue Nov 22 15:54:06 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000087.html">map of identity standards
+</A></li>
+        <LI>Next message: <A HREF="000089.html">pgp trust network membership
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#88">[ date ]</a>
+              <a href="thread.html#88">[ thread ]</a>
+              <a href="subject.html#88">[ subject ]</a>
+              <a href="author.html#88">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>So I was thinking about the requirement that there be a PGP
+web-of-trust link between the source and the sink for the FOAF record
+to be considered valid, and then I was thinking that in order for it
+to really work, there must be a WOT link between the source and every
+step in the Konfidi trust network along the way, since if there is a
+forged FOAF record anywhere in the chain the result is useless.  But
+it's pretty cumbersome to check the WOT link for every step as it find
+a path, and it would be a drag to find a path first, and then check
+the WOT, and then find a new one if it wasn't there.
+
+Then I had this other idea:  since all that matters is that there be a
+WOT link, of any length, between each member, and not necessarily
+matter what that WOT path is, we could build up a WOT group membership
+list, in which every key that is connected together by some link is in
+a group.  When a FOAF is added to the Konfidi trust network, we would
+determine the PGP group of the signing key and add that as an
+attribute to the record.  Then, we conduct the Konfidi trust network
+search in such a way that only those trust links that belong to the
+same pgp group are considered.  Because, if we construct the groups
+properly, everyone with a certain group number is by definition
+connected through PGP to any other node with the same group number. 
+This moves the bulk of the PGP computation to the front, so that it
+need only occur when a FOAF record is added or updated.  We can even
+build up a subgroup or equivalent group system so that we don't have
+to recompute everything when two PGP groups merge.
+
+What do you think of this?
+
+Andy
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000087.html">map of identity standards
+</A></li>
+	<LI>Next message: <A HREF="000089.html">pgp trust network membership
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#88">[ date ]</a>
+              <a href="thread.html#88">[ thread ]</a>
+              <a href="subject.html#88">[ subject ]</a>
+              <a href="author.html#88">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

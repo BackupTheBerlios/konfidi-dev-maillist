@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> privacy, etc
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20privacy%2C%20etc&In-Reply-To=%3C4405248F.7080006%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000106.html">
+   <LINK REL="Next"  HREF="000107.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>privacy, etc</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20privacy%2C%20etc&In-Reply-To=%3C4405248F.7080006%40brondsema.net%3E"
+       TITLE="privacy, etc">dave at brondsema.net
+       </A><BR>
+    <I>Wed Mar  1 05:35:27 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000106.html">wot ontology usage
+</A></li>
+        <LI>Next message: <A HREF="000107.html">perl module
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#105">[ date ]</a>
+              <a href="thread.html#105">[ thread ]</a>
+              <a href="subject.html#105">[ subject ]</a>
+              <a href="author.html#105">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A. Schamp wrote:
+&gt;<i> I was thinking about privacy, and the social implications of people
+</I>&gt;<i> being able to see the trust ratings that others give to them (and
+</I>&gt;<i> others), and how several papers we read mentioned it was a bad thing.
+</I>&gt;<i> I think I agree, the best way is probably to hide the intermediate
+</I>&gt;<i> steps for normal use (being available as debugging output if needed).
+</I>&gt;<i>
+</I>&gt;<i> One question:  how, then, are users to post a trustified foaf to a
+</I>&gt;<i> foafserver while keeping that other data private?
+</I>&gt;<i>
+</I>&gt;<i> A few answers: One way I've seen is to have the regular foaf reference
+</I>&gt;<i> another document that is encrypted to the foafserver's public key and
+</I>&gt;<i> sent in along with the first.  so the foaf data is public, but only
+</I>&gt;<i> the foafserver (and whomever it gives access) can see the trust data.
+</I>&gt;<i> One other way would be to just have the trust data in the same file,
+</I>&gt;<i> but when the foafserver serves out that file, it doesn't show the
+</I>&gt;<i> trust data, by filtering it out.  Of course, then, the trustserver
+</I>&gt;<i> would still need that trust data, and anyone who wanted to see it
+</I>&gt;<i> could set up their own mirror, etc., and have access.  ultimately, I
+</I>&gt;<i> don't know of a way it can be truly hidden, just obscured or made too
+</I>&gt;<i> hasslelicious to get to.
+</I>
+And somebody could set up a mirror and put a public interface on it all,
+rendering it all low-hassle.
+
+First, I'm not sure if privacy would be a big demand.  I'm sure some
+people would want it and some wouldn't.  I don't know how to estimate
+its importance.  What do you think?
+
+Second, I think if we were to implement it, it would require a design
+change to be effective.  (It may not be very feasible at all since the
+premise of Konfidi is that *sharing* trust makes inference possible).
+The paper I mentioned at
+<A HREF="../2006-February/000097.html">http://lists.berlios.de/pipermail/konfidi-dev/2006-February/000097.html</A>
+comes to mind.  The nature of the system is fairly different, but one
+concept we could borrow is that of users (or users' daemons) &quot;speaking
+up&quot; with output when asked.  Decentralizing the computation,
+essentially.  This requires the users to be online, or after a period of
+time it will default (in that system, the default is to admit/claim
+responsibility for a message).  Not sure how defaults could work for
+konfidi, nor what sort of algorithm we could use to distribute the
+computation.  I'll have to ponder it.
+
+P.S. if such a system were algorithmically possible, we could make it
+practical by requiring privacy-desiring users to have a web service set
+up to answer requests.  Other users could just publish.  So you'd have
+to be online all the time if you want privacy (or perhaps a hosting
+service for konfidi web services? ...)
+
+I tried to think of an algorithm, but didn't come up with anything.
+Onion routing could be useful.
+
+I did think of a major concern.  In any sort of privacy system, must the
+very existence of a trust link be private?  I think it probably would.
+If so, how would you find paths at all?  I don't think you could.  I
+guess you could, if the users give the private info to a server and it
+never reveals paths (see below, though).  A doubt a decentralized system
+would work though, because it couldn't know how to route one
+step-calculation to the next.
+
+&gt;<i>
+</I>&gt;<i> Another question:  will the information really be obscured, since any
+</I>&gt;<i> user can request a trust rating between any two other users (e.g., get
+</I>&gt;<i> the value for any particular edge in the graph), and, step-by-step,
+</I>&gt;<i> reconstruct it?
+</I>&gt;<i>
+</I>&gt;<i> A few more answers:  Well, we could restrict it so that individuals
+</I>&gt;<i> could only do searches with themselves as either the source or the
+</I>&gt;<i> sink.
+</I>
+I think that'd be an acceptable constraint, if we found it to help in
+some way.  Even limiting to searches with themself as only the source.
+
+
+&gt;<i>  Or, we could use some kind of rounding to obscure the number of
+</I>&gt;<i> steps involved (e.g., if there's one step, the value is likely to be a
+</I>&gt;<i> whole number, whereas if there are many steps, the value is likely to
+</I>&gt;<i> be some long decimal.  so, we could round everything off, say, to the
+</I>&gt;<i> nearest 0.05 or 0.005 or what have you.  Would we still have to
+</I>&gt;<i> obscure the path that the trust rating takes, or just the value?  This
+</I>&gt;<i> might be useful information for debugging your own web, say, if you
+</I>&gt;<i> get crummy data because you trust someone, who trusts someone else who
+</I>&gt;<i> is sketchy, and this sketchy person trusts a spammer.  you'd want to
+</I>&gt;<i> know where the problem was, so that you could enter explicit distrust
+</I>&gt;<i> of the sketchy individual without harming your trust of the
+</I>&gt;<i> intermediate fellow, which you'd like to maintain, etc. etc.
+</I>
+Rounding could help some, but not a lot.  And of course if you round a
+lot the values become less useful.
+
+Yes I think showing the path is very important.  I expect polished
+clients would have easy ways to see the path and make adjustments.
+
+&gt;<i>
+</I>&gt;<i> Your thoughts on this?
+</I>&gt;<i>
+</I>&gt;<i> Andrew
+</I>&gt;<i>
+</I>
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+                &lt;&gt;&lt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060228/25af9d9f/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060228/25af9d9f/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000106.html">wot ontology usage
+</A></li>
+	<LI>Next message: <A HREF="000107.html">perl module
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#105">[ date ]</a>
+              <a href="thread.html#105">[ thread ]</a>
+              <a href="subject.html#105">[ subject ]</a>
+              <a href="author.html#105">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

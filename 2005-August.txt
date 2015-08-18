@@ -1,0 +1,846 @@
+From dave at brondsema.net  Sat Aug  6 19:00:51 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 06 Aug 2005 13:00:51 -0400
+Subject: pyme/mod_python weirdness
+In-Reply-To: <5a086d9d05072812237efba908@mail.gmail.com>
+References: <42E841E3.1000601@brondsema.net>	 <5a086d9d0507280517fc19c0a@mail.gmail.com>	 <42E921F4.8070707@brondsema.net> <5a086d9d05072812237efba908@mail.gmail.com>
+Message-ID: <42F4ECC3.3040409@brondsema.net>
+
+Minimal test cases
+
+Any thoughts, Andy?  I'm hopeless.  Same issue occurs with any text and
+detached signature (ascii-armored or not).
+
+-------------------------------
+server.py:
+
+
+from pyme import core
+
+def handler():
+     content = open("/home/dpb2/tmp.txt.asc", 'r').read()
+     stext = open("/home/dpb2/tmp.txt", 'r').read()
+     ctx = core.Context()
+     ctx.op_verify(core.Data(content), core.Data(stext), None)
+     result = ctx.op_verify_result()
+     sign = result.signatures
+     if sign:
+         key = ctx.get_key(sign.fpr, 0)
+         raise Exception("success: " + sign.fpr + "|" + key.uids.uid)
+     if result.signatures is None:
+         raise Exception("No PGP signature found")
+
+     # List results for all signatures. Status equal 0 means "Ok".
+     if result.signatures.status != 0:
+         raise Exception("PGP signature is not valid")
+     return apache.OK
+
+handler()
+
+
+---------------------------
+.htaccess:
+
+
+# don't try to use mod_negotiation at all, it can mess up URI handling
+Options -MultiViews
+
+# ALL requests handled by mod_python
+SetHandler mod_python
+
+# all mod_python requests go to server.py
+PythonHandler server
+
+PythonDebug On
+PythonAutoReload On
+# seperate interpreter for this app; otherwise mod_python shares a
+namespace for each apache virtual domain
+PythonInterpPerDirective On
+
+
+----------------------------
+
+
+$ python server.py
+Traceback (most recent call last):
+   File "server.py", line 21, in ?
+     handler()
+   File "server.py", line 12, in handler
+     raise Exception("success: " + sign.fpr + "|" + key.uids.uid)
+Exception: success: EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70|Dave
+Brondsema <dave at brondsema.net>
+
+
+
+http://brondsema.gotdns.com/~dpb2/pyme_problem/
+
+Mod_python error: "PythonHandler server"
+
+Traceback (most recent call last):
+
+   File "/usr/lib/python2.3/site-packages/mod_python/apache.py", line
+287, in HandlerDispatch
+     log=debug)
+
+   File "/usr/lib/python2.3/site-packages/mod_python/apache.py", line
+457, in import_module
+     module = imp.load_module(mname, f, p, d)
+
+   File "/home/dpb2/public_html/pyme_problem/server.py", line 23, in ?
+     handler()
+
+   File "/home/dpb2/public_html/pyme_problem/server.py", line 16, in handler
+     raise Exception("No PGP signature found")
+
+Exception: No PGP signature found
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050806/a16be6fe/attachment.pgp>
+
+From dave at brondsema.net  Tue Aug  9 05:24:19 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 08 Aug 2005 23:24:19 -0400
+Subject: pyme setup update
+Message-ID: <42F821E3.6030505@brondsema.net>
+
+
+So setting GNUPGHOME helps.  But now I have this problem.
+
+su - userx
+mkdir mygnupghome
+cd !$
+echo 'keyserver-options auto-key-retrieve
+keyserver x-hkp://random.sks.keyserver.penguin.de' >> gpg.conf
+chmod 600 gpg.conf
+GNUPGHOME=. python server.py
+
+where server.py is:
+
+
+
+from pyme import core, gpgme
+def handler():
+     stext="""test
+abcd
+"""
+     content="""-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (GNU/Linux)
+
+iD8DBQBC9PRzVvBSb5uzznARApa6AKCwZhFcYGIoDXS/7x+R5teHqPB52QCfSbwx
++zyyVRMkKIP4UaLj5eyEA9Y=
+=buAb
+-----END PGP SIGNATURE-----
+"""
+
+     ctx = core.Context()
+     ctx.op_verify(core.Data(content), core.Data(stext), None)
+     result = ctx.op_verify_result()
+     sign = result.signatures
+     if sign:
+         key = ctx.get_key(sign.fpr, 0)
+         raise Exception("success: " + sign.fpr + "|" + key.uids.uid)
+     if sign is None:
+         raise Exception("No PGP signature found in: " + content + stext)
+
+     # List results for all signatures. Status equal 0 means "Ok".
+     if result.signatures.status != 0:
+         raise Exception("PGP signature is not valid")
+     return apache.OK
+
+handler()
+
+
+
+
+
+That fails with "GPGME: End of file", which I'm pretty sure just means
+the key wasn't found.  But if done as 'root' instead of 'userx', it auto
+retrieves the key from a keyserver and succeeds.  Crazy gpg!  Nothing
+seems particularly root-y in there, does it?
+
+I know you probably can't shed much light, but maybe you can, and maybe
+writing this will help me.  But darn, it hasn't yet.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050808/bff7efa9/attachment.pgp>
+
+From schamp at gmail.com  Tue Aug 16 15:17:45 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 16 Aug 2005 08:17:45 -0500
+Subject: testing
+Message-ID: <5a086d9d050816061712c3b52c@mail.gmail.com>
+
+I want to start using some unit tests.  I've found two things, which look good: 
+
+unittest (aka PyUnit) - it comes with Python, and is very similar to JUnit
+py.test - it doesn't come with Python, but it looks like it kicks ass.
+
+Which should we use?
+
+
+From dave at brondsema.net  Tue Aug 16 23:02:58 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 16 Aug 2005 17:02:58 -0400
+Subject: testing
+In-Reply-To: <5a086d9d050816061712c3b52c@mail.gmail.com>
+References: <5a086d9d050816061712c3b52c@mail.gmail.com>
+Message-ID: <43025482.9040403@brondsema.net>
+
+A. Schamp wrote:
+> I want to start using some unit tests.  I've found two things, which look good: 
+> 
+> unittest (aka PyUnit) - it comes with Python, and is very similar to JUnit
+> py.test - it doesn't come with Python, but it looks like it kicks ass.
+> 
+> Which should we use?
+> 
+
+I'ven't used either and don't have time to look into them until I get
+internet in a week or so.  But my gut reaction would be that unittest is
+more mature and has more users if it is a standard package.  But if
+py.test has more useful features then whatever...
+
+-- 
+Dave Brondsema
+Software Developer
+Cornerstone University
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 254 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050816/7eea7851/attachment.pgp>
+
+From schamp at gmail.com  Tue Aug 16 23:12:57 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 16 Aug 2005 16:12:57 -0500
+Subject: testing
+In-Reply-To: <43025482.9040403@brondsema.net>
+References: <5a086d9d050816061712c3b52c@mail.gmail.com>
+	 <43025482.9040403@brondsema.net>
+Message-ID: <5a086d9d05081614125758f942@mail.gmail.com>
+
+Dave,
+
+I'm rather torn, so I'll think about it a bit more.  I have more I
+want to do, but much of it is locked away in my working copy on your
+machine... : (  I've been using eclipse and pydev on my box, now, and
+like it, but I don't want to duplicate all the work I did before.  The
+more I think about it, though, the more I think I'll go with PyUnit,
+since it's included and doesn't have any implications on the licenses
+we use.
+
+Which reminds me, do you have any idea how to test mod_python apps?  
+
+Also, when can I turn off phone service to Sweetsville?  Now, I
+presume?  Where did you go?
+
+Thanks,
+Andy
+
+On 8/16/05, Dave Brondsema <dave at brondsema.net> wrote:
+> A. Schamp wrote:
+> > I want to start using some unit tests.  I've found two things, which look good:
+> >
+> > unittest (aka PyUnit) - it comes with Python, and is very similar to JUnit
+> > py.test - it doesn't come with Python, but it looks like it kicks ass.
+> >
+> > Which should we use?
+> >
+> 
+> I'ven't used either and don't have time to look into them until I get
+> internet in a week or so.  But my gut reaction would be that unittest is
+> more mature and has more users if it is a standard package.  But if
+> py.test has more useful features then whatever...
+> 
+> --
+> Dave Brondsema
+> Software Developer
+> Cornerstone University
+> 
+> 
+>
+
+
+From dave at brondsema.net  Wed Aug 17 14:08:03 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 17 Aug 2005 08:08:03 -0400
+Subject: testing
+In-Reply-To: <5a086d9d05081614125758f942@mail.gmail.com>
+References: <5a086d9d050816061712c3b52c@mail.gmail.com>	 <43025482.9040403@brondsema.net> <5a086d9d05081614125758f942@mail.gmail.com>
+Message-ID: <430328A3.3050603@brondsema.net>
+
+A. Schamp wrote:
+> Dave,
+> 
+> I'm rather torn, so I'll think about it a bit more.  I have more I
+> want to do, but much of it is locked away in my working copy on your
+> machine... : (  I've been using eclipse and pydev on my box, now, and
+> like it, but I don't want to duplicate all the work I did before.  The
+> more I think about it, though, the more I think I'll go with PyUnit,
+> since it's included and doesn't have any implications on the licenses
+> we use.
+
+My box'll be online Sunday at the earliest.
+
+> 
+> Which reminds me, do you have any idea how to test mod_python apps?  
+
+There are various http and/or html testing frameworks, none of which
+I've tried.  For those it doesn't matter what language they are in.
+
+> 
+> Also, when can I turn off phone service to Sweetsville?  Now, I
+> presume?  Where did you go?
+
+I'll reply privately :-)
+
+> 
+> Thanks,
+> Andy
+> 
+> On 8/16/05, Dave Brondsema <dave at brondsema.net> wrote:
+> 
+>>A. Schamp wrote:
+>>
+>>>I want to start using some unit tests.  I've found two things, which look good:
+>>>
+>>>unittest (aka PyUnit) - it comes with Python, and is very similar to JUnit
+>>>py.test - it doesn't come with Python, but it looks like it kicks ass.
+>>>
+>>>Which should we use?
+>>>
+>>
+>>I'ven't used either and don't have time to look into them until I get
+>>internet in a week or so.  But my gut reaction would be that unittest is
+>>more mature and has more users if it is a standard package.  But if
+>>py.test has more useful features then whatever...
+>>
+>>--
+>>Dave Brondsema
+>>Software Developer
+>>Cornerstone University
+>>
+>>
+>>
+> 
+> 
+
+
+-- 
+Dave Brondsema
+Software Developer
+Cornerstone University
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 254 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050817/914fcf4d/attachment.pgp>
+
+From dave at brondsema.net  Tue Aug 30 09:45:53 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 30 Aug 2005 07:45:53 +0000
+Subject: 2 links
+Message-ID: <43140EB1.3020705@brondsema.net>
+
+
+Two links from planetrdf this morning:
+
+http://www.mnot.net/sw/sparta/
+	may be useful to you
+http://www.emacswiki.org/cw/ReputationBudget
+	another trust system that'd be good to understand, but I doubt it'll
+have any impact on our project
+
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050830/04329e19/attachment.pgp>
+
+From schamp at gmail.com  Tue Aug 30 14:43:38 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 30 Aug 2005 07:43:38 -0500
+Subject: 2 links
+In-Reply-To: <43140EB1.3020705@brondsema.net>
+References: <43140EB1.3020705@brondsema.net>
+Message-ID: <5a086d9d0508300543743302bd@mail.gmail.com>
+
+On 8/30/05, Dave Brondsema <dave at brondsema.net> wrote:
+> 
+> Two links from planetrdf this morning:
+> 
+> http://www.mnot.net/sw/sparta/
+>         may be useful to you
+
+Interesting.  It seems to be one of the first implementations that
+I've seen explicitly mention OWL.  Also, it could be useful as another
+option for the updater.  I've been trying to decide whether we should
+just pick redland and stick with it, or offer options for what people
+want to install (redland, rdflib, sparta, or others) and then allow
+them to use what they might already have.  The problem with rdflib (or
+librdf, I can't keep the two straight) is that it doesn't seem to work
+under windows, due to some problem with a dependency, I think.
+
+On the other hand, it may be a big hassle to try and maintain the
+possibility of all three.  What do you think?
+
+> http://www.emacswiki.org/cw/ReputationBudget
+>         another trust system that'd be good to understand, but I doubt it'll
+> have any impact on our project
+
+This is very interesting, as it brings up something that I believe
+Jennifer mentioned in her thesis somewhere:  the economy of trust, or
+scarcity.  Konfidi is not going to work if everyone just rates
+everyone else with a high trust rating.  There needs to be some kind
+of incentive for providing and maintaining reasonably accurate
+trust/reputation data.  "Faith in the system" and "hope that it works"
+may be enough for us and the altruists interested in the project
+academically (and even practically, while it's small), but the more I
+think about it, the more I doubt that that is sustainable on a large
+scale.  So, introducing scarcity, or some way to make people reluctant
+to spend all their trust on everybody, has some utility in the system.
+ It would be interesting to link/evaluate trust networks to/in the
+context of economic systems and game theory.  Graduate thesis, anyone?
+
+Which reminds me, I don't think I told you--I'm starting part-time
+grad. studies at Wash U next week.  It's for a masters, and it can be
+all coursework (there isn't anyone here right now that is into trust
+networks, and I'm not sure I'd want to do anything else).  My first
+class will probably be on mobile computing and related networking
+issues.  I'm limited by the times that classes are offered and my
+ability to get to class on time using transit, but I think it'll work
+out and be cool.
+
+I bought a new HD, and am installing windows afresh and making images
+for quick restores, etc., so once that's all done, when I find time,
+I'll be back updating the read/write updating strategies, etc., and
+trying to get them to work.  I'm frustrated, because I really want to
+run Linux, but I know that I'm probably not ready to do that yet.  How
+have things been going for you in the self-control department?
+
+In other news, Abby moved here late last week, and yesterday, was
+given a job at a coffeehouse two blocks from her apartment.  So,
+praise the Lord!  That's a big answer to prayer.  It is very good to
+be near her all the time, for it reduces some of the urgency that
+comes with the visits in a long term relationship, and makes it easier
+to flourish.  I haven't heard frpm you lately--how are things
+developing with Cherith?  Have you had any guidance about that?
+
+Finally, I wanted to ask you if you would be willing to be an usher at
+our wedding.  It is to be Saturday, January 7, with the rehearsal the
+day before.  I'd be honored--will you do this?
+
+Peace,
+Andy
+
+
+From dave at brondsema.net  Tue Aug 30 18:08:51 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Tue, 30 Aug 2005 12:08:51 -0400
+Subject: 2 links
+In-Reply-To: <5a086d9d0508300543743302bd@mail.gmail.com>
+References: <43140EB1.3020705@brondsema.net> <5a086d9d0508300543743302bd@mail.gmail.com>
+Message-ID: <43148493.3000706@brondsema.net>
+
+A. Schamp wrote:
+> On 8/30/05, Dave Brondsema <dave at brondsema.net> wrote:
+> 
+>>Two links from planetrdf this morning:
+>>
+>>http://www.mnot.net/sw/sparta/
+>>        may be useful to you
+> 
+> 
+> Interesting.  It seems to be one of the first implementations that
+> I've seen explicitly mention OWL.  Also, it could be useful as another
+> option for the updater.  I've been trying to decide whether we should
+> just pick redland and stick with it, or offer options for what people
+> want to install (redland, rdflib, sparta, or others) and then allow
+> them to use what they might already have.  The problem with rdflib (or
+> librdf, I can't keep the two straight) is that it doesn't seem to work
+> under windows, due to some problem with a dependency, I think.
+> 
+> On the other hand, it may be a big hassle to try and maintain the
+> possibility of all three.  What do you think?
+> 
+
+Yeah.  If there's one that works well under Linux & Windows, let's just
+use that one.  KISS.  We can add support for others if people request it.
+
+> 
+>>http://www.emacswiki.org/cw/ReputationBudget
+>>        another trust system that'd be good to understand, but I doubt it'll
+>>have any impact on our project
+> 
+> 
+> This is very interesting, as it brings up something that I believe
+> Jennifer mentioned in her thesis somewhere:  the economy of trust, or
+> scarcity.  Konfidi is not going to work if everyone just rates
+> everyone else with a high trust rating.  There needs to be some kind
+> of incentive for providing and maintaining reasonably accurate
+> trust/reputation data.  "Faith in the system" and "hope that it works"
+> may be enough for us and the altruists interested in the project
+> academically (and even practically, while it's small), but the more I
+> think about it, the more I doubt that that is sustainable on a large
+> scale.  So, introducing scarcity, or some way to make people reluctant
+> to spend all their trust on everybody, has some utility in the system.
+>  It would be interesting to link/evaluate trust networks to/in the
+> context of economic systems and game theory.  Graduate thesis, anyone?
+
+Yes.  We could have a strategy that does this, right?
+
+> 
+> Which reminds me, I don't think I told you--I'm starting part-time
+> grad. studies at Wash U next week.  It's for a masters, and it can be
+> all coursework (there isn't anyone here right now that is into trust
+> networks, and I'm not sure I'd want to do anything else).  My first
+> class will probably be on mobile computing and related networking
+> issues.  I'm limited by the times that classes are offered and my
+> ability to get to class on time using transit, but I think it'll work
+> out and be cool.
+
+Cool.  Peter Boumgarden attends there now, for Org. Behavior.  Don't
+know if you knew him at Calvin or not...
+
+
+
+
+-- 
+Dave Brondsema
+Software Developer
+Cornerstone University
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 254 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050830/f8ed2dc0/attachment.pgp>
+
+From dave at brondsema.net  Wed Aug 31 14:06:44 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 31 Aug 2005 08:06:44 -0400
+Subject: 2 links
+In-Reply-To: <43148493.3000706@brondsema.net>
+References: <43140EB1.3020705@brondsema.net> <5a086d9d0508300543743302bd@mail.gmail.com> <43148493.3000706@brondsema.net>
+Message-ID: <43159D54.7080200@brondsema.net>
+
+Dave Brondsema wrote:
+> A. Schamp wrote:
+> 
+>>On 8/30/05, Dave Brondsema <dave at brondsema.net> wrote:
+>>
+>>
+>>>Two links from planetrdf this morning:
+>>>
+>>>http://www.mnot.net/sw/sparta/
+>>>       may be useful to you
+>>
+>>
+>>Interesting.  It seems to be one of the first implementations that
+>>I've seen explicitly mention OWL.  Also, it could be useful as another
+>>option for the updater.  I've been trying to decide whether we should
+>>just pick redland and stick with it, or offer options for what people
+>>want to install (redland, rdflib, sparta, or others) and then allow
+>>them to use what they might already have.  The problem with rdflib (or
+>>librdf, I can't keep the two straight) is that it doesn't seem to work
+>>under windows, due to some problem with a dependency, I think.
+>>
+>>On the other hand, it may be a big hassle to try and maintain the
+>>possibility of all three.  What do you think?
+>>
+> 
+> 
+> Yeah.  If there's one that works well under Linux & Windows, let's just
+> use that one.  KISS.  We can add support for others if people request it.
+> 
+> 
+>>>http://www.emacswiki.org/cw/ReputationBudget
+>>>       another trust system that'd be good to understand, but I doubt it'll
+>>>have any impact on our project
+>>
+>>
+>>This is very interesting, as it brings up something that I believe
+>>Jennifer mentioned in her thesis somewhere:  the economy of trust, or
+>>scarcity.  Konfidi is not going to work if everyone just rates
+>>everyone else with a high trust rating.  There needs to be some kind
+>>of incentive for providing and maintaining reasonably accurate
+>>trust/reputation data.  "Faith in the system" and "hope that it works"
+>>may be enough for us and the altruists interested in the project
+>>academically (and even practically, while it's small), but the more I
+>>think about it, the more I doubt that that is sustainable on a large
+>>scale.  So, introducing scarcity, or some way to make people reluctant
+>>to spend all their trust on everybody, has some utility in the system.
+>> It would be interesting to link/evaluate trust networks to/in the
+>>context of economic systems and game theory.  Graduate thesis, anyone?
+> 
+> 
+> Yes.  We could have a strategy that does this, right?
+> 
+
+We have to be careful how we do it, though.  First of all, we must give
+immediate feedback to the user about the weighting so that they will
+understand the system they use, and be inclined to rate people better.
+
+Also, in our context, it is very likely that some people will only rate
+their closest friends (all a 9, say) and that should be okay.  Some
+people will get more spam (and more ham) and have *lots* of ratings all
+over the place.  That should be okay, there's no good reason to
+undervalue them.
+
+In fact... with the directionality of ratings (i.e. there's no way to
+increase your rating in the eyes of person X) budgeting might not be
+necessary at all.
+
+-- 
+Dave Brondsema
+Software Developer
+Cornerstone University
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 254 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050831/19eb1b4a/attachment.pgp>
+
+From schamp at gmail.com  Wed Aug 31 16:07:21 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Wed, 31 Aug 2005 09:07:21 -0500
+Subject: 2 links
+In-Reply-To: <43159D54.7080200@brondsema.net>
+References: <43140EB1.3020705@brondsema.net>
+	 <5a086d9d0508300543743302bd@mail.gmail.com>
+	 <43148493.3000706@brondsema.net> <43159D54.7080200@brondsema.net>
+Message-ID: <5a086d9d0508310707153edcc4@mail.gmail.com>
+
+Er, sorry about replying to the list.  I always forget.
+
+Anyway, one other thing that is increasingly important to me is this: 
+privacy of ratings.  The system needs to be able to obscure the
+details of a path (perhaps only if desired, perhaps required for
+everyone), otherwise, I think it runs the risk of losing its meaning
+by becoming a popularity mongering system.  If your friend Joe, who
+you like, but don't really trust all that much, is able to see what
+you think of him, then that increases your likelihood of providing a
+less accurate rating.  Jennifer covered this quite a bit.
+
+One way it could work for Konfidi might be something like this: 
+everyone's FOAF could have a "see also" or some tag relating the FOAF
+to another FOAF document that contains the trust information for that
+person.  This document, however, could be encrypted with the public
+key of the TrustServer, so that it is available for crawling, etc.. 
+What do you think about this?
+
+Andy
+
+On 8/31/05, Dave Brondsema <dave at brondsema.net> wrote:
+> Dave Brondsema wrote:
+> > A. Schamp wrote:
+> >
+> >>On 8/30/05, Dave Brondsema <dave at brondsema.net> wrote:
+> >>
+> >>
+> >>>Two links from planetrdf this morning:
+> >>>
+> >>>http://www.mnot.net/sw/sparta/
+> >>>       may be useful to you
+> >>
+> >>
+> >>Interesting.  It seems to be one of the first implementations that
+> >>I've seen explicitly mention OWL.  Also, it could be useful as another
+> >>option for the updater.  I've been trying to decide whether we should
+> >>just pick redland and stick with it, or offer options for what people
+> >>want to install (redland, rdflib, sparta, or others) and then allow
+> >>them to use what they might already have.  The problem with rdflib (or
+> >>librdf, I can't keep the two straight) is that it doesn't seem to work
+> >>under windows, due to some problem with a dependency, I think.
+> >>
+> >>On the other hand, it may be a big hassle to try and maintain the
+> >>possibility of all three.  What do you think?
+> >>
+> >
+> >
+> > Yeah.  If there's one that works well under Linux & Windows, let's just
+> > use that one.  KISS.  We can add support for others if people request it.
+> >
+> >
+> >>>http://www.emacswiki.org/cw/ReputationBudget
+> >>>       another trust system that'd be good to understand, but I doubt it'll
+> >>>have any impact on our project
+> >>
+> >>
+> >>This is very interesting, as it brings up something that I believe
+> >>Jennifer mentioned in her thesis somewhere:  the economy of trust, or
+> >>scarcity.  Konfidi is not going to work if everyone just rates
+> >>everyone else with a high trust rating.  There needs to be some kind
+> >>of incentive for providing and maintaining reasonably accurate
+> >>trust/reputation data.  "Faith in the system" and "hope that it works"
+> >>may be enough for us and the altruists interested in the project
+> >>academically (and even practically, while it's small), but the more I
+> >>think about it, the more I doubt that that is sustainable on a large
+> >>scale.  So, introducing scarcity, or some way to make people reluctant
+> >>to spend all their trust on everybody, has some utility in the system.
+> >> It would be interesting to link/evaluate trust networks to/in the
+> >>context of economic systems and game theory.  Graduate thesis, anyone?
+> >
+> >
+> > Yes.  We could have a strategy that does this, right?
+> >
+> 
+> We have to be careful how we do it, though.  First of all, we must give
+> immediate feedback to the user about the weighting so that they will
+> understand the system they use, and be inclined to rate people better.
+> 
+> Also, in our context, it is very likely that some people will only rate
+> their closest friends (all a 9, say) and that should be okay.  Some
+> people will get more spam (and more ham) and have *lots* of ratings all
+> over the place.  That should be okay, there's no good reason to
+> undervalue them.
+> 
+> In fact... with the directionality of ratings (i.e. there's no way to
+> increase your rating in the eyes of person X) budgeting might not be
+> necessary at all.
+> 
+> --
+> Dave Brondsema
+> Software Developer
+> Cornerstone University
+> 
+> 
+>
+
+
+From dave at brondsema.net  Wed Aug 31 18:32:26 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 31 Aug 2005 12:32:26 -0400
+Subject: privacy
+In-Reply-To: <5a086d9d0508310707153edcc4@mail.gmail.com>
+References: <43140EB1.3020705@brondsema.net>	 <5a086d9d0508300543743302bd@mail.gmail.com>	 <43148493.3000706@brondsema.net> <43159D54.7080200@brondsema.net> <5a086d9d0508310707153edcc4@mail.gmail.com>
+Message-ID: <4315DB9A.8050701@brondsema.net>
+
+A. Schamp wrote:
+> Er, sorry about replying to the list.  I always forget.
+> 
+> Anyway, one other thing that is increasingly important to me is this: 
+> privacy of ratings.  The system needs to be able to obscure the
+> details of a path (perhaps only if desired, perhaps required for
+> everyone), otherwise, I think it runs the risk of losing its meaning
+> by becoming a popularity mongering system.  If your friend Joe, who
+> you like, but don't really trust all that much, is able to see what
+> you think of him, then that increases your likelihood of providing a
+> less accurate rating.  Jennifer covered this quite a bit.
+> 
+> One way it could work for Konfidi might be something like this: 
+> everyone's FOAF could have a "see also" or some tag relating the FOAF
+> to another FOAF document that contains the trust information for that
+> person.  This document, however, could be encrypted with the public
+> key of the TrustServer, so that it is available for crawling, etc.. 
+> What do you think about this?
+> 
+> Andy
+> 
+
+I don't know.  I agree with most of what you say, but a technical
+solution only solves technical problems, not social ones.  Peer
+pressure, etc will still exist.
+
+In the context of spam, I don't think this will be a big issue because
+the distinction is so clear, and a spammer won't be in your group of
+friends.  But accurate ratings are valuable for other konfidi topics.
+
+The problem I see with hidden ratings are:
+
+1) the konfidi system should be transparent, to allow the user to
+understand and trust in it.  Transparency of data in addition to
+transparency of logic is important
+
+2) data that is encrypted only for a keyserver is difficult to scale for
+multiple keyservers.  If each keyserver has a key, end-user software
+must encrypt for each one.  Not easy to add new keyservers then.  And if
+they all share one key, the risk is too high that the key gets exposed.
+
+3) people will want to find out about trust values of those near them.
+Alone, or with cooperation, I'm sure they could construct trustserver
+queries that provide enough information to derive the trust values.
+Especially if the strategy algorighms are public.  If this is possible
+as I think it is, we allow/create an underground/hidden world of trust
+values.  If they are to exist publicly, they should be officially public.
+
+
+To handle the problem of accurate ratings, I think we should look to
+strategies (e.g. budgeting) and user education.
+
+
+-- 
+Dave Brondsema
+Software Developer
+Cornerstone University
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 254 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050831/d50a803c/attachment.pgp>
+
+From dave at brondsema.net  Wed Aug 31 23:36:48 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 31 Aug 2005 21:36:48 +0000
+Subject: another email trust system
+Message-ID: <431622F0.4040002@brondsema.net>
+
+
+https://www.ciphire.com/cm/technology/trust_is_transparent.html
+
+Looks like they try to smush the trust into the cryptographic level.
+Would be similar to our system with just PGP paths.
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050831/12e59d18/attachment.pgp>
+

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> r361 - paper
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-April/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r361%20-%20paper&In-Reply-To=%3C4264812B.8030808%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000010.html">
+   <LINK REL="Next"  HREF="000012.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>r361 - paper</H1>
+    <B>A. Schamp</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r361%20-%20paper&In-Reply-To=%3C4264812B.8030808%40gmail.com%3E"
+       TITLE="r361 - paper">schamp at gmail.com
+       </A><BR>
+    <I>Tue Apr 19 05:55:23 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000010.html">topic taxonomy
+</A></li>
+        <LI>Next message: <A HREF="000012.html">[Task #1904] remove hardcoded paths
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#11">[ date ]</a>
+              <a href="thread.html#11">[ thread ]</a>
+              <a href="subject.html#11">[ subject ]</a>
+              <a href="author.html#11">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I thought it might be a drag having hugely long, single lines for
+paragraphs in LaTeX, but it's sweet, since we can see changes for a
+whole paragraph at once.  Score!
+
+Dave Brondsema at BerliOS wrote:
+
+&gt;<i>Author: brondsem
+</I>&gt;<i>Date: 2005-04-19 00:47:02 +0200 (Tue, 19 Apr 2005)
+</I>&gt;<i>New Revision: 361
+</I>&gt;<i>
+</I>&gt;<i>Modified:
+</I>&gt;<i>   paper/termpaper.tex
+</I>&gt;<i>Log:
+</I>&gt;<i>punctuation; rework infrastructure sentence
+</I>&gt;<i>
+</I>&gt;<i>Modified: paper/termpaper.tex
+</I>&gt;<i>===================================================================
+</I>&gt;<i>--- paper/termpaper.tex	2005-04-18 21:44:19 UTC (rev 360)
+</I>&gt;<i>+++ paper/termpaper.tex	2005-04-18 22:47:02 UTC (rev 361)
+</I>&gt;<i>@@ -23,8 +23,6 @@
+</I>&gt;<i>        \affaddr{Grand Rapids, MI 49546}\\
+</I>&gt;<i>        \email{<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>}
+</I>&gt;<i> \alignauthor Andrew Schamp
+</I>&gt;<i>-%\titlenote{Mr. Schamp is first because he is primarily responsible for this document, while Mr. Brondsema is primarily responsible for the presentation.}
+</I>&gt;<i>-\\
+</I>&gt;<i>        \affaddr{Calvin College}\\
+</I>&gt;<i>        \affaddr{3201 Burton SE}\\
+</I>&gt;<i>        \affaddr{Grand Rapids, MI  49546}\\
+</I>&gt;<i>@@ -54,9 +52,9 @@
+</I>&gt;<i>
+</I>&gt;<i> Ratings system for reputation within certain domains (eBay auctions, for example), may be of some limited use, however, they may also be susceptible to floods of manipulative ratings.  Even if such systems can be guarded against such attacks, why should someone base whether they trust anotehr person on opinions given by others that they neither know nor trust?
+</I>&gt;<i>
+</I>&gt;<i>-A solution growing in popularity is that of creating a network of trust between individuals who know one another and have good reason to trust the ratings they give of others.  However, these systems too can subject to problems if someone impersonating a trusted party provides incorrect data boosting the reputation of an untrustworthy party.  The PGP web of trust provides the necessary verification of an individual's identity, however, it does not allow for expressing any additional information about that individual's trustworthiness on matters apart from personal identification.
+</I>&gt;<i>+A solution growing in popularity is that of creating a network of trust between individuals who know one another and have good reason to trust the ratings they give of others.  However, these systems too can subject to problems if someone impersonating a trusted party provides incorrect data boosting the reputation of an untrustworthy party.  The PGP web of trust provides the necessary verification of an individual's identity; however, it does not allow the expression of any additional information about that individual's trustworthiness on matters apart from personal identification.
+</I>&gt;<i>
+</I>&gt;<i>-In this paper, we will describe some difficulties in integrating these two kinds of trust network, and how we designed a system to overcome them.  We will then describe our structure for representing trust data, and our methods for making trust inferences on this data.  Finally, we will discuss other things (find a better way to phrase this) that we have built to develop the beginnings of a useful infrastructure for this model of trust network.
+</I>&gt;<i>+In this paper, we will describe some difficulties in integrating these two kinds of trust networks, and how we designed a system to overcome them.  We will then describe our structure for representing trust data, and our methods for making trust inferences on this data.  Finally, we will discuss the software we have begun to develop so that this trust network can be put to use.
+</I>&gt;<i>
+</I>&gt;<i> \section{Related Work}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/dde96096/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050418/dde96096/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000010.html">topic taxonomy
+</A></li>
+	<LI>Next message: <A HREF="000012.html">[Task #1904] remove hardcoded paths
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#11">[ date ]</a>
+              <a href="thread.html#11">[ thread ]</a>
+              <a href="subject.html#11">[ subject ]</a>
+              <a href="author.html#11">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

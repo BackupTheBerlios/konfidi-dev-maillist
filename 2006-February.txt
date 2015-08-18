@@ -1,0 +1,213 @@
+From dave at brondsema.net  Sat Feb  4 04:11:34 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Fri, 03 Feb 2006 22:11:34 -0500
+Subject: privacy-capable system somewhat like konfidi
+Message-ID: <43E41B66.1010407@brondsema.net>
+
+I came across http://www.links.org/?p=57 from planetapache.org today.  A
+good read and from the footnote on the first page it looks like he's
+going to submit it to WWW'06.
+
+I am going to submit our paper (with some recent modifications (nothing
+major) ) to the WWW'06 conference's workshop on trust in a few days.  I
+submitted it a few days ago to spamconference.org but since the date
+changed I will not be able to go even if the paper were accepted.
+
+Back to his paper, it's pretty interesting.  Reminds me of the
+onion-routing talk at Calvin last year.  It has some major differences:
+only the theory/algorithms are discussed, used for public posting (think
+slashdot), everyone must be online all the time to respond to
+verification requests, and it's mostly root-centric although it
+discusses ways to modify that.
+
+But there are some things that can help Konfidi and any explanations of
+it that we may give.  The phrase "introduction costs" is a good term to
+refer to the social networking aspect that makes it expensive to get
+into the identity network.  There are practical examples (like gmail) to
+demonstrate that invite-only networks can scale up fast enough.
+(Especially for us since we aren't root-centric there can be many
+growing nets that quickly join together).  And lastly there are several
+references to sociology (sociology! not psychology) that we can look
+into.  I think we would have much better luck researching notions of
+trust in sociology publications than we did in pysch.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060203/1b2f7b16/attachment.pgp>
+
+From dave at brondsema.net  Sun Feb 19 01:22:33 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 18 Feb 2006 19:22:33 -0500
+Subject: i'm using konfidi!
+Message-ID: <43F7BA49.1020103@brondsema.net>
+
+
+I have konfidi clients & servers all working and I'm using it!
+
+I think we're reading for a 0.1 release, do you agree?
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060218/c70d5dc0/attachment.pgp>
+
+From schamp at gmail.com  Sun Feb 19 02:28:12 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Sat, 18 Feb 2006 19:28:12 -0600
+Subject: i'm using konfidi!
+In-Reply-To: <43F7BA49.1020103@brondsema.net>
+References: <43F7BA49.1020103@brondsema.net>
+Message-ID: <5a086d9d0602181728y1654599ay2405bee86c58f1dd@mail.gmail.com>
+
+sounds good to me.  what strategies are we using now?
+
+Andy
+
+On 2/18/06, Dave Brondsema <dave at brondsema.net> wrote:
+>
+> I have konfidi clients & servers all working and I'm using it!
+>
+> I think we're reading for a 0.1 release, do you agree?
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                 <><
+>
+>
+>
+
+
+From dave at brondsema.net  Sun Feb 19 04:01:25 2006
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 18 Feb 2006 22:01:25 -0500
+Subject: i'm using konfidi!
+In-Reply-To: <5a086d9d0602181728y1654599ay2405bee86c58f1dd@mail.gmail.com>
+References: <43F7BA49.1020103@brondsema.net> <5a086d9d0602181728y1654599ay2405bee86c58f1dd@mail.gmail.com>
+Message-ID: <43F7DF85.1080306@brondsema.net>
+
+Multiplicative2, but it's configurable in the client.
+
+There's a bug in the cli-filter I need to fix (email headers get mangled
+when the key can't be retrieved from a keyserver) and then we can do it.
+  I suppose for now we can just make the distributables by hand (I mean,
+we don't need to get fancy with release scripts).
+
+A. Schamp wrote:
+> sounds good to me.  what strategies are we using now?
+>
+> Andy
+>
+> On 2/18/06, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>I have konfidi clients & servers all working and I'm using it!
+>>
+>>I think we're reading for a 0.1 release, do you agree?
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.brondsema.net : personal
+>>http://www.splike.com : programming
+>>                <><
+>>
+>>
+>>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060218/38d2887c/attachment.pgp>
+
+From schamp at gmail.com  Tue Feb 28 15:50:53 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 28 Feb 2006 08:50:53 -0600
+Subject: privacy, etc
+Message-ID: <5a086d9d0602280650s5897006ao752a48fb7078aa4a@mail.gmail.com>
+
+I was thinking about privacy, and the social implications of people
+being able to see the trust ratings that others give to them (and
+others), and how several papers we read mentioned it was a bad thing. 
+I think I agree, the best way is probably to hide the intermediate
+steps for normal use (being available as debugging output if needed).
+
+One question:  how, then, are users to post a trustified foaf to a
+foafserver while keeping that other data private?
+
+A few answers: One way I've seen is to have the regular foaf reference
+another document that is encrypted to the foafserver's public key and
+sent in along with the first.  so the foaf data is public, but only
+the foafserver (and whomever it gives access) can see the trust data. 
+One other way would be to just have the trust data in the same file,
+but when the foafserver serves out that file, it doesn't show the
+trust data, by filtering it out.  Of course, then, the trustserver
+would still need that trust data, and anyone who wanted to see it
+could set up their own mirror, etc., and have access.  ultimately, I
+don't know of a way it can be truly hidden, just obscured or made too
+hasslelicious to get to.
+
+Another question:  will the information really be obscured, since any
+user can request a trust rating between any two other users (e.g., get
+the value for any particular edge in the graph), and, step-by-step,
+reconstruct it?
+
+A few more answers:  Well, we could restrict it so that individuals
+could only do searches with themselves as either the source or the
+sink.  Or, we could use some kind of rounding to obscure the number of
+steps involved (e.g., if there's one step, the value is likely to be a
+whole number, whereas if there are many steps, the value is likely to
+be some long decimal.  so, we could round everything off, say, to the
+nearest 0.05 or 0.005 or what have you.  Would we still have to
+obscure the path that the trust rating takes, or just the value?  This
+might be useful information for debugging your own web, say, if you
+get crummy data because you trust someone, who trusts someone else who
+is sketchy, and this sketchy person trusts a spammer.  you'd want to
+know where the problem was, so that you could enter explicit distrust
+of the sketchy individual without harming your trust of the
+intermediate fellow, which you'd like to maintain, etc. etc.
+
+Your thoughts on this?
+
+Andrew
+
+
+From schamp at gmail.com  Tue Feb 28 15:56:05 2006
+From: schamp at gmail.com (A. Schamp)
+Date: Tue, 28 Feb 2006 08:56:05 -0600
+Subject: clients
+Message-ID: <5a086d9d0602280656j3c8fc400mca0bf4a5b5390c75@mail.gmail.com>
+
+also, I think a popfile-esque proxy client would be easier to
+implement than a Thunderbird plugin, so I'm going to start working on
+that first.
+
+Andy
+
+

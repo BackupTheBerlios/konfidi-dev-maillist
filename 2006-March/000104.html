@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> wot ontology usage
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20wot%20ontology%20usage&In-Reply-To=%3C44051F75.4030704%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000103.html">
+   <LINK REL="Next"  HREF="000106.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>wot ontology usage</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20wot%20ontology%20usage&In-Reply-To=%3C44051F75.4030704%40brondsema.net%3E"
+       TITLE="wot ontology usage">dave at brondsema.net
+       </A><BR>
+    <I>Wed Mar  1 05:13:41 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000103.html">clients
+</A></li>
+        <LI>Next message: <A HREF="000106.html">wot ontology usage
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>We do this:
+
+&lt;foaf:Person rdf:nodeID=&quot;me&quot;&gt;
+
+&lt;wot:fingerprint&gt;EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70&lt;/wot:fingerprint&gt;
+&lt;/foaf:Person&gt;
+
+
+
+But <A HREF="http://xmlns.com/wot/0.1/">http://xmlns.com/wot/0.1/</A> seems to indicate that this is correct (or
+at least, preferred):
+
+&lt;foaf:Person rdf:nodeID=&quot;me&quot;&gt;
+  &lt;wot:hasKey&gt;
+   &lt;wot:PubKey&gt;
+
+&lt;wot:fingerprint&gt;EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70&lt;/wot:fingerprint&gt;
+   &lt;wot:PubKey&gt;
+  &lt;/wot:hasKey&gt;
+&lt;/foaf:Person&gt;
+
+
+
+Also, <A HREF="http://xmlns.com/wot/0.1/#term_fingerprint">http://xmlns.com/wot/0.1/#term_fingerprint</A> seems to contradict
+itself on whitespace.  What's your interpretation?  (Until we have
+foaf-o-matic, it'd be easier to permit whitespace)
+
+
+
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+                &lt;&gt;&lt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060228/e4d6575d/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060228/e4d6575d/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000103.html">clients
+</A></li>
+	<LI>Next message: <A HREF="000106.html">wot ontology usage
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

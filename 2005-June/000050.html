@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> r458 - in trustserver/trunk: . TrustStrategies
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-June/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r458%20-%20in%20trustserver/trunk%3A%20.%20TrustStrategies&In-Reply-To=%3C42B1E13D.3090001%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000049.html">
+   <LINK REL="Next"  HREF="000051.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>r458 - in trustserver/trunk: . TrustStrategies</H1>
+    <B>A. Schamp</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r458%20-%20in%20trustserver/trunk%3A%20.%20TrustStrategies&In-Reply-To=%3C42B1E13D.3090001%40gmail.com%3E"
+       TITLE="r458 - in trustserver/trunk: . TrustStrategies">schamp at gmail.com
+       </A><BR>
+    <I>Thu Jun 16 22:29:49 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000049.html">r458 - in trustserver/trunk: . TrustStrategies
+</A></li>
+        <LI>Next message: <A HREF="000051.html">r458 - in trustserver/trunk: . TrustStrategies
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dave Brondsema wrote:
+
+&gt;<i> Quoting Andrew Schamp at BerliOS &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">schamp at sheep.berlios.de</A>&gt;:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Author: schamp
+</I>&gt;&gt;<i> Date: 2005-06-16 22:37:26 +0200 (Thu, 16 Jun 2005)
+</I>&gt;&gt;<i> New Revision: 458
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> added basic password protection to strategies, rolled options parsing
+</I>&gt;&gt;<i> into ReadOnly and ReadWrite
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> What if we made the URLs more REST-ful like:
+</I>&gt;<i> trustserver/StrategyName/someparam/otherparam
+</I>&gt;<i>
+</I>&gt;<i> and then use apache auth controls on trustserver/SomeStrategy instead
+</I>&gt;<i> of in
+</I>&gt;<i> python.
+</I>&gt;<i>
+</I>&gt;<i> I'm not sure how to make the parameters RESTful.  Order doesn't matter so
+</I>&gt;<i> someparam/otherparam/etc doesn't make a whole lot of sense.  Perhaps just
+</I>&gt;<i> trustserver/StrategyName?a=b&amp;c=d would be good
+</I>&gt;<i>
+</I>I've thought about this a bit, and I can't think of a good way, either.
+The main problem, I think, is that there are so many.  I was thinking
+about developing a simple XML based query language, that would have some
+standard features, and still allow for some strategy specific things.
+the thing is, a number of strategies (like the DOTGraph one, for
+example), don't even use the source and sink.
+
+Another thing about apache auth controls is that they won't work for a
+non-apache frontend (if somebody makes one).  I don't know if this is a
+problem, esp. if we start adding signatures or some other encryption
+and/or authentication for communication between the components.  I'm not
+committed to this particular way of doing it.  However, as the
+authentication matters more to the TrustServer than the frontend, maybe
+it makes sense to have it in there--access controls on the frontend kind
+of imply who has access to that feature on the frontend, not access to
+the server.  on the other hand, maybe it's simpler to do it in apache.
+I don't know.  I think, before I do any more with this, we should try
+and get some ideas and settle on a RESTful interface (or something else,
+whatever works).
+
+Andy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 187 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050616/2543884b/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050616/2543884b/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000049.html">r458 - in trustserver/trunk: . TrustStrategies
+</A></li>
+	<LI>Next message: <A HREF="000051.html">r458 - in trustserver/trunk: . TrustStrategies
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> r363 - paper
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-April/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r363%20-%20paper&In-Reply-To=%3C4265C4CE.8090703%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000016.html">
+   <LINK REL="Next"  HREF="000018.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>r363 - paper</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r363%20-%20paper&In-Reply-To=%3C4265C4CE.8090703%40brondsema.net%3E"
+       TITLE="r363 - paper">dave at brondsema.net
+       </A><BR>
+    <I>Wed Apr 20 04:56:14 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000016.html">[Task #1869] license &amp; copyright
+</A></li>
+        <LI>Next message: <A HREF="000018.html">[Task #1904] remove hardcoded paths
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#17">[ date ]</a>
+              <a href="thread.html#17">[ thread ]</a>
+              <a href="subject.html#17">[ subject ]</a>
+              <a href="author.html#17">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Comments in email, rather than inline.  Seems a better medium for
+discussion, when possible.  I dunno, you do loose the discussion from
+the text itself.  Some good, some bad.  Anyway, I typed it all here so
+too late now.
+
+A. M. Schamp at BerliOS wrote:
+
+&gt;<i> -\subsection{Previous Attempt}
+</I>&gt;<i> +\subsection{Trust Inference Using PGP}
+</I>&gt;<i>  % Should we include this at all? Perhaps title it something like &quot;An approach using only PGP&quot; and demphasize the fact that it was an idea we explored during this project?
+</I>&gt;<i> -Our own project began as an exploration of whether we might use the PGP web-of-trust to filter email spam at the client's end. A mail client plugin would filter incoming mail, and check to see if there was a path from the sender to the recipient, in which the recipient had signed someone's key, who had signed another key, which eventually lead to the sender's key. If there was a path within a certain length, the message would be marked as trusted, if not, it would be marked as not trusted. This approach required that most users digitally sign email messages, and it depended on users to be aware of known spammers and keep from signing their keys. However, the recommended PGP keysigning practices require only the careful verification of the key-holder's identity, and a signed key does not entail anything about trustworthiness in other areas.  Whether a user should be trusted to send good email, and not spam, is information over and above that expressed in the PGP web-of-trus
+</I>t!
+&gt;<i>   itself, so the web-of-trust would be inadequate to encode such information.
+</I>&gt;<i> +% how is it now?
+</I>
+I like it
+
+&gt;<i> +One possible approach is to use the PGP web-of-trust to filter email spam at the client's end. For example, a mail client plugin could filter incoming mail, and check to see if there was a path from the sender to the recipient, in which the recipient had signed someone's key, who had signed another key, which eventually lead to the sender's key. If there was a path within a certain length, the message would be marked as trusted, if not, it would be marked as not trusted. This approach required that most users digitally sign email messages, and it depended on users to be aware of known spammers and keep from signing their keys. However, the recommended PGP keysigning practices require only the careful verification of the key-holder's identity, and a signed key does not entail anything about trustworthiness in other areas.  Whether a user should be trusted to send good email, and not spam, is information over and above that expressed in the PGP web-of-trust itself, so the we
+</I>b!
+&gt;<i>  -of-trust would be inadequate to encode such information.
+</I>&gt;<i>
+</I>&gt;<i>  A more serious flaw in an approach that depends so heavily on the client software is this:  because information about key signatures is stored as a part of the key that was signed, and not that of the signer, paths between users can only be constructed from the sender backward to the recipient. When a key is retrieved from a keyserver, all of the signatures on that key are included with it, showing which keys have signed that key, and providing a number of possible links in a chain. However, using the existing keyserver infrastructure, there is no easy way to tell which other keys a particular key has signed. If these paths are built backward using a breadth-first search from the sender to the recipient, a spammer or other malicious user could generate a large number of fake keys that are inter-signed, and then use these keys to sign the sender's key. By adding this artificial information, the client's searching capabilities would be crippled, and the web-of-trust would be
+</I> !
+&gt;<i>  polluted with fabricated keys, users, and signatures. The PGP system of key-signing and verification was designed to be robust against this sort of impersonation, by requiring photo-identification and fingerprint exchange before any key-signing, but a deluge of false information would put undue strain on the keyserver infrastructure, and would amount to a denial-of-service, of sorts.
+</I>&gt;<i>
+</I>&gt;<i> @@ -101,8 +103,11 @@
+</I>&gt;<i>
+</I>&gt;<i>  \subsection{Trust Ontology}
+</I>&gt;<i>  % representation is seperate from algorithm result, right?  Need to fix this paragraph if so
+</I>&gt;<i> -The schema for representing trust data went through several iterations before stabilizing in its current form.  It seemed that we had the choice of two general kinds of representations:  one that used discrete values for varying levels of trust and returned a discrete binary (yes or no) answer, or one which used a (theoretically) continuous range of trust values and returned an answer within that range.  Now, either kind of representation could be roughly mapped onto the other, however, a continuous range would allow more finely-grained control over the data.  This had its advantages in setting up our test data, but it also took into consideration our thoughts about the way trust between people works.
+</I>&gt;<i> +% what do you mean?  I suppose the algorithm can perform whatever operation on the values it wants, but I think the point is that the domain and range of the network is the same:  an inferred trust rating should look no different from an explicit one.  maybe this is unclear...
+</I>
+I think I follow you now.  But in the discrete one, shouldn't the output
+be one of the discrete levels, not a binary yes/no?  The binary decision
+happens at the client-level at a configured threshold for either model.
+
+
+&gt;<i>  \subsubsection{OWL Schema}
+</I>&gt;<i> +% we need to say more at some point about FOAF, so that it is clear how we are using it and why.  But where?  In related work?  Here?  I'll put it here for now.
+</I>
+Seems good.  Possibly shift some of into \ref{foaf} but I don't see any
+strong reason to do that.
+
+&gt;<i> +As the FOAF project grows in popularity, an infrastructure is growing to support it, as mentioned in \ref{foaf}.  Since there would be many advantages to tapping into this infrastructure, and since the specification of trust relationships fits in naturally alongside the existing \texttt{foaf:knows} property, Konfidi also uses the Resource Description Framework (RDF)\cite{rdf} for representing trust relationships.  In addition to the FOAF vocabulary, there is a vocabulary called WOT defining and describing singing and assurance, which provides the necessary structure for associating persons and organizations with key fingerprints\cite{wot}.  By designing Konfidi's vocabulary to make use of FOAF and WOT vocabulary elements, then, we can take advantage of the established standards and make our extensions compatible with existing FOAF-enabled tools.
+</I>&gt;<i> +
+</I>&gt;<i> +Konfidi uses the Web Ontology Language (OWL)\cite{owl} to define the RDF elements that make up the Konfidi trust ontology.  OWL builds on the existing RDF specification by providing a vocabulary to describe properties and classes, and their relations.  The Konfidi trust ontology provides two objects and five properties, which, in conjunction with the existing FOAF and WOT vocabularies, are sufficient to describe the trust relationships that Konfidi requires.
+</I>&gt;<i> +
+</I>&gt;<i> +% how should we describe the ontology?  how about this for now?
+</I>
+Seems fine for now.  We can give a more thorough review later
+
+&gt;<i> +
+</I>&gt;<i> +The primary element is \texttt{Relationship}\footnote{According to RDF standards, the names of objects are capitalized, while the names of properties remain lowercase.}, which represents a relationship of trust that holds between two people.  There are two properties required for every \texttt{Relationship}, \texttt{truster} and \texttt{trusted}, which indicate the two parties to the relationship.  Both \texttt{truster} and \texttt{trusted} have \texttt{foaf:Person} objects as their targets\footnote{These \texttt{Person} objects should also contain at least one \texttt{wot:fingerprint} property specifying the PGP fingerprint of a public key held by the individual the \texttt{Person} describes.  This property is required for verification; if no \texttt{fingerprint} is available, then Konfidi cannot use the relationship.}, which may be defined in the same file, inline, or in external documents indicated by their resource URIs\footnote{Because it does not matter where the \te
+</I>x!
+
+Should we talk about trust:trusted being a non-person resource?
+
+&gt;<i>
+</I>&gt;<i>  \subsection{FOAFServer}
+</I>&gt;<i> +\label{foafserver}
+</I>&gt;<i> +% in the &quot;owl schema&quot; section, I say that this section talks about the advantages of having distributed FOAF and RDF records, so be sure to cover that here as part of hte motivation of the Foafserver.  you remember what I mean, right?
+</I>
+rdf:seeAlso references to a file with more info, right?  But trustserver
+can't actually use any data from that because it's not stored in the
+foafserver.  Or do you mean store only trust relationships in the
+foafserver and have your main one (and others) hosted elsewhere?
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+<A HREF="http://csx.calvin.edu">http://csx.calvin.edu</A> : student org
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050419/bd52b6ad/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050419/bd52b6ad/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000016.html">[Task #1869] license &amp; copyright
+</A></li>
+	<LI>Next message: <A HREF="000018.html">[Task #1904] remove hardcoded paths
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#17">[ date ]</a>
+              <a href="thread.html#17">[ thread ]</a>
+              <a href="subject.html#17">[ subject ]</a>
+              <a href="author.html#17">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

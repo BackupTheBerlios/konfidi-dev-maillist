@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> 2 links
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-August/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%202%20links&In-Reply-To=%3C5a086d9d0508310707153edcc4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000076.html">
+   <LINK REL="Next"  HREF="000078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>2 links</H1>
+    <B>A. Schamp</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%202%20links&In-Reply-To=%3C5a086d9d0508310707153edcc4%40mail.gmail.com%3E"
+       TITLE="2 links">schamp at gmail.com
+       </A><BR>
+    <I>Wed Aug 31 16:07:21 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000076.html">2 links
+</A></li>
+        <LI>Next message: <A HREF="000078.html">privacy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Er, sorry about replying to the list.  I always forget.
+
+Anyway, one other thing that is increasingly important to me is this: 
+privacy of ratings.  The system needs to be able to obscure the
+details of a path (perhaps only if desired, perhaps required for
+everyone), otherwise, I think it runs the risk of losing its meaning
+by becoming a popularity mongering system.  If your friend Joe, who
+you like, but don't really trust all that much, is able to see what
+you think of him, then that increases your likelihood of providing a
+less accurate rating.  Jennifer covered this quite a bit.
+
+One way it could work for Konfidi might be something like this: 
+everyone's FOAF could have a &quot;see also&quot; or some tag relating the FOAF
+to another FOAF document that contains the trust information for that
+person.  This document, however, could be encrypted with the public
+key of the TrustServer, so that it is available for crawling, etc.. 
+What do you think about this?
+
+Andy
+
+On 8/31/05, Dave Brondsema &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>&gt; wrote:
+&gt;<i> Dave Brondsema wrote:
+</I>&gt;<i> &gt; A. Schamp wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt;On 8/30/05, Dave Brondsema &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt;Two links from planetrdf this morning:
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt;<A HREF="http://www.mnot.net/sw/sparta/">http://www.mnot.net/sw/sparta/</A>
+</I>&gt;<i> &gt;&gt;&gt;       may be useful to you
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;Interesting.  It seems to be one of the first implementations that
+</I>&gt;<i> &gt;&gt;I've seen explicitly mention OWL.  Also, it could be useful as another
+</I>&gt;<i> &gt;&gt;option for the updater.  I've been trying to decide whether we should
+</I>&gt;<i> &gt;&gt;just pick redland and stick with it, or offer options for what people
+</I>&gt;<i> &gt;&gt;want to install (redland, rdflib, sparta, or others) and then allow
+</I>&gt;<i> &gt;&gt;them to use what they might already have.  The problem with rdflib (or
+</I>&gt;<i> &gt;&gt;librdf, I can't keep the two straight) is that it doesn't seem to work
+</I>&gt;<i> &gt;&gt;under windows, due to some problem with a dependency, I think.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;On the other hand, it may be a big hassle to try and maintain the
+</I>&gt;<i> &gt;&gt;possibility of all three.  What do you think?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Yeah.  If there's one that works well under Linux &amp; Windows, let's just
+</I>&gt;<i> &gt; use that one.  KISS.  We can add support for others if people request it.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt;&gt;<A HREF="http://www.emacswiki.org/cw/ReputationBudget">http://www.emacswiki.org/cw/ReputationBudget</A>
+</I>&gt;<i> &gt;&gt;&gt;       another trust system that'd be good to understand, but I doubt it'll
+</I>&gt;<i> &gt;&gt;&gt;have any impact on our project
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;This is very interesting, as it brings up something that I believe
+</I>&gt;<i> &gt;&gt;Jennifer mentioned in her thesis somewhere:  the economy of trust, or
+</I>&gt;<i> &gt;&gt;scarcity.  Konfidi is not going to work if everyone just rates
+</I>&gt;<i> &gt;&gt;everyone else with a high trust rating.  There needs to be some kind
+</I>&gt;<i> &gt;&gt;of incentive for providing and maintaining reasonably accurate
+</I>&gt;<i> &gt;&gt;trust/reputation data.  &quot;Faith in the system&quot; and &quot;hope that it works&quot;
+</I>&gt;<i> &gt;&gt;may be enough for us and the altruists interested in the project
+</I>&gt;<i> &gt;&gt;academically (and even practically, while it's small), but the more I
+</I>&gt;<i> &gt;&gt;think about it, the more I doubt that that is sustainable on a large
+</I>&gt;<i> &gt;&gt;scale.  So, introducing scarcity, or some way to make people reluctant
+</I>&gt;<i> &gt;&gt;to spend all their trust on everybody, has some utility in the system.
+</I>&gt;<i> &gt;&gt; It would be interesting to link/evaluate trust networks to/in the
+</I>&gt;<i> &gt;&gt;context of economic systems and game theory.  Graduate thesis, anyone?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Yes.  We could have a strategy that does this, right?
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> We have to be careful how we do it, though.  First of all, we must give
+</I>&gt;<i> immediate feedback to the user about the weighting so that they will
+</I>&gt;<i> understand the system they use, and be inclined to rate people better.
+</I>&gt;<i> 
+</I>&gt;<i> Also, in our context, it is very likely that some people will only rate
+</I>&gt;<i> their closest friends (all a 9, say) and that should be okay.  Some
+</I>&gt;<i> people will get more spam (and more ham) and have *lots* of ratings all
+</I>&gt;<i> over the place.  That should be okay, there's no good reason to
+</I>&gt;<i> undervalue them.
+</I>&gt;<i> 
+</I>&gt;<i> In fact... with the directionality of ratings (i.e. there's no way to
+</I>&gt;<i> increase your rating in the eyes of person X) budgeting might not be
+</I>&gt;<i> necessary at all.
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Dave Brondsema
+</I>&gt;<i> Software Developer
+</I>&gt;<i> Cornerstone University
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000076.html">2 links
+</A></li>
+	<LI>Next message: <A HREF="000078.html">privacy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#77">[ date ]</a>
+              <a href="thread.html#77">[ thread ]</a>
+              <a href="subject.html#77">[ subject ]</a>
+              <a href="author.html#77">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

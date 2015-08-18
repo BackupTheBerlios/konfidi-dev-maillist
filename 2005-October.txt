@@ -1,0 +1,98 @@
+From dave at brondsema.net  Sat Oct  8 00:20:34 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Fri, 07 Oct 2005 22:20:34 +0000
+Subject: trustserver functionality
+In-Reply-To: <5a086d9d05092505113e849ec4@mail.gmail.com>
+References: <433571A3.2050307@brondsema.net>	 <5a086d9d05092414097d591d5e@mail.gmail.com>	 <4335C5C6.9020207@brondsema.net> <5a086d9d05092505113e849ec4@mail.gmail.com>
+Message-ID: <4346F4B2.8040504@brondsema.net>
+
+You had made TrustPathFinder.setup a private method and protected
+would've been great, but there's no such thing in python.  Works now.
+
+What is the best strategy to use?  Multiplicative2?
+
+What do you think about the languages & frameworks (e.g. apache) that
+we've chosen to implement konfidi & the foafserver?  I have my own
+thoughts about future direction... but I want to hear yours first.
+
+
+And a few thoughts about a 0.1 release:
+
+1) Should we have a way to automatically reload all rdfs into the
+trustserver when it restarts?  I think probably yes.
+
+
+2) who should we "announce" it to first, and how?
+    - abs-chat
+    - rdf/foaf people
+    - apache people
+I would say invite users & developers from abs-chat only now.
+
+
+-Dave
+
+A. Schamp wrote:
+> Hrm.  I can't really look at it right now, but I'll probably be able
+> to in a few weeks.  Can you try rolling back to an earlier revision?
+>
+> Andy
+>
+> On 9/24/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>I do have it working now but there's weird DNS stuff.  Using 127.0.0.1
+>>works for now.
+>>
+>>
+>>However, the trustserver appears to have some XML issues on any command.
+>>
+>>A. Schamp wrote:
+>>
+>>>I think it works as-is now.  There's just functionality in progress
+>>>that isn't being used.  I haven't commited all of the changes--can you
+>>>make it work?
+>>>
+>>>Andy
+>>>
+>>>On 9/24/05, Dave Brondsema <dave at brondsema.net> wrote:
+>>>
+>>>
+>>>>Now that I have foafserver validation working, it's good enough for 0.1
+>>>>I think.
+>>>>
+>>>>What should we do to get updating working in the trustserver?  Revert to
+>>>>an older version for now?  I know you're busy :-)  If you can give me
+>>>>some direction I'll see if I can get it working.
+>>>>
+>>>>--
+>>>>Dave Brondsema : dave at brondsema.net
+>>>>http://www.brondsema.net : personal
+>>>>http://www.splike.com : programming
+>>>>               <><
+>>>>
+>>>>
+>>>>
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.brondsema.net : personal
+>>http://www.splike.com : programming
+>>                <><
+>>
+>>
+>>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20051007/7449daa8/attachment.pgp>
+

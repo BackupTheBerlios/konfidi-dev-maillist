@@ -1,0 +1,60 @@
+From dave at brondsema.net  Wed May 25 06:50:05 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 25 May 2005 00:50:05 -0400
+Subject: describing our REST API
+Message-ID: <429403FD.8050009@brondsema.net>
+
+Like WSDL can describe a SOAP web api, WADL can describe a REST api.
+Something to consider doing in the future (esp. as we conform better to
+REST)
+
+http://weblogs.java.net/blog/mhadley/archive/2005/05/wadl_revision.html
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://csx.calvin.edu : student org
+http://www.brondsema.net : personal
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050525/4b9cba9a/attachment.pgp>
+
+From dave at brondsema.net  Fri May 27 07:02:01 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Fri, 27 May 2005 01:02:01 -0400
+Subject: privacy
+Message-ID: <4296A9C9.10808@brondsema.net>
+
+
+http://www.downes.ca/cgi-bin/website/view.cgi?dbs=Article&key=1115168586
+
+Steven Downes differentiation authentication from identity.  He says
+"authentication is impossible without identification"
+
+Our PGP pathfinder asserts authenticity.  Normally PGP links are created
+by somebody when they know one's identity and authenticity of it.  But
+the link itself is only authenticity; the identity lies in the FOAF/PGP
+records.
+So a person may still have an unknown identity if no useful email & name
+are given.  When the "privacy broker" verifies a person's NON-digital
+identity and then signs their digital identity (e.g. anonymous324570)
+PGP key and trusts their foaf, they make an authenticity statement in
+those links, but to a record that is unique but non-identifiable.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050527/1b10f443/attachment.pgp>
+

@@ -1,0 +1,332 @@
+From dave at brondsema.net  Sat Sep 24 13:57:05 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 24 Sep 2005 11:57:05 +0000
+Subject: pyme setup update
+In-Reply-To: <42F821E3.6030505@brondsema.net>
+References: <42F821E3.6030505@brondsema.net>
+Message-ID: <43353F11.2060500@brondsema.net>
+
+Wow.
+
+chmod 700 .
+
+Need that to keep the GNUPGHOME directory secure.  gpg will give a
+useful error message when that's not the case, but not gpgme nor pyme.
+
+Dave Brondsema wrote:
+>
+> So setting GNUPGHOME helps.  But now I have this problem.
+>
+> su - userx
+> mkdir mygnupghome
+> cd !$
+> echo 'keyserver-options auto-key-retrieve
+> keyserver x-hkp://random.sks.keyserver.penguin.de' >> gpg.conf
+> chmod 600 gpg.conf
+> GNUPGHOME=. python server.py
+>
+> where server.py is:
+>
+>
+>
+> from pyme import core, gpgme
+> def handler():
+>     stext="""test
+> abcd
+> """
+>     content="""-----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.1 (GNU/Linux)
+>
+> iD8DBQBC9PRzVvBSb5uzznARApa6AKCwZhFcYGIoDXS/7x+R5teHqPB52QCfSbwx
+> +zyyVRMkKIP4UaLj5eyEA9Y=
+> =buAb
+> -----END PGP SIGNATURE-----
+> """
+>
+>     ctx = core.Context()
+>     ctx.op_verify(core.Data(content), core.Data(stext), None)
+>     result = ctx.op_verify_result()
+>     sign = result.signatures
+>     if sign:
+>         key = ctx.get_key(sign.fpr, 0)
+>         raise Exception("success: " + sign.fpr + "|" + key.uids.uid)
+>     if sign is None:
+>         raise Exception("No PGP signature found in: " + content + stext)
+>
+>     # List results for all signatures. Status equal 0 means "Ok".
+>     if result.signatures.status != 0:
+>         raise Exception("PGP signature is not valid")
+>     return apache.OK
+>
+> handler()
+>
+>
+>
+>
+>
+> That fails with "GPGME: End of file", which I'm pretty sure just means
+> the key wasn't found.  But if done as 'root' instead of 'userx', it auto
+> retrieves the key from a keyserver and succeeds.  Crazy gpg!  Nothing
+> seems particularly root-y in there, does it?
+>
+> I know you probably can't shed much light, but maybe you can, and maybe
+> writing this will help me.  But darn, it hasn't yet.
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://www.brondsema.net : personal
+>                <><
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050924/fcbc81a0/attachment.pgp>
+
+From dave at brondsema.net  Sat Sep 24 17:32:51 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 24 Sep 2005 15:32:51 +0000
+Subject: trustserver functionality
+Message-ID: <433571A3.2050307@brondsema.net>
+
+
+Now that I have foafserver validation working, it's good enough for 0.1
+I think.
+
+What should we do to get updating working in the trustserver?  Revert to
+an older version for now?  I know you're busy :-)  If you can give me
+some direction I'll see if I can get it working.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050924/715216a5/attachment.pgp>
+
+From schamp at gmail.com  Sat Sep 24 23:09:39 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Sat, 24 Sep 2005 17:09:39 -0400
+Subject: trustserver functionality
+In-Reply-To: <433571A3.2050307@brondsema.net>
+References: <433571A3.2050307@brondsema.net>
+Message-ID: <5a086d9d05092414097d591d5e@mail.gmail.com>
+
+I think it works as-is now.  There's just functionality in progress
+that isn't being used.  I haven't commited all of the changes--can you
+make it work?
+
+Andy
+
+On 9/24/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+> Now that I have foafserver validation working, it's good enough for 0.1
+> I think.
+>
+> What should we do to get updating working in the trustserver?  Revert to
+> an older version for now?  I know you're busy :-)  If you can give me
+> some direction I'll see if I can get it working.
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                 <><
+>
+>
+>
+
+
+From dave at brondsema.net  Sat Sep 24 22:32:25 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 24 Sep 2005 20:32:25 +0000
+Subject: trustserver functionality
+In-Reply-To: <5a086d9d05092414097d591d5e@mail.gmail.com>
+References: <433571A3.2050307@brondsema.net> <5a086d9d05092414097d591d5e@mail.gmail.com>
+Message-ID: <4335B7D9.5050906@brondsema.net>
+
+Do we want
+
+test-foafserver.konfidi.org
+test-server.konfidi.org
+
+or
+
+test-foafserver.konfidi.org
+test-trustserver.konfidi.org
+
+
+The former is what I set up, but I think the latter is better, right?
+
+Dave
+
+A. Schamp wrote:
+> I think it works as-is now.  There's just functionality in progress
+> that isn't being used.  I haven't commited all of the changes--can you
+> make it work?
+>
+> Andy
+>
+> On 9/24/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>Now that I have foafserver validation working, it's good enough for 0.1
+>>I think.
+>>
+>>What should we do to get updating working in the trustserver?  Revert to
+>>an older version for now?  I know you're busy :-)  If you can give me
+>>some direction I'll see if I can get it working.
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.brondsema.net : personal
+>>http://www.splike.com : programming
+>>                <><
+>>
+>>
+>>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050924/bb696492/attachment.pgp>
+
+From dave at brondsema.net  Sat Sep 24 23:31:50 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 24 Sep 2005 21:31:50 +0000
+Subject: trustserver functionality
+In-Reply-To: <5a086d9d05092414097d591d5e@mail.gmail.com>
+References: <433571A3.2050307@brondsema.net> <5a086d9d05092414097d591d5e@mail.gmail.com>
+Message-ID: <4335C5C6.9020207@brondsema.net>
+
+
+I do have it working now but there's weird DNS stuff.  Using 127.0.0.1
+works for now.
+
+
+However, the trustserver appears to have some XML issues on any command.
+
+A. Schamp wrote:
+> I think it works as-is now.  There's just functionality in progress
+> that isn't being used.  I haven't commited all of the changes--can you
+> make it work?
+>
+> Andy
+>
+> On 9/24/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>Now that I have foafserver validation working, it's good enough for 0.1
+>>I think.
+>>
+>>What should we do to get updating working in the trustserver?  Revert to
+>>an older version for now?  I know you're busy :-)  If you can give me
+>>some direction I'll see if I can get it working.
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.brondsema.net : personal
+>>http://www.splike.com : programming
+>>                <><
+>>
+>>
+>>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.brondsema.net : personal
+http://www.splike.com : programming
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050924/762b4b69/attachment.pgp>
+
+From schamp at gmail.com  Sun Sep 25 14:11:08 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Sun, 25 Sep 2005 07:11:08 -0500
+Subject: trustserver functionality
+In-Reply-To: <4335C5C6.9020207@brondsema.net>
+References: <433571A3.2050307@brondsema.net>
+	 <5a086d9d05092414097d591d5e@mail.gmail.com>
+	 <4335C5C6.9020207@brondsema.net>
+Message-ID: <5a086d9d05092505113e849ec4@mail.gmail.com>
+
+Hrm.  I can't really look at it right now, but I'll probably be able
+to in a few weeks.  Can you try rolling back to an earlier revision?
+
+Andy
+
+On 9/24/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+> I do have it working now but there's weird DNS stuff.  Using 127.0.0.1
+> works for now.
+>
+>
+> However, the trustserver appears to have some XML issues on any command.
+>
+> A. Schamp wrote:
+> > I think it works as-is now.  There's just functionality in progress
+> > that isn't being used.  I haven't commited all of the changes--can you
+> > make it work?
+> >
+> > Andy
+> >
+> > On 9/24/05, Dave Brondsema <dave at brondsema.net> wrote:
+> >
+> >>Now that I have foafserver validation working, it's good enough for 0.1
+> >>I think.
+> >>
+> >>What should we do to get updating working in the trustserver?  Revert to
+> >>an older version for now?  I know you're busy :-)  If you can give me
+> >>some direction I'll see if I can get it working.
+> >>
+> >>--
+> >>Dave Brondsema : dave at brondsema.net
+> >>http://www.brondsema.net : personal
+> >>http://www.splike.com : programming
+> >>                <><
+> >>
+> >>
+> >>
+> >
+>
+>
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.brondsema.net : personal
+> http://www.splike.com : programming
+>                 <><
+>
+>
+>
+
+

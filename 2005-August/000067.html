@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> pyme/mod_python weirdness
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-August/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20pyme/mod_python%20weirdness&In-Reply-To=%3C42F4ECC3.3040409%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000068.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>pyme/mod_python weirdness</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20pyme/mod_python%20weirdness&In-Reply-To=%3C42F4ECC3.3040409%40brondsema.net%3E"
+       TITLE="pyme/mod_python weirdness">dave at brondsema.net
+       </A><BR>
+    <I>Sat Aug  6 19:00:51 CEST 2005</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000068.html">pyme setup update
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#67">[ date ]</a>
+              <a href="thread.html#67">[ thread ]</a>
+              <a href="subject.html#67">[ subject ]</a>
+              <a href="author.html#67">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Minimal test cases
+
+Any thoughts, Andy?  I'm hopeless.  Same issue occurs with any text and
+detached signature (ascii-armored or not).
+
+-------------------------------
+server.py:
+
+
+from pyme import core
+
+def handler():
+     content = open(&quot;/home/dpb2/tmp.txt.asc&quot;, 'r').read()
+     stext = open(&quot;/home/dpb2/tmp.txt&quot;, 'r').read()
+     ctx = core.Context()
+     ctx.op_verify(core.Data(content), core.Data(stext), None)
+     result = ctx.op_verify_result()
+     sign = result.signatures
+     if sign:
+         key = ctx.get_key(sign.fpr, 0)
+         raise Exception(&quot;success: &quot; + sign.fpr + &quot;|&quot; + key.uids.uid)
+     if result.signatures is None:
+         raise Exception(&quot;No PGP signature found&quot;)
+
+     # List results for all signatures. Status equal 0 means &quot;Ok&quot;.
+     if result.signatures.status != 0:
+         raise Exception(&quot;PGP signature is not valid&quot;)
+     return apache.OK
+
+handler()
+
+
+---------------------------
+.htaccess:
+
+
+# don't try to use mod_negotiation at all, it can mess up URI handling
+Options -MultiViews
+
+# ALL requests handled by mod_python
+SetHandler mod_python
+
+# all mod_python requests go to server.py
+PythonHandler server
+
+PythonDebug On
+PythonAutoReload On
+# seperate interpreter for this app; otherwise mod_python shares a
+namespace for each apache virtual domain
+PythonInterpPerDirective On
+
+
+----------------------------
+
+
+$ python server.py
+Traceback (most recent call last):
+   File &quot;server.py&quot;, line 21, in ?
+     handler()
+   File &quot;server.py&quot;, line 12, in handler
+     raise Exception(&quot;success: &quot; + sign.fpr + &quot;|&quot; + key.uids.uid)
+Exception: success: EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70|Dave
+Brondsema &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>&gt;
+
+
+
+<A HREF="http://brondsema.gotdns.com/~dpb2/pyme_problem/">http://brondsema.gotdns.com/~dpb2/pyme_problem/</A>
+
+Mod_python error: &quot;PythonHandler server&quot;
+
+Traceback (most recent call last):
+
+   File &quot;/usr/lib/python2.3/site-packages/mod_python/apache.py&quot;, line
+287, in HandlerDispatch
+     log=debug)
+
+   File &quot;/usr/lib/python2.3/site-packages/mod_python/apache.py&quot;, line
+457, in import_module
+     module = imp.load_module(mname, f, p, d)
+
+   File &quot;/home/dpb2/public_html/pyme_problem/server.py&quot;, line 23, in ?
+     handler()
+
+   File &quot;/home/dpb2/public_html/pyme_problem/server.py&quot;, line 16, in handler
+     raise Exception(&quot;No PGP signature found&quot;)
+
+Exception: No PGP signature found
+
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+                &lt;&gt;&lt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050806/a16be6fe/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050806/a16be6fe/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000068.html">pyme setup update
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#67">[ date ]</a>
+              <a href="thread.html#67">[ thread ]</a>
+              <a href="subject.html#67">[ subject ]</a>
+              <a href="author.html#67">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

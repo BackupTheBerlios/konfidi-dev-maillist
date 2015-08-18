@@ -1,0 +1,840 @@
+From dave at brondsema.net  Wed Jul 20 06:19:22 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 20 Jul 2005 00:19:22 -0400
+Subject: one-time use identity?
+Message-ID: <42DDD0CA.3000909@brondsema.net>
+
+
+I saw mention of one-time ids on one of my RSS feeds about identity.
+Would there be an use-cases for konfidi to have one-use identities?
+Because that could start swamping the PGP keyid space.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050720/cf3d0d5a/attachment.pgp>
+
+From schamp at gmail.com  Wed Jul 20 15:59:31 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Wed, 20 Jul 2005 08:59:31 -0500
+Subject: one-time use identity?
+In-Reply-To: <42DDD0CA.3000909@brondsema.net>
+References: <42DDD0CA.3000909@brondsema.net>
+Message-ID: <5a086d9d05072006593d0069da@mail.gmail.com>
+
+I'd have to think about it.  The main point of Konfidi is to have
+highly trustworthy and reusable identities.  Maybe some of the things
+we discussed about "anonymity brokers" would apply.  Question:  once
+PGP keys are revoked or expire, are they effectively removed from the
+keyid space?
+
+Andy
+
+On 7/19/05, Dave Brondsema <dave at brondsema.net> wrote:
+> 
+> I saw mention of one-time ids on one of my RSS feeds about identity.
+> Would there be an use-cases for konfidi to have one-use identities?
+> Because that could start swamping the PGP keyid space.
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://www.brondsema.net : personal
+>                 <><
+> 
+> 
+>
+
+
+From dave at brondsema.net  Wed Jul 20 23:11:43 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 20 Jul 2005 17:11:43 -0400
+Subject: one-time use identity?
+In-Reply-To: <5a086d9d05072006593d0069da@mail.gmail.com>
+References: <42DDD0CA.3000909@brondsema.net> <5a086d9d05072006593d0069da@mail.gmail.com>
+Message-ID: <42DEBE0F.4060509@brondsema.net>
+
+
+I think anonymity brokers would provide one-use (or sometimes more)
+identites, but those won't be created en masse.  What I'm concerned
+about is automatic stuff; like maybe b2b transactions which for extra
+security use new PGP keys for each transaction.
+
+But I can't think of a prime example of how/why that would happen.  At
+any rate... I suppose if it really becomes a desire and PGP is still the
+right cryptography, it just means the PGP folks will have to create a
+new specification which handles more and is backwards compatible.  Like
+upgrading ipv4 to ipv6
+
+A. Schamp wrote:
+> I'd have to think about it.  The main point of Konfidi is to have
+> highly trustworthy and reusable identities.  Maybe some of the things
+> we discussed about "anonymity brokers" would apply.  Question:  once
+> PGP keys are revoked or expire, are they effectively removed from the
+> keyid space?
+>
+> Andy
+>
+> On 7/19/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>I saw mention of one-time ids on one of my RSS feeds about identity.
+>>Would there be an use-cases for konfidi to have one-use identities?
+>>Because that could start swamping the PGP keyid space.
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://www.brondsema.net : personal
+>>                <><
+>>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050720/35d76875/attachment.pgp>
+
+From dave at brondsema.net  Thu Jul 21 17:32:40 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Thu, 21 Jul 2005 11:32:40 -0400
+Subject: test-server.konfidi.org
+Message-ID: <42DFC018.9000506@brondsema.net>
+
+
+I set up http://test-server.konfidi.org/ as a DNS CNAME alias to my
+personal box.  I'll keep a trustserver & frontend running all the time,
+if possible.
+
+http://test-foafserver.konfidi.org/ is set up similarly.
+
+Right now these symlink to my development copies of the software, but
+soon I will set them up to be completely seperate.
+
+When this becomes more popular, we should probably 1) change the test-*
+aliases to a more dedicated machine and then 2) get a real public server
+established with a non-test url
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050721/3ea1239e/attachment.pgp>
+
+From schamp at gmail.com  Thu Jul 21 17:57:45 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Thu, 21 Jul 2005 08:57:45 -0700
+Subject: test-server.konfidi.org
+In-Reply-To: <42DFC018.9000506@brondsema.net>
+References: <42DFC018.9000506@brondsema.net>
+Message-ID: <5a086d9d05072108571022e4e7@mail.gmail.com>
+
+sweet.  I've had lots of ideas lately, but I don't have internet at my
+new place yet.  Keep up the good work.
+
+On 7/21/05, Dave Brondsema <dave at brondsema.net> wrote:
+> 
+> I set up http://test-server.konfidi.org/ as a DNS CNAME alias to my
+> personal box.  I'll keep a trustserver & frontend running all the time,
+> if possible.
+> 
+> http://test-foafserver.konfidi.org/ is set up similarly.
+> 
+> Right now these symlink to my development copies of the software, but
+> soon I will set them up to be completely seperate.
+> 
+> When this becomes more popular, we should probably 1) change the test-*
+> aliases to a more dedicated machine and then 2) get a real public server
+> established with a non-test url
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://www.brondsema.net : personal
+>                 <><
+> 
+>
+
+
+From dave at brondsema.net  Fri Jul 22 05:15:48 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Thu, 21 Jul 2005 23:15:48 -0400
+Subject: test-server.konfidi.org
+In-Reply-To: <5a086d9d05072108571022e4e7@mail.gmail.com>
+References: <42DFC018.9000506@brondsema.net> <5a086d9d05072108571022e4e7@mail.gmail.com>
+Message-ID: <42E064E4.7020309@brondsema.net>
+
+Cool.  My time for konfidi slips through my fingers like water.
+
+Any idea why the anonymous svn checkout (per berlios' docs) fails?
+
+# svn checkout svn://svn.berlios.de/konfidi/foafserver/trunk foafserver
+svn: Can't connect to host 'svn.berlios.de': Connection refused
+
+
+A. Schamp wrote:
+> sweet.  I've had lots of ideas lately, but I don't have internet at my
+> new place yet.  Keep up the good work.
+>
+> On 7/21/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>I set up http://test-server.konfidi.org/ as a DNS CNAME alias to my
+>>personal box.  I'll keep a trustserver & frontend running all the time,
+>>if possible.
+>>
+>>http://test-foafserver.konfidi.org/ is set up similarly.
+>>
+>>Right now these symlink to my development copies of the software, but
+>>soon I will set them up to be completely seperate.
+>>
+>>When this becomes more popular, we should probably 1) change the test-*
+>>aliases to a more dedicated machine and then 2) get a real public server
+>>established with a non-test url
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://www.brondsema.net : personal
+>>                <><
+>>
+>>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050721/570839bb/attachment.pgp>
+
+From dave at brondsema.net  Sun Jul 24 05:29:21 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Sat, 23 Jul 2005 23:29:21 -0400
+Subject: topic
+Message-ID: <42E30B11.8020901@brondsema.net>
+
+
+I think a very basic heirarchy like this will be useful first:
+
+digital communication
+\--email
+  \--wiki posting
+   \--weblog
+      \--comments
+       \--trackback
+
+
+
+Even though a heirarchy isn't supported yet, I think we should have
+everyone use "internet communication" for starters.  This'll let us
+expand the application of Konfidi in the future without having to
+establish a new trust network for that topic.  WDYT?
+
+"digital communication" is a bit lengthy, but that really shouldn't
+matter much.  Also, the term is probably too generic because we don't
+trust "that X will communicate digitally" but rather "that X will use
+digital communications properly/non-spammily".  Should we change it by
+adding some adjective like: "good digital communication"?
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050723/a401dc84/attachment.pgp>
+
+From schamp at gmail.com  Mon Jul 25 14:22:12 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 25 Jul 2005 07:22:12 -0500
+Subject: topic
+In-Reply-To: <42E30B11.8020901@brondsema.net>
+References: <42E30B11.8020901@brondsema.net>
+Message-ID: <5a086d9d050725052249467459@mail.gmail.com>
+
+Yeah, that sounds good.  The people can get more specific later, if
+they need to.  That sample hierarchy looks pretty good.  I hadn't
+thought about trackback.
+
+Do we have a wiki page about hierarchies?
+
+As for the term, I think that it's reasonably clear.  Besides, we'll
+have an explanation of each of the subjects on the subject definition
+page, to which users can refer if needed.  Users will also be able to
+define their own subjects (which, I suppose, could inherit from any of
+these or others that we make).
+
+I'm scheduled to have the internet next Friday, so on Monday, after
+Abby leaves, I'll probably be implementing many of the ideas I've had.
+
+Andy`
+
+On 7/23/05, Dave Brondsema <dave at brondsema.net> wrote:
+> 
+> I think a very basic heirarchy like this will be useful first:
+> 
+> digital communication
+> \--email
+>   \--wiki posting
+>    \--weblog
+>       \--comments
+>        \--trackback
+> 
+> 
+> 
+> Even though a heirarchy isn't supported yet, I think we should have
+> everyone use "internet communication" for starters.  This'll let us
+> expand the application of Konfidi in the future without having to
+> establish a new trust network for that topic.  WDYT?
+> 
+> "digital communication" is a bit lengthy, but that really shouldn't
+> matter much.  Also, the term is probably too generic because we don't
+> trust "that X will communicate digitally" but rather "that X will use
+> digital communications properly/non-spammily".  Should we change it by
+> adding some adjective like: "good digital communication"?
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://www.brondsema.net : personal
+>                 <><
+> 
+> 
+>
+
+
+From dave at brondsema.net  Mon Jul 25 15:34:38 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Mon, 25 Jul 2005 09:34:38 -0400
+Subject: topic
+In-Reply-To: <5a086d9d050725052249467459@mail.gmail.com>
+References: <42E30B11.8020901@brondsema.net> <5a086d9d050725052249467459@mail.gmail.com>
+Message-ID: <42E4EA6E.8050703@brondsema.net>
+
+A. Schamp wrote:
+> Yeah, that sounds good.  The people can get more specific later, if
+> they need to.  That sample hierarchy looks pretty good.  I hadn't
+> thought about trackback.
+> 
+> Do we have a wiki page about hierarchies?
+> 
+
+No, but the Application Ideas page is related.
+
+BTW, I grouped the wiki pages into Project, Dev, and User docs. 
+"Project" is a bit ambigious, but I think its working well so far.  I've 
+also added a few pages like "How to Help" and "How to Start Using". 
+Check out RecentChanges if you like.  The RecentChanges RSS feed isn't 
+working for me anymore, unfortunately.
+
+> As for the term, I think that it's reasonably clear.  Besides, we'll
+> have an explanation of each of the subjects on the subject definition
+> page, to which users can refer if needed.  Users will also be able to
+> define their own subjects (which, I suppose, could inherit from any of
+> these or others that we make).
+> 
+> I'm scheduled to have the internet next Friday, so on Monday, after
+> Abby leaves, I'll probably be implementing many of the ideas I've had.
+> 
+
+Cool.  What sort of ideas do you have?
+
+This week is my last free week before I start at Cornerstone.  I hope to 
+do as much as I can to move towards a 0.1 release.  I really would like 
+to do that so we can invite people to help & join.
+
+> Andy`
+> 
+> On 7/23/05, Dave Brondsema <dave at brondsema.net> wrote:
+> 
+>>I think a very basic heirarchy like this will be useful first:
+>>
+>>digital communication
+>>\--email
+>>  \--wiki posting
+>>   \--weblog
+>>      \--comments
+>>       \--trackback
+>>
+>>
+>>
+>>Even though a heirarchy isn't supported yet, I think we should have
+>>everyone use "internet communication" for starters.  This'll let us
+>>expand the application of Konfidi in the future without having to
+>>establish a new trust network for that topic.  WDYT?
+>>
+>>"digital communication" is a bit lengthy, but that really shouldn't
+>>matter much.  Also, the term is probably too generic because we don't
+>>trust "that X will communicate digitally" but rather "that X will use
+>>digital communications properly/non-spammily".  Should we change it by
+>>adding some adjective like: "good digital communication"?
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://www.brondsema.net : personal
+>>                <><
+>>
+>>
+>>
+> 
+
+
+
+From schamp at gmail.com  Mon Jul 25 15:51:13 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Mon, 25 Jul 2005 08:51:13 -0500
+Subject: topic
+In-Reply-To: <42E4EA6E.8050703@brondsema.net>
+References: <42E30B11.8020901@brondsema.net>
+	 <5a086d9d050725052249467459@mail.gmail.com>
+	 <42E4EA6E.8050703@brondsema.net>
+Message-ID: <5a086d9d05072506514d824baf@mail.gmail.com>
+
+Quoth Dave Brondsema:
+
+> No, but the Application Ideas page is related.
+> 
+> BTW, I grouped the wiki pages into Project, Dev, and User docs.
+> "Project" is a bit ambigious, but I think its working well so far.  I've
+> also added a few pages like "How to Help" and "How to Start Using".
+
+That sounds sensible.
+
+> Check out RecentChanges if you like.  The RecentChanges RSS feed isn't
+> working for me anymore, unfortunately.
+
+Hmm.  I'll check it out on Friday, when my RSS reader will work again.  : )
+
+> Cool.  What sort of ideas do you have?
+
+They are mostly about the Trust Server and implementing various
+strategies.  One part of it is to find a way to make it start properly
+on both Windows and *NIX.  I think I've almost got that figured out. 
+Then, it's the new Redland library, and updating, and so forth.  A
+new, smart data structure for holding the web of trust, too.
+
+> This week is my last free week before I start at Cornerstone.  I hope to
+> do as much as I can to move towards a 0.1 release.  I really would like
+> to do that so we can invite people to help & join.
+
+Word.
+
+Andy
+
+
+From dave at brondsema.net  Thu Jul 28 04:24:35 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Wed, 27 Jul 2005 22:24:35 -0400
+Subject: pyme/mod_python weirdness
+Message-ID: <42E841E3.1000601@brondsema.net>
+
+Andy, see if you can help me before I go to the pyme *AND* mod_python
+mailing lists.
+
+Here's a snippet of code in question, temporarily hacked to behave
+independently of any parameters:
+
+
+from pyme import core, callbacks
+from pyme.constants.sig import mode
+...
+class PGPSig:
+     ...
+     def verify(self, signed_text):
+         """verify this signature against some plaintext"""
+         content =
+open("/home/ams5/foafs/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf.asc",
+'r').read()
+         stext =
+open("/home/ams5/foafs/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf",
+'r').read()
+         self.ctx.op_verify(core.Data(content), core.Data(stext), None)
+         result = self.ctx.op_verify_result()
+         sign = result.signatures
+         index = 0
+         while sign:
+             index += 1
+             key = self.ctx.get_key(sign.fpr, 0)
+             raise Exception("test: " + sign.fpr + "|" + key.uids.uid)
+             sign = sign.next
+         if result.signatures is None:
+             raise Exception("No PGP signature found")
+
+         # List results for all signatures. Status equal 0 means "Ok".
+         if result.signatures.status != 0:
+             raise Exception("PGP signature is not valid")
+
+
+
+When I invoke this through a mod_python script, I get:
+   File "/home/dpb2/public_html/foafserver/PGPSig.py", line 86, in verify
+     raise Exception("No PGP signature found")
+
+When I invoke this through a script on the command line, I get:
+   File "/home/dpb2/dev/konfidi/foafserver/trunk/PGPSig.py", line 83, in
+verify
+     raise Exception("test: " + sign.fpr + "|" + key.uids.uid)
+
+
+Any idea why the mod_python one doesn't work right?
+
+Python 2.3.5; mod_python 3.1.3; pyme 0.7.0.  The only difference in
+sys.path is that commandline starts ['', '/usr/lib/portage/pym',] and
+mod_python starts ['/home/dpb2/public_html/foafserver/',] and then they
+both continue with system paths.
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050727/81ac5463/attachment.pgp>
+
+From schamp at gmail.com  Thu Jul 28 14:17:58 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Thu, 28 Jul 2005 07:17:58 -0500
+Subject: pyme/mod_python weirdness
+In-Reply-To: <42E841E3.1000601@brondsema.net>
+References: <42E841E3.1000601@brondsema.net>
+Message-ID: <5a086d9d0507280517fc19c0a@mail.gmail.com>
+
+Well, I'm not familiar with either of the libraries, and I don't
+really have access to the docs.
+
+Can you do a dump of result, and see if there's any kind of useful
+message stored in it?
+
+Also, you're invoking two different files.  Can you invoke the one in
+public_html from the commandline?  What happens then?  Are you sure
+the files are the same?
+
+Andy
+
+On 7/27/05, Dave Brondsema <dave at brondsema.net> wrote:
+> Andy, see if you can help me before I go to the pyme *AND* mod_python
+> mailing lists.
+> 
+> Here's a snippet of code in question, temporarily hacked to behave
+> independently of any parameters:
+> 
+> 
+> from pyme import core, callbacks
+> from pyme.constants.sig import mode
+> ...
+> class PGPSig:
+>      ...
+>      def verify(self, signed_text):
+>          """verify this signature against some plaintext"""
+>          content =
+> open("/home/ams5/foafs/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf.asc",
+> 'r').read()
+>          stext =
+> open("/home/ams5/foafs/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf",
+> 'r').read()
+>          self.ctx.op_verify(core.Data(content), core.Data(stext), None)
+>          result = self.ctx.op_verify_result()
+>          sign = result.signatures
+>          index = 0
+>          while sign:
+>              index += 1
+>              key = self.ctx.get_key(sign.fpr, 0)
+>              raise Exception("test: " + sign.fpr + "|" + key.uids.uid)
+>              sign = sign.next
+>          if result.signatures is None:
+>              raise Exception("No PGP signature found")
+> 
+>          # List results for all signatures. Status equal 0 means "Ok".
+>          if result.signatures.status != 0:
+>              raise Exception("PGP signature is not valid")
+> 
+> 
+> 
+> When I invoke this through a mod_python script, I get:
+>    File "/home/dpb2/public_html/foafserver/PGPSig.py", line 86, in verify
+>      raise Exception("No PGP signature found")
+> 
+> When I invoke this through a script on the command line, I get:
+>    File "/home/dpb2/dev/konfidi/foafserver/trunk/PGPSig.py", line 83, in
+> verify
+>      raise Exception("test: " + sign.fpr + "|" + key.uids.uid)
+> 
+> 
+> Any idea why the mod_python one doesn't work right?
+> 
+> Python 2.3.5; mod_python 3.1.3; pyme 0.7.0.  The only difference in
+> sys.path is that commandline starts ['', '/usr/lib/portage/pym',] and
+> mod_python starts ['/home/dpb2/public_html/foafserver/',] and then they
+> both continue with system paths.
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://www.brondsema.net : personal
+>                 <><
+> 
+> 
+>
+
+
+From dave at brondsema.net  Thu Jul 28 20:20:36 2005
+From: dave at brondsema.net (Dave Brondsema)
+Date: Thu, 28 Jul 2005 14:20:36 -0400
+Subject: pyme/mod_python weirdness
+In-Reply-To: <5a086d9d0507280517fc19c0a@mail.gmail.com>
+References: <42E841E3.1000601@brondsema.net> <5a086d9d0507280517fc19c0a@mail.gmail.com>
+Message-ID: <42E921F4.8070707@brondsema.net>
+
+I'm invoking the same method, and I'm pretty sure the files that call
+that method don't do anything that would affect the outcome.  But I'll
+come up with a minimal testcase, which will be useful anyway if I have
+to go to other mailing lists.
+
+Is there any good way to get a raw dump of a python object?
+
+A. Schamp wrote:
+> Well, I'm not familiar with either of the libraries, and I don't
+> really have access to the docs.
+>
+> Can you do a dump of result, and see if there's any kind of useful
+> message stored in it?
+>
+> Also, you're invoking two different files.  Can you invoke the one in
+> public_html from the commandline?  What happens then?  Are you sure
+> the files are the same?
+>
+> Andy
+>
+> On 7/27/05, Dave Brondsema <dave at brondsema.net> wrote:
+>
+>>Andy, see if you can help me before I go to the pyme *AND* mod_python
+>>mailing lists.
+>>
+>>Here's a snippet of code in question, temporarily hacked to behave
+>>independently of any parameters:
+>>
+>>
+>>from pyme import core, callbacks
+>>from pyme.constants.sig import mode
+>>...
+>>class PGPSig:
+>>     ...
+>>     def verify(self, signed_text):
+>>         """verify this signature against some plaintext"""
+>>         content =
+>>open("/home/ams5/foafs/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf.asc",
+>>'r').read()
+>>         stext =
+>>open("/home/ams5/foafs/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf",
+>>'r').read()
+>>         self.ctx.op_verify(core.Data(content), core.Data(stext), None)
+>>         result = self.ctx.op_verify_result()
+>>         sign = result.signatures
+>>         index = 0
+>>         while sign:
+>>             index += 1
+>>             key = self.ctx.get_key(sign.fpr, 0)
+>>             raise Exception("test: " + sign.fpr + "|" + key.uids.uid)
+>>             sign = sign.next
+>>         if result.signatures is None:
+>>             raise Exception("No PGP signature found")
+>>
+>>         # List results for all signatures. Status equal 0 means "Ok".
+>>         if result.signatures.status != 0:
+>>             raise Exception("PGP signature is not valid")
+>>
+>>
+>>
+>>When I invoke this through a mod_python script, I get:
+>>   File "/home/dpb2/public_html/foafserver/PGPSig.py", line 86, in verify
+>>     raise Exception("No PGP signature found")
+>>
+>>When I invoke this through a script on the command line, I get:
+>>   File "/home/dpb2/dev/konfidi/foafserver/trunk/PGPSig.py", line 83, in
+>>verify
+>>     raise Exception("test: " + sign.fpr + "|" + key.uids.uid)
+>>
+>>
+>>Any idea why the mod_python one doesn't work right?
+>>
+>>Python 2.3.5; mod_python 3.1.3; pyme 0.7.0.  The only difference in
+>>sys.path is that commandline starts ['', '/usr/lib/portage/pym',] and
+>>mod_python starts ['/home/dpb2/public_html/foafserver/',] and then they
+>>both continue with system paths.
+>>
+>>--
+>>Dave Brondsema : dave at brondsema.net
+>>http://www.splike.com : programming
+>>http://www.brondsema.net : personal
+>>                <><
+>>
+>>
+>>
+>
+
+
+--
+Dave Brondsema : dave at brondsema.net
+http://www.splike.com : programming
+http://www.brondsema.net : personal
+                <><
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: <https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050728/d007dfa3/attachment.pgp>
+
+From schamp at gmail.com  Thu Jul 28 21:23:46 2005
+From: schamp at gmail.com (A. Schamp)
+Date: Thu, 28 Jul 2005 14:23:46 -0500
+Subject: pyme/mod_python weirdness
+In-Reply-To: <42E921F4.8070707@brondsema.net>
+References: <42E841E3.1000601@brondsema.net>
+	 <5a086d9d0507280517fc19c0a@mail.gmail.com>
+	 <42E921F4.8070707@brondsema.net>
+Message-ID: <5a086d9d05072812237efba908@mail.gmail.com>
+
+there's a Dumper class, or something to that effect, I think.  I used
+to use it in some of my classes, do a grep -ir for dump in my folder.
+
+On 7/28/05, Dave Brondsema <dave at brondsema.net> wrote:
+> I'm invoking the same method, and I'm pretty sure the files that call
+> that method don't do anything that would affect the outcome.  But I'll
+> come up with a minimal testcase, which will be useful anyway if I have
+> to go to other mailing lists.
+> 
+> Is there any good way to get a raw dump of a python object?
+> 
+> A. Schamp wrote:
+> > Well, I'm not familiar with either of the libraries, and I don't
+> > really have access to the docs.
+> >
+> > Can you do a dump of result, and see if there's any kind of useful
+> > message stored in it?
+> >
+> > Also, you're invoking two different files.  Can you invoke the one in
+> > public_html from the commandline?  What happens then?  Are you sure
+> > the files are the same?
+> >
+> > Andy
+> >
+> > On 7/27/05, Dave Brondsema <dave at brondsema.net> wrote:
+> >
+> >>Andy, see if you can help me before I go to the pyme *AND* mod_python
+> >>mailing lists.
+> >>
+> >>Here's a snippet of code in question, temporarily hacked to behave
+> >>independently of any parameters:
+> >>
+> >>
+> >>from pyme import core, callbacks
+> >>from pyme.constants.sig import mode
+> >>...
+> >>class PGPSig:
+> >>     ...
+> >>     def verify(self, signed_text):
+> >>         """verify this signature against some plaintext"""
+> >>         content =
+> >>open("/home/ams5/foafs/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf.asc",
+> >>'r').read()
+> >>         stext =
+> >>open("/home/ams5/foafs/EAB0FABEDEA81AD4086902FE56F0526F9BB3CE70.rdf",
+> >>'r').read()
+> >>         self.ctx.op_verify(core.Data(content), core.Data(stext), None)
+> >>         result = self.ctx.op_verify_result()
+> >>         sign = result.signatures
+> >>         index = 0
+> >>         while sign:
+> >>             index += 1
+> >>             key = self.ctx.get_key(sign.fpr, 0)
+> >>             raise Exception("test: " + sign.fpr + "|" + key.uids.uid)
+> >>             sign = sign.next
+> >>         if result.signatures is None:
+> >>             raise Exception("No PGP signature found")
+> >>
+> >>         # List results for all signatures. Status equal 0 means "Ok".
+> >>         if result.signatures.status != 0:
+> >>             raise Exception("PGP signature is not valid")
+> >>
+> >>
+> >>
+> >>When I invoke this through a mod_python script, I get:
+> >>   File "/home/dpb2/public_html/foafserver/PGPSig.py", line 86, in verify
+> >>     raise Exception("No PGP signature found")
+> >>
+> >>When I invoke this through a script on the command line, I get:
+> >>   File "/home/dpb2/dev/konfidi/foafserver/trunk/PGPSig.py", line 83, in
+> >>verify
+> >>     raise Exception("test: " + sign.fpr + "|" + key.uids.uid)
+> >>
+> >>
+> >>Any idea why the mod_python one doesn't work right?
+> >>
+> >>Python 2.3.5; mod_python 3.1.3; pyme 0.7.0.  The only difference in
+> >>sys.path is that commandline starts ['', '/usr/lib/portage/pym',] and
+> >>mod_python starts ['/home/dpb2/public_html/foafserver/',] and then they
+> >>both continue with system paths.
+> >>
+> >>--
+> >>Dave Brondsema : dave at brondsema.net
+> >>http://www.splike.com : programming
+> >>http://www.brondsema.net : personal
+> >>                <><
+> >>
+> >>
+> >>
+> >
+> 
+> 
+> --
+> Dave Brondsema : dave at brondsema.net
+> http://www.splike.com : programming
+> http://www.brondsema.net : personal
+>                 <><
+> 
+> 
+>
+
+

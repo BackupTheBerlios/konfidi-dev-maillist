@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> r458 - in trustserver/trunk: . TrustStrategies
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2005-June/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r458%20-%20in%20trustserver/trunk%3A%20.%20TrustStrategies&In-Reply-To=%3C42B64379.2030205%40brondsema.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000050.html">
+   <LINK REL="Next"  HREF="000052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>r458 - in trustserver/trunk: . TrustStrategies</H1>
+    <B>Dave Brondsema</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r458%20-%20in%20trustserver/trunk%3A%20.%20TrustStrategies&In-Reply-To=%3C42B64379.2030205%40brondsema.net%3E"
+       TITLE="r458 - in trustserver/trunk: . TrustStrategies">dave at brondsema.net
+       </A><BR>
+    <I>Mon Jun 20 06:18:01 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000050.html">r458 - in trustserver/trunk: . TrustStrategies
+</A></li>
+        <LI>Next message: <A HREF="000052.html">r458 - in trustserver/trunk: . TrustStrategies
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#51">[ date ]</a>
+              <a href="thread.html#51">[ thread ]</a>
+              <a href="subject.html#51">[ subject ]</a>
+              <a href="author.html#51">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A. Schamp wrote:
+&gt;<i> Dave Brondsema wrote:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i>Quoting Andrew Schamp at BerliOS &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">schamp at sheep.berlios.de</A>&gt;:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>Author: schamp
+</I>&gt;&gt;&gt;<i>Date: 2005-06-16 22:37:26 +0200 (Thu, 16 Jun 2005)
+</I>&gt;&gt;&gt;<i>New Revision: 458
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>added basic password protection to strategies, rolled options parsing
+</I>&gt;&gt;&gt;<i>into ReadOnly and ReadWrite
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>What if we made the URLs more REST-ful like:
+</I>&gt;&gt;<i>trustserver/StrategyName/someparam/otherparam
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>and then use apache auth controls on trustserver/SomeStrategy instead
+</I>&gt;&gt;<i>of in
+</I>&gt;&gt;<i>python.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I'm not sure how to make the parameters RESTful.  Order doesn't matter so
+</I>&gt;&gt;<i>someparam/otherparam/etc doesn't make a whole lot of sense.  Perhaps just
+</I>&gt;&gt;<i>trustserver/StrategyName?a=b&amp;c=d would be good
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I've thought about this a bit, and I can't think of a good way, either.
+</I>&gt;<i> The main problem, I think, is that there are so many.  I was thinking
+</I>&gt;<i> about developing a simple XML based query language, that would have some
+</I>&gt;<i> standard features, and still allow for some strategy specific things.
+</I>&gt;<i> the thing is, a number of strategies (like the DOTGraph one, for
+</I>&gt;<i> example), don't even use the source and sink.
+</I>&gt;<i>
+</I>
+Hm... yeah.  Each can have their own params; they don't have to use the
+same ones, right?
+
+&gt;<i> Another thing about apache auth controls is that they won't work for a
+</I>&gt;<i> non-apache frontend (if somebody makes one).  I don't know if this is a
+</I>&gt;<i> problem, esp. if we start adding signatures or some other encryption
+</I>&gt;<i> and/or authentication for communication between the components.  I'm not
+</I>&gt;<i> committed to this particular way of doing it.  However, as the
+</I>&gt;<i> authentication matters more to the TrustServer than the frontend, maybe
+</I>&gt;<i> it makes sense to have it in there--access controls on the frontend kind
+</I>&gt;<i> of imply who has access to that feature on the frontend, not access to
+</I>&gt;<i> the server.  on the other hand, maybe it's simpler to do it in apache.
+</I>&gt;<i> I don't know.  I think, before I do any more with this, we should try
+</I>&gt;<i> and get some ideas and settle on a RESTful interface (or something else,
+</I>&gt;<i> whatever works).
+</I>&gt;<i>
+</I>&gt;<i> Andy
+</I>
+
+I guess I was thinking of intentionally having the frontend do auth and
+anything not central to the TrustServer.  So it would mean rewriting for
+a different auth.  The TS does only the TS work and the frontend is a
+layer on top of that to handle auth, admin, caching, logging, whatever.
+  I think it's good to keep these sorts of tasks seperate from the TS.
+
+I am assuming that the frontend layer will always go hand-in-hand with a
+TS and pretty much all communication will go through it.
+
+
+--
+Dave Brondsema : <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">dave at brondsema.net</A>
+<A HREF="http://www.splike.com">http://www.splike.com</A> : programming
+<A HREF="http://www.brondsema.net">http://www.brondsema.net</A> : personal
+                &lt;&gt;&lt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050620/562074d7/attachment.pgp">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20050620/562074d7/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000050.html">r458 - in trustserver/trunk: . TrustStrategies
+</A></li>
+	<LI>Next message: <A HREF="000052.html">r458 - in trustserver/trunk: . TrustStrategies
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#51">[ date ]</a>
+              <a href="thread.html#51">[ thread ]</a>
+              <a href="subject.html#51">[ subject ]</a>
+              <a href="author.html#51">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>

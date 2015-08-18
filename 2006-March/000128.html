@@ -1,0 +1,631 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> r530 - paper
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/konfidi-dev/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r530%20-%20paper&In-Reply-To=%3C5a086d9d0603290922k5af777e9w94adb58540e4c612%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000126.html">
+   <LINK REL="Next"  HREF="000129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>r530 - paper</H1>
+    <B>A. Schamp</B> 
+    <A HREF="mailto:konfidi-dev%40lists.berlios.de?Subject=Re%3A%20r530%20-%20paper&In-Reply-To=%3C5a086d9d0603290922k5af777e9w94adb58540e4c612%40mail.gmail.com%3E"
+       TITLE="r530 - paper">schamp at gmail.com
+       </A><BR>
+    <I>Wed Mar 29 19:22:11 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000126.html">probability
+</A></li>
+        <LI>Next message: <A HREF="000129.html">r530 - paper
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Did you have any general comments about these?
+
+Andy
+
+On 3/29/06, <A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">brondsem at berlios.de</A> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/konfidi-dev">brondsem at berlios.de</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Author: brondsem
+</I>&gt;<i> Date: 2006-03-29 19:19:04 +0200 (Wed, 29 Mar 2006)
+</I>&gt;<i> New Revision: 530
+</I>&gt;<i>
+</I>&gt;<i> Modified:
+</I>&gt;<i>    paper/MTW-06.tex
+</I>&gt;<i> Log:
+</I>&gt;<i> include most of Andy's minor changes
+</I>&gt;<i>
+</I>&gt;<i> Modified: paper/MTW-06.tex
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- paper/MTW-06.tex    2006-03-24 04:30:42 UTC (rev 529)
+</I>&gt;<i> +++ paper/MTW-06.tex    2006-03-29 17:19:04 UTC (rev 530)
+</I>&gt;<i> @@ -68,7 +68,7 @@
+</I>&gt;<i>
+</I>&gt;<i> \maketitle
+</I>&gt;<i> \begin{abstract}
+</I>&gt;<i> -Email filtering and many other processes could be improved through social
+</I>&gt;<i> networks of trust.  To do this, we propose the Konfidi system.  Konfidi uses
+</I>&gt;<i> PGP connections to determine authenticity, and topical trust connections
+</I>&gt;<i> described in RDF to compute inferred trust values.  Between yourself and
+</I>&gt;<i> some person X whom you do not know, Konfidi works to find a path of
+</I>&gt;<i> cryptographic PGP signatures to assure the identity of X, and estimates a
+</I>&gt;<i> trust rating by an algorithm that operates along the trust paths that
+</I>&gt;<i> connect you to X.  The trust paths are formed from public person-to-person
+</I>&gt;<i> trust ratings that are maintained by those individuals.  We discuss the
+</I>&gt;<i> design of the network and system architecture and the current state of
+</I>&gt;<i> implementation.
+</I>&gt;<i> +Trust networks have great potential for improving the effectiveness of
+</I>&gt;<i> email filtering and many other processes concerned with the validity of
+</I>&gt;<i> identity and content.  To explore this potential, we propose the Konfidi
+</I>&gt;<i> system.  Konfidi uses PGP connections to determine authenticity, and topical
+</I>&gt;<i> trust connections described in RDF to compute inferred trust
+</I>&gt;<i> values.  Between yourself and some person X whom you do not know, Konfidi
+</I>&gt;<i> works to find a path of cryptographic PGP signatures to assure the identity
+</I>&gt;<i> of X, and estimates a trust rating by an algorithm that operates along the
+</I>&gt;<i> trust paths that connect you to X.  The trust paths are formed from public
+</I>&gt;<i> person-to-person trust ratings that are maintained by those individuals.  We
+</I>&gt;<i> discuss the design of the network and system architecture and the current
+</I>&gt;<i> state of implementation.
+</I>&gt;<i> \end{abstract}
+</I>&gt;<i>
+</I>&gt;<i> \keywords{Semantic web, trust network, FOAF, RDF, OpenPGP, PGP, GPG,
+</I>&gt;<i> reputation, propagation, distributed, inference, delegation, social network}
+</I>&gt;<i> @@ -79,10 +79,10 @@
+</I>&gt;<i>
+</I>&gt;<i> There have been a number of attempts to answer either one question or the
+</I>&gt;<i> other.  The OpenPGP encryption system \citep{rfc2440} (hereafter PGP) has
+</I>&gt;<i> developed a web-of-trust which can help provide verification of an
+</I>&gt;<i> individual's identity;  however, it does not allow the expression of any
+</I>&gt;<i> additional information about that individual's trustworthiness on matters
+</I>&gt;<i> other than personal identification.  As for the second question, one answer
+</I>&gt;<i> that is growing in popularity is that of creating a network of trust between
+</I>&gt;<i> individuals who know one another and have good reason to trust their
+</I>&gt;<i> estimations of others.  However, these systems can be subject to problems;
+</I>&gt;<i> suppose someone impersonating a trusted party provides incorrect data
+</I>&gt;<i> boosting the reputation of an untrustworthy party.  A simple rating system
+</I>&gt;<i> for reputation within certain domains, such as eBay online auctions, may be
+</I>&gt;<i> of some limited use.  However, unless there is a system to verify the
+</I>&gt;<i> raters, they may also be susceptible t!
+</I>&gt;<i> o malicious users who manipulate ratings.  Even if such systems can be
+</I>&gt;<i> guarded against such attacks, one should not have to base their trust in
+</I>&gt;<i> another person on ratings given by people that they neither know nor trust.
+</I>&gt;<i>
+</I>&gt;<i> -In this paper, we present a system that combines the a trust network with
+</I>&gt;<i> the PGP web-of-trust.  We describe some difficulties in integrating the
+</I>&gt;<i> networks, and how it might be possible to overcome them.  We then describe
+</I>&gt;<i> our structure for representing trust data, and our methods for making trust
+</I>&gt;<i> inferences on this data.  Finally, we discuss the our proof-of-concept
+</I>&gt;<i> software for putting this trust to use.
+</I>&gt;<i> +In this paper, we present a system that combines the a trust network with
+</I>&gt;<i> the PGP web-of-trust.  We describe some difficulties in integrating the
+</I>&gt;<i> networks, and analyze various strategies for overcoming them.  We then
+</I>&gt;<i> describe our structure for representing trust data, and our methods for
+</I>&gt;<i> making trust inferences on this data.  Finally, we discuss the our
+</I>&gt;<i> proof-of-concept software for putting this trust to use.
+</I>&gt;<i>
+</I>&gt;<i> \section{Related Work}
+</I>&gt;<i> -We have incorporated into our project a number of existing technologies
+</I>&gt;<i> designed to serve various purposes.  We introduce them here, and explain
+</I>&gt;<i> later in the paper how we have integrated them.  We also discuss here
+</I>&gt;<i> related academic research on the relevant topics.
+</I>&gt;<i> +We have incorporated into our project a number of existing technologies
+</I>&gt;<i> designed to serve various purposes.  We introduce them here, and explain
+</I>&gt;<i> later in the paper how we have integrated them.  We also include a
+</I>&gt;<i> discussion of related academic research on the relevant topics.
+</I>&gt;<i>
+</I>&gt;<i> \subsection{Representing Trust Relationships}
+</I>&gt;<i> There seems to be a general lack of psychological research on ways of
+</I>&gt;<i> representing trust relationships between individuals and procedures for
+</I>&gt;<i> inferring unspecified trust values.  We found no recommendations for a
+</I>&gt;<i> particular scheme for modeling trust relationships or networks
+</I>&gt;<i> mathematically.  Most work on this topic in the fields of mathematics and
+</I>&gt;<i> computer science adopts an arbitrary model appropriate to the algorithm
+</I>&gt;<i> under consideration. Guha points out \citep{guha04propagation} that there
+</I>&gt;<i> are compelling reasons for a trust representation scheme to express explicit
+</I>&gt;<i> distrust as well as trust.
+</I>&gt;<i> @@ -103,7 +103,7 @@
+</I>&gt;<i> Dan Brickley has made a practical attempt to investigate the use of FOAF,
+</I>&gt;<i> particularly the \texttt{mbox\_sha1} property, to automatically generate
+</I>&gt;<i> email whitelists. By hashing the sender's email address using SHA1, privacy
+</I>&gt;<i> is protected (and the address cannot be gathered by spiders), and so users
+</I>&gt;<i> can share whitelists of \texttt{mbox\_sha1}s of addresses they know not to
+</I>&gt;<i> send spam. Then for all incoming mail, the sender's address is hashed and
+</I>&gt;<i> the whitelist searched for the resulting value, and then is filtered
+</I>&gt;<i> accordingly. This use of FOAF is promising, but since it is decentralized,
+</I>&gt;<i> it is difficult for updates to propagate \citep{foafWhitelisting}. No effort
+</I>&gt;<i> is taken in this project to verify the sender's identity.
+</I>&gt;<i>
+</I>&gt;<i> \subsection{Email Filtering}
+</I>&gt;<i> -Filtering email to reduce unsolicited email has received considerable
+</I>&gt;<i> attention in many areas.  Domain-level solutions, such as Sender Policy
+</I>&gt;<i> Framework (SPF) \citep{spf} and DomainKeys Identified Mail (DKIM)
+</I>&gt;<i> \citep{dkim}, are designed mostly to prevent phishing (emails with a forged
+</I>&gt;<i> From: address to trick users into divulging personal information) and also
+</I>&gt;<i> assume that a domain's administrator can control and monitor all its user's
+</I>&gt;<i> activities. Greylisting and blacklisting often have too many false positives
+</I>&gt;<i> and false negatives. User-level filtering, which Konfidi does in the context
+</I>&gt;<i> of email, is not very common. Challenge-response mechanisms to build a
+</I>&gt;<i> whitelist are tedious for the sender and receiver and do not validate
+</I>&gt;<i> authenticity. Content-level testing is the most common, but Bayesian
+</I>&gt;<i> filtering and other header checks are reactionary and must be updated often,
+</I>&gt;<i> and are becoming less effective as spammers create emails that look ever
+</I>&gt;<i> more legitimate.
+</I>&gt;<i> +Filtering email to reduce unsolicited email has received considerable
+</I>&gt;<i> attention in many areas.  Domain-level solutions, such as Sender Policy
+</I>&gt;<i> Framework (SPF) \citep{spf} and DomainKeys Identified Mail (DKIM)
+</I>&gt;<i> \citep{dkim}, are designed mostly to prevent phishing (emails with a forged
+</I>&gt;<i> From: address to trick users into divulging personal information) and also
+</I>&gt;<i> assume that a domain's administrator can control and monitor all its user's
+</I>&gt;<i> activities. Greylisting and blacklisting often have too many false positives
+</I>&gt;<i> and false negatives. User-level filtering, which Konfidi does in the context
+</I>&gt;<i> of email, is not very common. Challenge-response mechanisms to build a
+</I>&gt;<i> whitelist are tedious for the sender and receiver and do not validate
+</I>&gt;<i> authenticity. Content-level testing is the most common, but Bayesian
+</I>&gt;<i> filtering and other header checks are reactionary and must be updated often,
+</I>&gt;<i> and are becoming less effective as spammers create emails that look ever
+</I>&gt;<i> more legitimate, attempting either to f!
+</I>&gt;<i> ool the filter or to distort the probabilities.
+</I>&gt;<i>
+</I>&gt;<i> There has been some work to bring authentication to email through the
+</I>&gt;<i> domain-level efforts of SPF and DKIM.  Their goal is to prevent phishing by
+</I>&gt;<i> assuring authenticity through cryptographic data in DNS records.  These
+</I>&gt;<i> approaches limit their applicability to domain-related data such as email or
+</I>&gt;<i> webpages and do not address any issues of trust, since DNS records must be
+</I>&gt;<i> assumed to be authentic.  Also, the granularity of the system is too coarse:
+</I>&gt;<i> cryptographic keys are normally created on a per-domain, not per-address,
+</I>&gt;<i> basis.
+</I>&gt;<i>
+</I>&gt;<i> @@ -119,30 +119,30 @@
+</I>&gt;<i>
+</I>&gt;<i> \subsubsection{Trust Inference Using PGP}
+</I>&gt;<i> \label{earlierPGP}
+</I>&gt;<i> -One approach would be for a Mail User Agent (MUA) to find a path from any
+</I>&gt;<i> PGP-signed email's sender to the recipient.\footnote{In the web-of-trust,
+</I>&gt;<i> nodes are PGP keys and edges are key signatures.  Paths are made when the
+</I>&gt;<i> recipient had signed someone's key, who had signed another key, and so on
+</I>&gt;<i> until a signature is found on the sender's key}  There are some MUA plugins,
+</I>&gt;<i> such as Enigmail \citep{enigmail}, that implement some of this.  Enigmail
+</I>&gt;<i> uses PGP to sign emails and validate any emails that are received with a PGP
+</I>&gt;<i> signature, fetching keys from the keyserver when necessary.  If there is a
+</I>&gt;<i> short enough path of signatures from the recipient to the sender, the
+</I>&gt;<i> signature is considered ``trusted&quot;.  It does not fetch keys in an attempt to
+</I>&gt;<i> find such a path; you must already have the keys locally that form the
+</I>&gt;<i> path.  Fetching all the keys along the path would be necessary, but is
+</I>&gt;<i> problematic for reasons explained later.
+</I>&gt;<i> +One approach would be for a Mail User Agent (MUA) to find a path from any
+</I>&gt;<i> PGP-signed email's sender to the recipient.\footnote{In the web-of-trust,
+</I>&gt;<i> nodes are PGP keys and edges are key signatures.  Paths are made when the
+</I>&gt;<i> recipient has signed someone's key, who has signed another key, and so on
+</I>&gt;<i> all the way until a signature is found on someone who has signed the
+</I>&gt;<i> sender's key}  There are some MUA plugins, such as Enigmail
+</I>&gt;<i> \citep{enigmail}, that implement some of this.  Enigmail uses PGP to sign
+</I>&gt;<i> emails and validate any emails that are received with a PGP signature,
+</I>&gt;<i> fetching keys from the keyserver when necessary.  If there is a short enough
+</I>&gt;<i> path of signatures from the recipient to the sender, the signature is
+</I>&gt;<i> considered ``trusted&quot;.  It does not fetch keys in an attempt to find such a
+</I>&gt;<i> path; you must already have the keys locally that form the path.  Fetching
+</I>&gt;<i> all the keys along the path would be necessary, but is problematic for
+</I>&gt;<i> reasons explained later.
+</I>&gt;<i>
+</I>&gt;<i> -This approach requires that most users digitally sign email messages, and
+</I>&gt;<i> it depends on users to be aware of known spammers and avoid signing their
+</I>&gt;<i> keys. However, the recommended PGP keysigning practices require only the
+</I>&gt;<i> careful verification of the key-holder's identity, and a signed key does not
+</I>&gt;<i> entail anything about trustworthiness in other areas.  Furthermore, if the
+</I>&gt;<i> identification requirements for keysigning are met, even by a spammer, it
+</I>&gt;<i> would be unfair to refrain from signing that spammer's key\footnote{In fact,
+</I>&gt;<i> such positive identification might be of use.}.  Whether a user should be
+</I>&gt;<i> trusted to send good email, and not spam, is information over and above that
+</I>&gt;<i> expressed in the PGP web-of-trust itself, so another system would be
+</I>&gt;<i> required to encode such information.
+</I>&gt;<i> +Using this approach to filter spam would require that most users
+</I>&gt;<i> digitally sign email messages, and it depends on users to be aware of known
+</I>&gt;<i> spammers and avoid signing their keys. However, the recommended PGP
+</I>&gt;<i> keysigning practices require only the careful verification of the
+</I>&gt;<i> key-holder's identity, and a signed key does not entail anything about
+</I>&gt;<i> trustworthiness in other areas.  Furthermore, if the identification
+</I>&gt;<i> requirements for keysigning are met, even by a spammer, it would be unfair
+</I>&gt;<i> to refrain from signing that spammer's key\footnote{In fact, such positive
+</I>&gt;<i> identification might be of use.}.  Whether a user should be trusted to send
+</I>&gt;<i> good email, and not spam, is information over and above that expressed in
+</I>&gt;<i> the PGP web-of-trust itself, so another system would be required to encode
+</I>&gt;<i> such information.
+</I>&gt;<i>
+</I>&gt;<i> -Another serious flaw in this approach is this:  because information about
+</I>&gt;<i> key signatures is stored with the signed key and not the signing key, the
+</I>&gt;<i> MUA must search for a path between users can only be constructed from the
+</I>&gt;<i> sender to the recipient.  Since these paths would have to be built by
+</I>&gt;<i> searching from the sender to the recipient, a spammer or other malicious
+</I>&gt;<i> user could generate a large number of fake keys that are inter-signed, and
+</I>&gt;<i> then use these keys to sign their sender's key.  This could inundate the
+</I>&gt;<i> client's search domain making such a search impractical.  A deluge of false
+</I>&gt;<i> information would put undue strain on the clients and keyserver
+</I>&gt;<i> infrastructure, and would amount to a denial-of-service, of sorts.  Existing
+</I>&gt;<i> keyserver infrastructure provides no effecient way to tell which keys a
+</I>&gt;<i> particular key has signed, which would allow safer searches in the reverse
+</I>&gt;<i> direction.
+</I>&gt;<i> +Another serious flaw in this approach is this:  because key signatures
+</I>&gt;<i> are listed with the signed key and not the signing key, the MUA must search
+</I>&gt;<i> for a path between users that can only be constructed from the sender to the
+</I>&gt;<i> recipient.  Since these paths would have to be built starting from the
+</I>&gt;<i> sender, a spammer or other malicious user could generate a large number of
+</I>&gt;<i> fake keys that are inter-signed, and then use these keys to sign their
+</I>&gt;<i> sender's key.  This could inundate the client's search domain making such a
+</I>&gt;<i> search impractical.  A deluge of false information would put undue strain on
+</I>&gt;<i> the clients and keyserver infrastructure, and would amount to a
+</I>&gt;<i> denial-of-service, of sorts.  Existing keyserver infrastructure provides no
+</I>&gt;<i> effecient way to tell which keys a particular key has signed, which would
+</I>&gt;<i> allow searches in the reverse direction that are not susceptible to this
+</I>&gt;<i> mis-use.
+</I>&gt;<i>
+</I>&gt;<i> \subsection{PGP Web of Trust}
+</I>&gt;<i> \label{wotsap}
+</I>&gt;<i> Wotsap \citep{wotsap} is a tool to work with the PGP web-of-trust.  From a
+</I>&gt;<i> keyserver it creates a data file with the names, email addresses, and
+</I>&gt;<i> signature connections of all keys from the largest strongly connected set of
+</I>&gt;<i> keys, but no cryptographic data.  For technical reasons, it does not include
+</I>&gt;<i> all keys or even all reachable keys.  Wotsap includes a python script to use
+</I>&gt;<i> this data file to find paths between keys and generate statistics.
+</I>&gt;<i>
+</I>&gt;<i> \subsection{Summary}
+</I>&gt;<i> -This related work forms many of the building blocks, both technical and
+</I>&gt;<i> theoretical, for our work.  The system should determine authenticity through
+</I>&gt;<i> a decentralized network and determine trust in a topic through a similar
+</I>&gt;<i> network topology.  We integrate PGP, RDF and FOAF, and design ideas from
+</I>&gt;<i> Golbeck, Guha, and others.  We are extending FOAF with an RDF trust ontology
+</I>&gt;<i> to represent our trust network, which ties into the PGP web-of-trust to
+</I>&gt;<i> verify authorship and identity.  We expanded Golbeck's trust ontology to a
+</I>&gt;<i> relationship-centered model with values in a continuous range which
+</I>&gt;<i> represent trust and distrust.
+</I>&gt;<i> +This related work forms many of the building blocks, both technical and
+</I>&gt;<i> theoretical, for our work.  A proper system should determine authenticity
+</I>&gt;<i> through a decentralized network and determine trust in a topic through a
+</I>&gt;<i> similar network topology.  We integrate PGP, RDF and FOAF, and design ideas
+</I>&gt;<i> from Golbeck, Guha, and others.  We are extending FOAF with an RDF trust
+</I>&gt;<i> ontology to represent our trust network, which ties into the PGP
+</I>&gt;<i> web-of-trust to verify authorship and identity.  We expanded Golbeck's trust
+</I>&gt;<i> ontology to a relationship-centered model with values in a continuous range
+</I>&gt;<i> which represent trust and distrust.
+</I>&gt;<i>
+</I>&gt;<i> \section{Konfidi}
+</I>&gt;<i>
+</I>&gt;<i> -Konfidi refers to the trust network design, the ontology used to encode
+</I>&gt;<i> it, and the software to make it usable.  The central idea is that between
+</I>&gt;<i> yourself and person X whom you do not know, there is a path of PGP
+</I>&gt;<i> signatures to assure the identity of X, and an estimated trust rating is
+</I>&gt;<i> computed by some algorithm that operates along the trust paths that connect
+</I>&gt;<i> you to X.  Figure~\ref{fig:arch} shows the components of the Konfidi
+</I>&gt;<i> architecture and how they relate to external components and one
+</I>&gt;<i> another.  The numbered paths indicate the steps in the process:
+</I>&gt;<i> +Konfidi refers to the trust network design, the ontology used to encode
+</I>&gt;<i> it, and the software to make it usable.  The central idea is that between
+</I>&gt;<i> yourself and person X whom you do not know, there is a path of PGP
+</I>&gt;<i> signatures to assure the identity of X.  An estimated trust rating can then
+</I>&gt;<i> be computed by some algorithm that operates along the trust paths that
+</I>&gt;<i> connect you to X.  Figure~\ref{fig:arch} shows the components of the Konfidi
+</I>&gt;<i> architecture and how they relate to external components and one
+</I>&gt;<i> another.  The numbered paths indicate the steps in the process:
+</I>&gt;<i>
+</I>&gt;<i> \begin{enumerate_tight}
+</I>&gt;<i> -\item  A client makes a request to the Konfidi server, indicating the
+</I>&gt;<i> source, which is the person at the beginning of a desired path\footnote{and
+</I>&gt;<i> usually the one making the request} and the sink, which is the person to
+</I>&gt;<i> whom the path leads.
+</I>&gt;<i> +\item  A client makes a request to the Konfidi server, indicating the
+</I>&gt;<i> source and the sink.\footnote{Source is defined as the entity at the
+</I>&gt;<i> beginning of a desired path, and usually the one making the request.  Sink
+</I>&gt;<i> is defined as the entity to which the path leads}
+</I>&gt;<i> \item  The frontend passes the request to the PGP Pathfinder, which
+</I>&gt;<i> verifies that some path exists from the source to the sink in the PGP
+</I>&gt;<i> web-of-trust.
+</I>&gt;<i> \item  The Pathfinder returns its response.
+</I>&gt;<i> -\item  The frontend passes the request to the TrustServer, which
+</I>&gt;<i> traverses the Konfidi trust network that is built from data kept up-to-date
+</I>&gt;<i> by the FOAFServer.
+</I>&gt;<i> +\item  If thre is a valid PGP web-of-trust connection, the frontend
+</I>&gt;<i> passes the request to the TrustServer, which traverses the Konfidi trust
+</I>&gt;<i> network that is built from data kept up-to-date by the FOAFServer.
+</I>&gt;<i> \item  The TrustServer responds with the inferred trust value or an
+</I>&gt;<i> appropriate error message.
+</I>&gt;<i> -\item  The Frontend combines the responses of the Pathfinder and the
+</I>&gt;<i> TrustServer, and sends it back to the client.
+</I>&gt;<i> +\item  The Frontend combines the responses of the Pathfinder and the
+</I>&gt;<i> TrustServer, and sends them back to the client.
+</I>&gt;<i> \end{enumerate_tight}
+</I>&gt;<i>
+</I>&gt;<i> In the remainder of this section, we discuss the underlying data structure
+</I>&gt;<i> for representing trust, how it is implemented in these steps, and the
+</I>&gt;<i> rationale for the system design.
+</I>&gt;<i> @@ -150,7 +150,7 @@
+</I>&gt;<i> \subsection{Trust Ontology}
+</I>&gt;<i> In the current research on trust inference networks, there seem to be two
+</I>&gt;<i> general kinds of representations:  one that uses discrete values for varying
+</I>&gt;<i> levels of trust, and one which uses a continuous range of trust
+</I>&gt;<i> values.  Both return an answer in the same range as their domain.  Either
+</I>&gt;<i> kind of representation could be roughly mapped onto the other, however, a
+</I>&gt;<i> continuous range would allow more finely-grained control over the
+</I>&gt;<i> data.  Further, the inferred trust values returned by searches would not
+</I>&gt;<i> have to be rounded to a discrete level, which would lose precision.
+</I>&gt;<i>
+</I>&gt;<i> -In our representation, trust is considered as a continuum of both trust
+</I>&gt;<i> and distrust, not a measure of just one or the other.  For example, if Alice
+</I>&gt;<i> trusts Bob at some moderate level (say, .75 of a scale of 0 to 1), then it
+</I>&gt;<i> seems that she also \textit{distrusts} him at some minimal level (say,
+</I>&gt;<i> .25).  If Alice trusts Bob neutrally, then she trusts him about as much as
+</I>&gt;<i> she distrusts him.  If she distrusts him completely, then she doesn't trust
+</I>&gt;<i> him at all.  But in all of these cases, there is a trade-off between trust
+</I>&gt;<i> and distrust.  Only in the extreme cases are either of them eliminated
+</I>&gt;<i> completely.  Our trust model represents a range of values from 0 to 1,
+</I>&gt;<i> treating 0 as complete distrust, 1 as complete trust, and 0.5 as
+</I>&gt;<i> neutral.  This also makes many propagation algorithms simpler, as we'll
+</I>&gt;<i> discuss later.
+</I>&gt;<i> +In our representation, trust is considered as a continuum of both trust
+</I>&gt;<i> and distrust, not a measure of just one or the other.  For example, if Alice
+</I>&gt;<i> trusts Bob at some moderate level (say, .75 of a scale of 0 to 1), then it
+</I>&gt;<i> seems that she also \textit{distrusts} him at some minimal level (say,
+</I>&gt;<i> .25).  If Alice trusts Bob neutrally, then she trusts him about as much as
+</I>&gt;<i> she distrusts him.  If she distrusts him completely, then she doesn't trust
+</I>&gt;<i> him at all.  But in all of these cases, there is a trade-off between trust
+</I>&gt;<i> and distrust.  Only in the extreme cases are either of them eliminated
+</I>&gt;<i> completely.  Our trust model represents a range of values from 0 to 1,
+</I>&gt;<i> treating 0 as complete distrust, 1 as complete trust, and 0.5 as
+</I>&gt;<i> neutral.  This also makes many propagation algorithms simpler, as we'll
+</I>&gt;<i> discuss later.\footnote{Considering trust in this range naturally evokes
+</I>&gt;<i> fond memories of probability theory, however, probabilistic approaches to
+</I>&gt;<i> these problems are beyond the scope of th!
+</I>&gt;<i> is paper.  Further consideration is merited, and might be implemented
+</I>&gt;<i> strategically as discussed in Section \ref{trustserver}.}
+</I>&gt;<i>
+</I>&gt;<i> \subsubsection{Distrust}
+</I>&gt;<i> The choice of representation is closely related to the concern that it an
+</I>&gt;<i> account of distrust.  If the trust network contained values ranging from
+</I>&gt;<i> neutral trust to complete trust, then everyone in the network is trusted,
+</I>&gt;<i> explicitly or by inference, on some level at or above neutral.  If the
+</I>&gt;<i> system makes a trust inference between Alice and Bob at one level, but Alice
+</I>&gt;<i> really trusts Bob at a different level, she can explicitly state this
+</I>&gt;<i> previously implicit trust to have a more accurate result (for herself and
+</I>&gt;<i> for others who build inference paths through her to Bob).  But, suppose that
+</I>&gt;<i> Alice feels strong negative feelings about Bob.  In this case, she would
+</I>&gt;<i> still only be able to represent this relationship as one of neutral
+</I>&gt;<i> trust.  So, the trust network must account for distrust in some reasonable
+</I>&gt;<i> way.
+</I>&gt;<i> @@ -162,13 +162,13 @@
+</I>&gt;<i> \label{fig:trust}
+</I>&gt;<i> \end{figure}
+</I>&gt;<i>
+</I>&gt;<i> -One of the difficulties of using explicit distrust in an inference
+</I>&gt;<i> network is that it is unclear how inferences should proceed once a link of
+</I>&gt;<i> distrust has been encountered.  Consider a trust network like that depicted
+</I>&gt;<i> in Figure~\ref{fig:trust}.  Suppose Alice distrusts Bob, and Bob distrusts
+</I>&gt;<i> Clara.  As Guha points out \citep{guha04propagation}, there are at least two
+</I>&gt;<i> interpretations of this situation.  On the one hand, Alice might think
+</I>&gt;<i> something like ``the enemy of my enemy is my friend&quot; and so decide to put
+</I>&gt;<i> trust in Clara.  On the other hand, she might realize that if someone as
+</I>&gt;<i> scheming as Bob distrusts Clara, then Clara must \textit{really} be an
+</I>&gt;<i> unreliable character, and so decide to distrust her.  Further, suppose Bob
+</I>&gt;<i> expressed trust for Elaine.  At first consideration, it might seem
+</I>&gt;<i> reasonable to simply distrust everyone that Bob distrusts, including
+</I>&gt;<i> Elaine.  But suppose there were another path through different nodes
+</I>&gt;<i> indicating some minimal level of trust for Elaine!
+</I>&gt;<i> .  Which path should be chosen as one which provides the correct
+</I>&gt;<i> inference?  Since Konfidi represents trust on an interval, and concatenates
+</I>&gt;<i> (combines trust path ratings) values by multiplication, any distrust will
+</I>&gt;<i> make the computed score drop quickly below the minimum threshold.  This
+</I>&gt;<i> effectively stops propagation along a path when distrust is encountered.
+</I>&gt;<i> +One of the difficulties of using explicit distrust in an inference
+</I>&gt;<i> network is that it is unclear how inferences should proceed once a link of
+</I>&gt;<i> distrust has been encountered.  Consider a trust network like that depicted
+</I>&gt;<i> in Figure~\ref{fig:trust}.  Suppose Alice distrusts Bob, and Bob distrusts
+</I>&gt;<i> Clara.  As Guha points out \citep{guha04propagation}, there are at least two
+</I>&gt;<i> possible interpretations of this situation.  On the one hand, Alice might
+</I>&gt;<i> think something like ``the enemy of my enemy is my friend&quot; and so decide to
+</I>&gt;<i> put trust in Clara.  On the other hand, she might realize that if someone as
+</I>&gt;<i> scheming as Bob distrusts Clara, then Clara must \textit{really} be an
+</I>&gt;<i> unreliable character, and so decide to distrust her.  Further, suppose Bob
+</I>&gt;<i> expressed trust for Elaine.  At first consideration, it might seem
+</I>&gt;<i> reasonable to simply distrust everyone that Bob distrusts, including
+</I>&gt;<i> Elaine.  But suppose there were another path through different nodes
+</I>&gt;<i> indicating some minimal level of trust f!
+</I>&gt;<i> or Elaine.  Which path should be chosen as one which provides the correct
+</I>&gt;<i> inference?  Since Konfidi represents trust on an interval, and concatenates
+</I>&gt;<i> (combines trust path ratings) values by multiplication, any distrust will
+</I>&gt;<i> make the computed score drop quickly below the minimum threshold.  This
+</I>&gt;<i> effectively stops propagation along a path when distrust is encountered.
+</I>&gt;<i>
+</I>&gt;<i> \subsubsection{Data Structure}
+</I>&gt;<i> \label{rating}
+</I>&gt;<i> -Golbeck's ontology represents trust as a relationship between a person
+</I>&gt;<i> and a composite object comprising a topic, a person, and a
+</I>&gt;<i> rating\footnote{Subject, trusted Person, and Value according to her
+</I>&gt;<i> terminology}.  However, this representation requires trust relationships to
+</I>&gt;<i> be in the context of a person.  Accordingly, it may be difficult to
+</I>&gt;<i> associate additional information with the trust relationship.
+</I>&gt;<i> +Golbeck's ontology represents trust as a relationship between a person
+</I>&gt;<i> and a composite object comprising a topic, a person, and a
+</I>&gt;<i> rating\footnote{\texttt{Subject}, trusted \texttt{Person}, and
+</I>&gt;<i> \texttt{Value} according to her terminology}.  However, this representation
+</I>&gt;<i> requires trust relationships to be in the context of a person.  Accordingly,
+</I>&gt;<i> it may be difficult to associate additional information with the trust
+</I>&gt;<i> relationship.
+</I>&gt;<i>
+</I>&gt;<i> -In our schema, we represent each trust relationship as an object, and the
+</I>&gt;<i> trusting person and the trusted subject (typically a person) are associated
+</I>&gt;<i> with that object.  Each relationship goes one-way from truster to trusted,
+</I>&gt;<i> but since the truster is responsible for the accuracy of the information,
+</I>&gt;<i> that is fine.  Trust relationships also have trust items specified.  See
+</I>&gt;<i> Section~\ref{owlschema} for a specific description of the structure.
+</I>&gt;<i> +In our schema, we represent each trust relationship as an object, and the
+</I>&gt;<i> trusting person and the trusted entity (typically a person) are associated
+</I>&gt;<i> with that object.  Each relationship goes one-way from truster to trusted,
+</I>&gt;<i> but since the truster is responsible for the accuracy of the information,
+</I>&gt;<i> that avoids the pitfalls of the PGP web-of-trust implementation as discussed
+</I>&gt;<i> in Section \ref{earlierPGP}.  Trust relationships also have trust items
+</I>&gt;<i> specified.  See Section~\ref{owlschema} for a specific description of the
+</I>&gt;<i> structure.
+</I>&gt;<i>
+</I>&gt;<i> Because the trust relationship is represented as its own object, other
+</I>&gt;<i> attributes may be added as the need arises, such as the dates the
+</I>&gt;<i> relationship began, annotations, etc.
+</I>&gt;<i>
+</I>&gt;<i> @@ -187,9 +187,9 @@
+</I>&gt;<i>
+</I>&gt;<i> The primary element is \texttt{Re\-la\-tion\-ship}, which represents a
+</I>&gt;<i> relationship of trust that holds between two persons.  There are two
+</I>&gt;<i> properties that are required for every \texttt{Re\-la\-tion\-ship},
+</I>&gt;<i> \texttt{trust\-er} and \texttt{trust\-ed}, which indicate the two parties to
+</I>&gt;<i> the relationship.  Both \texttt{trust\-er} and \texttt{trust\-ed} have
+</I>&gt;<i> \texttt{foaf:\-Per\-son} objects as their targets.  These \texttt{Per\-son}
+</I>&gt;<i> objects should also contain at least one \texttt{wot:\-fin\-ger\-print}
+</I>&gt;<i> property specifying the PGP fingerprint of a public key held by the
+</I>&gt;<i> individual the \texttt{Per\-son} describes.  This property is required for
+</I>&gt;<i> verification; if no \texttt{fin\-ger\-print} is available, then Konfidi
+</I>&gt;<i> cannot use the relationship.  In general, any object described in RDF with a
+</I>&gt;<i> resource URI can be the \texttt{trust\-ed} party, such as specific documents
+</I>&gt;<i> or websites, but for simplicity in our examples, we will focus on persons.
+</I>&gt;<i> which may be defined in the same file, i!
+</I>&gt;<i> nline, or in external documents indicated by their resource URIs.  Because
+</I>&gt;<i> it does not matter where the \texttt{foaf:\-Per\-son} data is stored, users
+</I>&gt;<i> may keep files indicating trust relationships separate from main FOAF
+</I>&gt;<i> files.  However, to ensure authenticity, any file containing one or more
+</I>&gt;<i> \texttt{Re\-la\-tion\-ship} objects must have a valid PGP signature from a
+</I>&gt;<i> public key corresponding to the \texttt{fin\-ger\-print} of each
+</I>&gt;<i> \texttt{Per\-son} listed as a \texttt{trust\-er} in that file.  As described
+</I>&gt;<i> in Section~\ref{foafserver}, flexibility in data location can have a number
+</I>&gt;<i> of advantages.
+</I>&gt;<i>
+</I>&gt;<i> -In addition to \texttt{truster} and \texttt{trusted}, each
+</I>&gt;<i> \texttt{Relationship} requires at least one \texttt{about} property, which
+</I>&gt;<i> relates the trust \texttt{Re\-la\-tion\-ship} to a trust \texttt{Item}.  A
+</I>&gt;<i> \texttt{Re\-la\-tion\-ship} is not limited in the other properties it can
+</I>&gt;<i> have, so auxiliary information about the relationship, such as when it
+</I>&gt;<i> began, who introduced it and so on may be recorded without having an effect
+</I>&gt;<i> on the requirements of Konfidi.  Each \texttt{Item} has two properties
+</I>&gt;<i> belonging to it.  The \texttt{topic} property specifies the subject of the
+</I>&gt;<i> trust according to a trust topic hierarchy\footnote{yet to be developed} and
+</I>&gt;<i> the \texttt{rating} property indicates the value, according to the 0-1 scale
+</I>&gt;<i> of trust (specified in Section~\ref{rating}) that is assigned to the
+</I>&gt;<i> relationship on that topic.
+</I>&gt;<i> +In addition to \texttt{truster} and \texttt{trusted}, each
+</I>&gt;<i> \texttt{Relationship} requires at least one \texttt{about} property, which
+</I>&gt;<i> relates the trust \texttt{Re\-la\-tion\-ship} to a trust \texttt{Item}.  A
+</I>&gt;<i> \texttt{Re\-la\-tion\-ship} is not limited in the other properties it can
+</I>&gt;<i> have, so the schema can be extended to include auxiliary information about
+</I>&gt;<i> the relationship, such as when it began, who introduced it and so on may be
+</I>&gt;<i> recorded without having an effect on the requirements of Konfidi.  Each
+</I>&gt;<i> \texttt{Item} has two properties belonging to it.  The \texttt{topic}
+</I>&gt;<i> property specifies the subject of the trust according to a trust topic
+</I>&gt;<i> hierarchy\footnote{yet to be developed} and the \texttt{rating} property
+</I>&gt;<i> indicates the value, according to the 0-1 scale of trust (specified in
+</I>&gt;<i> Section~\ref{rating}) that is assigned to the relationship on that topic.
+</I>&gt;<i>
+</I>&gt;<i> -A \texttt{Relationship} may have more than one \texttt{Item} that it is
+</I>&gt;<i> about.  For example, remember the example given above, in which Alice trusts
+</I>&gt;<i> Bob highly about cooking, and distrusts him somewhat about the
+</I>&gt;<i> weather.  This might be represented in our ontology as something like the
+</I>&gt;<i> following\footnote{That is, supposing that the objects \texttt{alice123},
+</I>&gt;<i> \texttt{bob1812}, \texttt{cooking}, and \texttt{weather} are all defined
+</I>&gt;<i> elsewhere in the same file.}:
+</I>&gt;<i> +A \texttt{Relationship} may have more than one \texttt{Item} that it is
+</I>&gt;<i> about.  For example, remember the example given above, in which Alice trusts
+</I>&gt;<i> Bob highly about cooking, and distrusts him somewhat about the
+</I>&gt;<i> weather.  This might be represented in our ontology as something like the
+</I>&gt;<i> following\footnote{That is, supposing that the objects \texttt{alice123} and
+</I>&gt;<i> \texttt{bob1812} are defined elsewhere in the same file, and
+</I>&gt;<i> \texttt{cooking}, and \texttt{weather} are defined as part of the topic
+</I>&gt;<i> hierarchy.}:
+</I>&gt;<i>
+</I>&gt;<i> \begin{verbatim}
+</I>&gt;<i> &lt;Relationship&gt;
+</I>&gt;<i> @@ -210,7 +210,7 @@
+</I>&gt;<i> &lt;/Relationship&gt;
+</I>&gt;<i> \end{verbatim}
+</I>&gt;<i>
+</I>&gt;<i> -For RDF corresponding to some of the network depicted in
+</I>&gt;<i> Figure~\ref{fig:trust}, see Appendix~\ref{app:trustExample}.  See
+</I>&gt;<i> Appendix~\ref{app:schemaCode} for the full OWL source code.
+</I>&gt;<i> +For RDF corresponding to some of the network depicted in
+</I>&gt;<i> Figure~\ref{fig:trust}, see Appendix~\ref{app:trustExample}.  See
+</I>&gt;<i> Appendix~\ref{app:schemaCode} for the full OWL source code of the schema.
+</I>&gt;<i>
+</I>&gt;<i> \subsection{The Konfidi Server}
+</I>&gt;<i> The Konfidi server handles requests for trust ratings, verifies that a PGP
+</I>&gt;<i> connection exists, and traverses the internal representation to find a
+</I>&gt;<i> path.  Since these three tasks are so distinct, all of Konfidi is divided
+</I>&gt;<i> into three parts.  Figure~\ref{fig:arch} shows the relationships between a
+</I>&gt;<i> frontend which listens for requests and dispatches them, and two internal
+</I>&gt;<i> components, one to search the PGP web-of-trust and another to query against
+</I>&gt;<i> Konfidi's trust network.  This separation, in addition to simplifying the
+</I>&gt;<i> design by encapsulating the different functions, also allows for increased
+</I>&gt;<i> flexibility and scalability.  Each part is loosely coupled to the other
+</I>&gt;<i> parts, with a simple API for handling communications between them.
+</I>&gt;<i> @@ -336,7 +336,7 @@
+</I>&gt;<i> If the client stops at any point, it will still add appropriate headers
+</I>&gt;<i> before writing the message to standard out.
+</I>&gt;<i>
+</I>&gt;<i> \section{Future Work}
+</I>&gt;<i> -There are a number of things to be done to develop Konfidi from a
+</I>&gt;<i> proof-of-concept to a useful system.\footnote{Development is ongoing at
+</I>&gt;<i> \url{<A HREF="http://www.konfidi.org/">http://www.konfidi.org/</A>}}  As we've mentioned above, one thing we
+</I>&gt;<i> need most is a good base of psychological research backing up our trust
+</I>&gt;<i> representation and propagation, or suggesting a new one.  Unfortunately, we
+</I>&gt;<i> must leave this to the experts in psychology.  The rest of the system can be
+</I>&gt;<i> developed in its absence, so long as it is understood that we have just
+</I>&gt;<i> approximated how trust might work.
+</I>&gt;<i> +There are a number of things to be done to develop Konfidi from a
+</I>&gt;<i> proof-of-concept to a useful system.\footnote{Development is ongoing at
+</I>&gt;<i> \url{<A HREF="http://www.konfidi.org/">http://www.konfidi.org/</A>}}  As we've mentioned above, one thing we
+</I>&gt;<i> need most is a good base of psychological and sociological research backing
+</I>&gt;<i> up our trust representation and propagation, or suggesting a new
+</I>&gt;<i> one.  Unfortunately, we must leave this to the experts in psychology.  The
+</I>&gt;<i> rest of the system can be developed in its absence, so long as it is
+</I>&gt;<i> understood that we have just approximated how trust might work.
+</I>&gt;<i>
+</I>&gt;<i> As we've said, a trust system is only as useful as it is trusted.  Thus, a
+</I>&gt;<i> system of secure communication between every different component is
+</I>&gt;<i> required, most likely using PGP multipart/signed data.  It is hard to say
+</I>&gt;<i> how a user's trust in a system like Konfidi can be represented within
+</I>&gt;<i> itself, but that may have implications, too.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060329/6d50c56a/attachment.html">https://lists.berlios.de/pipermail/konfidi-dev/attachments/20060329/6d50c56a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000126.html">probability
+</A></li>
+	<LI>Next message: <A HREF="000129.html">r530 - paper
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/konfidi-dev">More information about the Konfidi-dev
+mailing list</a><br>
+</body></html>
